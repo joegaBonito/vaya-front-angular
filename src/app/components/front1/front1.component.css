@@ -1,0 +1,59 @@
+/* Extra small devices (portrait phones, less than 576px)
+/ No media query since this is the default in Bootstrap */
+.row {
+  margin: 0px auto;
+  width:100%;
+}
+
+.front1-backgroundimg {
+  background-image: url('../../../assets/bible2.jpg');
+  background-size: 100% 300px;
+  background-repeat: no-repeat;
+  width:100%;
+  height:300px;
+
+}
+
+.front1-text {
+  display:inline-block;
+  position: relative;
+  top: 50px;
+}
+
+.front1-text p {
+  font-weight:bold;
+  font-size:14px;
+  word-break:keep-all;
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media screen and (min-width: 576px) {
+
+}
+
+
+/* Medium devices (tablets, 768px and up)*/
+@media screen and (min-width: 768px) {
+
+}
+
+
+/* Large devices (desktops, 992px and up)*/
+@media screen and (min-width: 992px) {
+  .front1-backgroundimg {
+    background-image: url('../../../assets/bible2.jpg');
+    background-size: 100% 600px;
+    background-repeat: no-repeat;
+    width:100%;
+    height:600px;
+  }
+  .front1-text p {
+    font-size:32px;
+  }
+}
+
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media screen and (min-width: 1200px) {
+
+}

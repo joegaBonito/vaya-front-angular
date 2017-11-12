@@ -1,0 +1,44 @@
+/* Extra small devices (portrait phones, less than 576px)
+/ No media query since this is the default in Bootstrap */
+.row {
+  margin: 0px auto;
+  width:100%;
+}
+
+.front-row-1 {
+
+  /*background-image:url('../../../assets/mapsImage.jpg');*/
+  /*background-color: #DFDFDF;*/
+}
+
+.front3-col-1 {
+  padding: 0px;
+}
+
+.front3-text {
+  padding-left:15px;
+  display:inline-block;
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media screen and (min-width: 576px) {
+
+}
+
+
+/* Medium devices (tablets, 768px and up)*/
+@media screen and (min-width: 768px) {
+
+}
+
+
+/* Large devices (desktops, 992px and up)*/
+@media screen and (min-width: 992px) {
+
+}
+
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media screen and (min-width: 1200px) {
+
+}

@@ -1,0 +1,21 @@
+<!-- <app-worship-banner></app-worship-banner> -->
+<div *ngIf="sermonPost">
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
+      <h2>{{sermonPost.title}}</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
+      {{sermonPost.mainVerse}}
+    </div>
+    <div class="col-xs-12 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
+      {{sermonPost.description}}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
+      <button class="btn btn-primary" (click)="goBack()">Back</button>
+    </div>
+  </div>
+</div>

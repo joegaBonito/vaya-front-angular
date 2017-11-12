@@ -1,0 +1,35 @@
+/* You can add global styles to this file, and also import other style files */
+
+.row {
+  margin: 0px auto;
+  width:100%;
+}
+
+label,a,p {
+  font-family:sans-serif;
+}
+
+
+/* Extra small devices (portrait phones, less than 576px)
+/ No media query since this is the default in Bootstrap */
+
+/* Small devices (landscape phones, 576px and up) */
+@media screen and (min-width: 576px) {
+
+}
+
+/* Medium devices (tablets, 768px and up)*/
+@media screen and (min-width: 768px) {
+
+}
+
+/* Large devices (desktops, 992px and up)*/
+@media screen and (min-width: 992px) {
+
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media screen and (min-width: 1200px) {
+
+
+}
