@@ -26,8 +26,16 @@
   font-size:14px;
 }
 
-th,td  {
-  width:33.33%;
+.table-column-width-10 {
+  width:10%;
+}
+
+.table-column-width-20 {
+  width:20%;
+}
+
+.table-column-width-30 {
+  width:30%;
 }
 
 h2 {

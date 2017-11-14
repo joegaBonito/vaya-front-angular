@@ -1,23 +1,26 @@
 <!-- <app-worship-banner></app-worship-banner> -->
   <div class="row">
-    <div class="col-xs-12 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
+    <div class="col-5 offset-1 col-lg-4 offset-lg-2">
       <h2>설교요약</h2>
+    </div>
+    <div class="col-2 offset-2 col-lg-4 offset-lg-2">
+      <button class="btn btn-primary" routerLink="/SermonCreatePostComponent">New</button>
     </div>
   </div>
   <div class="row">
     <table class="table table-responsive col-xs-12 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
       <thead>
         <tr>
-          <th>#</th>
-          <th>Author</th>
-          <th>Title</th>
+          <th class="table-column-width-10">#</th>
+          <th class="table-column-width-20">Author</th>
+          <th class="table-column-width-30">Title</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let item of items">
-          <td>{{item.id}}</td>
-          <td>{{item.author}}</td>
-          <td><a [routerLink]="['/SermonViewPostComponent',item.id]" href="" >{{item.title}}</a></td>
+          <td class="table-column-width-10">{{item.id}}</td>
+          <td class="table-column-width-20">{{item.author}}</td>
+          <td class="table-column-width-30"><a [routerLink]="['/SermonViewPostComponent',item.id]" href="" >{{item.title}}</a></td>
         </tr>
       </tbody>
     </table>

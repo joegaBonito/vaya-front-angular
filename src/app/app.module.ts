@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, Component } from '@angular/core';
 import { AgmCoreModule} from '@agm/core';
 import { Routes, RouterModule} from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 //Components
 import { AppComponent } from './app.component';
@@ -59,6 +60,7 @@ const appRoutes:Routes = [
   {path:"PictureListComponent",component: PictureListComponent},
   {path:"VideoListComponent",component: VideoListComponent},
   {path: "SermonViewPostComponent/:id", component: SermonViewPostComponent},
+  {path: "SermonCreatePostComponent",component:SermonCreatePostComponent},
   {path: "ComingsoonComponent", component:ComingsoonComponent}
 ];
 
@@ -108,6 +110,7 @@ const appRoutes:Routes = [
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     RouterModule.forRoot(appRoutes),
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyD72lQaX_Ki1nZlA9Y2OoczB8GvKBY_hIg'

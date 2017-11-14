@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {SermonPost} from '../model/SermonPost';
 
 @Component({
   selector: 'app-sermon-create-post',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SermonCreatePostComponent implements OnInit {
 
-  constructor() { }
+  sermonPost:SermonPost;
+
+  submitted:boolean = false;
+  constructor() {
+  }
 
   ngOnInit() {
+  }
+
+
+  onSubmit(sermonCreateForm) {
+    this.submitted = true;
   }
 
 }
