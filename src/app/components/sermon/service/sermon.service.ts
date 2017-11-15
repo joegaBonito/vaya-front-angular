@@ -5,11 +5,13 @@ import {SermonPosts} from '../model/Mock-SermonPosts';
 
 @Injectable()
 export class SermonService {
-
-  constructor() { }
+  sermonPosts:SermonPost[];
+  constructor() {
+    this.sermonPosts = SermonPosts;
+  }
 
   getSermonPosts():Promise<SermonPost[]> {
-    return Promise.resolve(SermonPosts);
+    return Promise.resolve(this.sermonPosts);
   }
 
   // getSermonPost(id:number):Promise<SermonPost> {
@@ -21,7 +23,12 @@ export class SermonService {
   // }
 
   getSermonPost(id: number): Promise<SermonPost> {
-  return this.getSermonPosts()
+    return this.getSermonPosts()
              .then(sermonPosts => sermonPosts.find(sermonPost => sermonPost.id === id));
+  }
+
+  newSermonPost(sermonPost:SermonPost) {
+    this.sermonPosts.push(sermonPost);
+    console.log(this.sermonPosts);
   }
 }

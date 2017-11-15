@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {SermonPost} from '../model/SermonPost';
+import { SermonService } from '../service/sermon.service';
+import { FlashMessagesService } from 'angular2-flash-messages';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-sermon-create-post',
@@ -9,17 +12,28 @@ import {SermonPost} from '../model/SermonPost';
 export class SermonCreatePostComponent implements OnInit {
 
   sermonPost:SermonPost;
-
   submitted:boolean = false;
-  constructor() {
+
+  constructor(
+    private sermonService:SermonService,
+    private flashMessagesService:FlashMessagesService,
+    private router:Router) {
   }
 
   ngOnInit() {
+
   }
 
 
-  onSubmit(sermonCreateForm) {
-    this.submitted = true;
+  onSubmit({value,valid}:{value:SermonPost, valid:boolean}) {
+    if(!valid) {
+      this.flashMessagesService.show('please fill in all fields', {cssClass:'alert-danger', timeout:4000});
+      this.router.navigate(['SermonCreatePostComponent']);
+    } else {
+      this.sermonService.newSermonPost(value);
+      this.flashMessagesService.show('New Client added',{cssClass:'alert-success',timeout:4000});
+      this.router.navigate(['/']);
+    }
   }
 
 }

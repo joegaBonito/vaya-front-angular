@@ -4,6 +4,7 @@ import { NgModule, Component } from '@angular/core';
 import { AgmCoreModule} from '@agm/core';
 import { Routes, RouterModule} from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { FlashMessagesModule } from 'angular2-flash-messages';
 
 //Components
 import { AppComponent } from './app.component';
@@ -111,6 +112,7 @@ const appRoutes:Routes = [
   imports: [
     BrowserModule,
     FormsModule,
+    FlashMessagesModule,
     RouterModule.forRoot(appRoutes),
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyD72lQaX_Ki1nZlA9Y2OoczB8GvKBY_hIg'
