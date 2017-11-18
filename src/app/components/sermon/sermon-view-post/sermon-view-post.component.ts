@@ -1,6 +1,6 @@
 import 'rxjs/add/operator/switchMap';
 import { Component, OnInit }        from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Location }                 from '@angular/common';
 import { SermonPost } from '../model/SermonPost';
 import { SermonService } from '../service/sermon.service';
@@ -16,6 +16,7 @@ export class SermonViewPostComponent implements OnInit {
 
   constructor(
     private sermonService: SermonService,
+    private router:Router,
     private route:ActivatedRoute,
     private location:Location
 
@@ -32,4 +33,13 @@ export class SermonViewPostComponent implements OnInit {
     this.location.back();
   }
 
+  onClickDelete() {
+    this.route.paramMap
+    .switchMap((params:ParamMap) => this.sermonService.deleteSermonPost(params.get('id')))
+    .subscribe(()=> this.router.navigate(['/SermonListComponent']));
+  }
+
+  onClickEdit() {
+
+  }
 }

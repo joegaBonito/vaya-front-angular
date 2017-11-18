@@ -1,21 +1,31 @@
 <!-- <app-worship-banner></app-worship-banner> -->
 <div *ngIf="sermonPost">
   <div class="row">
-    <div class="col-xs-12 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
+    <div class="col-3 offset-1 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
       <h2>{{sermonPost.title}}</h2>
     </div>
   </div>
   <div class="row">
-    <div class="col-xs-12 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
-      {{sermonPost.mainVerse}}
+    <div class="col-4 offset-1 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
+      {{sermonPost.author}}
     </div>
-    <div class="col-xs-12 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
-      {{sermonPost.description}}
+    <div class="col-4 offset-1 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
+      {{sermonPost.date}}
     </div>
   </div>
   <div class="row">
-    <div class="col-xs-12 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
+    <div class="col-10 offset-1 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
+      {{sermonPost.mainVerse}}
+    </div>
+    <div class="col-10 offset-1 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
+      {{sermonPost.body}}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-10 offset-1 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
       <button class="btn btn-primary" (click)="goBack()">Back</button>
+        <button class="btn btn-secondary" (click) = "onClickEdit()">Edit</button>
+        <button class="btn btn-danger" (click) = "onClickDelete()">Delete</button>
     </div>
   </div>
 </div>

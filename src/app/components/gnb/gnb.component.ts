@@ -7,17 +7,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GnbComponent implements OnInit {
   innerWidth:any;
-  show:boolean = true;
+  show:boolean = false;
 
   constructor() {
     //Gets the resolution width of the screen on load.
-    this.innerWidth = window.screen.width;
+    this.innerWidth = window.innerWidth;
+    if(this.innerWidth < 992) {
+      this.show = false;
+    } else {
+      this.show=true;
+    }
  }
 
   ngOnInit() {
-    if(this.innerWidth < 992) {
-      this.show = false;
-    }
   }
   //Gets the resolution width of the screen on resize.
   onResize(event) {

@@ -36,9 +36,13 @@ export class SermonService {
   }
 
   newSermonPost(sermonPost:SermonPost):Observable<SermonPost> {
-    console.log(sermonPost);
    return this.http.post<SermonPost>(`${this.baseUrl}/sermon-create`, sermonPost).map(res => JSON.stringify(res))
-       .catch(this.handleError<SermonPost>('Create SermonPost'));
+       .catch(this.handleError<SermonPost>('Create SermonPost Error'));
+  }
+
+  deleteSermonPost(id:string):Observable<SermonPost> {
+    return this.http.delete<SermonPost>(`${this.baseUrl}/sermon-delete/${id}`,httpOptions)
+    .catch(this.handleError<SermonPost>('Delete SermonPost Error'));
   }
 
  private handleError<T> (operation = 'operation', result?: T) {
