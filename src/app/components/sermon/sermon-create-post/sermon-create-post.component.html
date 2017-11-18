@@ -28,6 +28,17 @@
       </div>
   </div>
   <div class="row">
+      <div class="col-10 offset-1 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
+        <label for="author">Main Verse: </label>
+      </div>
+      <div class="col-10 offset-1  col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
+        <input type="textarea" class="form-control" id="mainVerse" [(ngModel)]="mainVerse" name="mainVerse" #sermonMainVerse = "ngModel" required/>
+        <div *ngIf="sermonMainVerse.errors?.required && sermonMainVerse.touched" class="alert alert-danger">
+          Main Verse is required
+        </div>
+      </div>
+  </div>
+  <div class="row">
       <div class="col-10 offset-1  col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
         <label for="date">Date: </label>
       </div>

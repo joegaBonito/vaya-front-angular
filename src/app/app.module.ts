@@ -5,6 +5,8 @@ import { AgmCoreModule} from '@agm/core';
 import { Routes, RouterModule} from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { FlashMessagesModule } from 'angular2-flash-messages';
+import { HttpModule } from '@angular/http';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 
 //Components
 import { AppComponent } from './app.component';
@@ -111,6 +113,8 @@ const appRoutes:Routes = [
   ],
   imports: [
     BrowserModule,
+    HttpModule,
+    HttpClientModule,
     FormsModule,
     FlashMessagesModule,
     RouterModule.forRoot(appRoutes),
@@ -119,6 +123,7 @@ const appRoutes:Routes = [
     })
   ],
   providers: [
+    HttpClientModule,
     SermonService
   ],
   bootstrap: [AppComponent]

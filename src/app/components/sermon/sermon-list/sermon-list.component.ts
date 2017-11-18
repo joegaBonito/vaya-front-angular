@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {Observable} from "rxjs/Observable";
+import { of } from 'rxjs/observable/of';
 import {SermonPost} from '../model/SermonPost';
-import {SermonPosts} from '../model/Mock-SermonPosts';
 import { SermonService } from '../service/sermon.service';
 
 @Component({
@@ -16,7 +17,7 @@ export class SermonListComponent implements OnInit {
   constructor(private sermonService:SermonService) { }
 
   getSermonPosts():void {
-    this.sermonService.getSermonPosts().then(sermonPosts=> this.items = sermonPosts);
+    this.sermonService.getSermonPosts().subscribe(sermonPosts=> this.items = sermonPosts);
   }
 
   ngOnInit() {

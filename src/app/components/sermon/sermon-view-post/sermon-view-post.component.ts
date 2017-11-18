@@ -23,7 +23,8 @@ export class SermonViewPostComponent implements OnInit {
 
   ngOnInit() {
     this.route.paramMap
-         .switchMap((params: ParamMap) => this.sermonService.getSermonPost(+params.get('id')))
+          // (+) converts string 'id' to a number (+params.get('id'))
+         .switchMap((params: ParamMap) => this.sermonService.getSermonPost(params.get('id')))
          .subscribe(sermonPost => this.sermonPost = sermonPost);
   }
 
