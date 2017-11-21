@@ -39,7 +39,4 @@ export class SermonViewPostComponent implements OnInit {
     .subscribe(()=> this.router.navigate(['/SermonListComponent']));
   }
 
-  onClickEdit() {
-
-  }
 }

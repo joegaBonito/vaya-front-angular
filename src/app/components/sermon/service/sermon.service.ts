@@ -45,6 +45,11 @@ export class SermonService {
     .catch(this.handleError<SermonPost>('Delete SermonPost Error'));
   }
 
+  editSermonPost(id:string, sermonPost:SermonPost):Observable<SermonPost> {
+    return this.http.put<SermonPost>(`${this.baseUrl}/sermon-edit/${id}`, sermonPost, httpOptions)
+    .catch(this.handleError<SermonPost>('Update SermonPost Error'));
+  }
+
  private handleError<T> (operation = 'operation', result?: T) {
   return (error: any): Observable<T> => {
 
