@@ -54,7 +54,7 @@
         <label for="body">Body: </label>
       </div>
       <div class="col-10 offset-1  col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
-        <textarea class="form-control" id="body" name="body" cols="10" rows="5" required [(ngModel)]="body" #sermonPostBody = ngModel [value]="sermonPost?.body" required></textarea>
+        <textarea class="form-control" id="body" name="body" cols="10" rows="5" required [(ngModel)]="body" #sermonPostBody = ngModel [value]="sermonPost?.body"></textarea>
         <div *ngIf="sermonPostBody.errors?.required && sermonPostBody.touched" class="alert alert-danger">
           Body has not been changed.
         </div>

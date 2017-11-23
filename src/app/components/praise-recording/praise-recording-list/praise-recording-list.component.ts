@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {PraiseRecording} from '../model/PraiseRecording';
+import {PraiserecordingService} from '../service/praiserecording.service';
 
 @Component({
   selector: 'app-praise-recording-list',
@@ -7,7 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PraiseRecordingListComponent implements OnInit {
 
-  constructor() { }
+  items:PraiseRecording[];
+  selectedPost:PraiseRecording;
+
+  constructor(private praiserecordingService:PraiserecordingService) { }
+
+  getPraiseRecordings():void {
+    this.praiserecordingService.getPraiseRecordings()
+    .subscribe(praiseRecordings => this.items = praiseRecordings);
+  }
 
   ngOnInit() {
   }

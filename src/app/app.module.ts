@@ -53,7 +53,7 @@ import { ComingsoonComponent } from './components/comingsoon/comingsoon.componen
 
 //Services
 import {SermonService} from './components/sermon/service/sermon.service';
-
+import {PraiserecordingService} from './components/praise-recording/service/praiserecording.service';
 const appRoutes:Routes = [
   {path:"",component: LandingPageComponent},
   {path:"about-us",component: AboutUsComponent},
@@ -125,7 +125,8 @@ const appRoutes:Routes = [
   ],
   providers: [
     HttpClientModule,
-    SermonService
+    SermonService,
+    PraiserecordingService
   ],
   bootstrap: [AppComponent]
 })
