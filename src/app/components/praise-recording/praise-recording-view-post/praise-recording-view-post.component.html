@@ -1,3 +1,32 @@
-<p>
-  praise-recording-view-post works!
-</p>
+<!-- <app-worship-banner></app-worship-banner> -->
+<div *ngIf="praiseRecording">
+  <div class="row">
+    <div class="col-3 offset-1 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
+      <h2>{{praiseRecording.title}}</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-4 offset-1 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
+      {{praiseRecording.author}}
+    </div>
+    <div class="col-4 offset-1 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
+      {{praiseRecording.date}}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-10 offset-1 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
+      <img width="200" height="200" *ngIf="imageFile" [src]="imageFile">
+      <!-- <button (click)="downloadFile()">Download File</button> -->
+    </div>
+    <div class="col-10 offset-1 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
+      {{praiseRecording.body}}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-10 offset-1 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
+      <button class="btn btn-primary" (click)="goBack()">Back</button>
+      <button class="btn btn-secondary" [routerLink]="['/PraiseRecordingEditPostComponent',praiseRecording.id]">Edit</button>
+      <button class="btn btn-danger" (click) = "onClickDelete()">Delete</button>
+    </div>
+  </div>
+</div>

@@ -20,6 +20,7 @@ export class PraiseRecordingListComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getPraiseRecordings();
   }
 
 }

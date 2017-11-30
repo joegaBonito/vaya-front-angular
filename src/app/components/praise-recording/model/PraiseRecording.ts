@@ -3,7 +3,7 @@ export class PraiseRecording {
   author:string;
   title:string;
   date:string;
-  file:ByteString;
+  fileData:File;
   body:string;
   deleteYN:string;
 };

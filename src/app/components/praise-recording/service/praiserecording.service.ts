@@ -14,14 +14,54 @@ const httpOptions = {
 export class PraiserecordingService {
     private baseUrl = 'http://localhost:3175'
     praiseRecodrings:PraiseRecording[];
-  constructor(private http:HttpClient) { }
+
+  constructor(private http:HttpClient) {
+
+  }
 
   getPraiseRecordings():Observable<PraiseRecording[]> {
     return this.http.get<PraiseRecording[]>(`${this.baseUrl}/praiserecording-list`)
-    .catch(this.handleError('getPraiseRecordings', []));
+    .catch(this.handleError<PraiseRecording[]>('getPraiseRecordings', []));
   }
 
+  getPraiseRecording(id:string):Observable<PraiseRecording> {
+    return this.http.get<PraiseRecording>(`${this.baseUrl}/praiserecording-read/${id}`)
+    .catch(this.handleError<PraiseRecording>(`getPraiseRecording id=${id}`));
+  }
 
+  newSermonPost(praiseRecording:PraiseRecording,fileData:File):Observable<PraiseRecording>{
+    let formData:FormData = new FormData();
+    formData.append('file', fileData);
+    formData.append('title',praiseRecording.title);
+    formData.append('author',praiseRecording.author);
+    formData.append('date',praiseRecording.date);
+    formData.append('body',praiseRecording.body);
+
+    return this.http.post<PraiseRecording>(`${this.baseUrl}/praiserecording-create`,formData)
+    .catch(this.handleError<PraiseRecording>('Create PraiseRecording Error'));
+  }
+
+  deletePraiseRecording(id:string):Observable<PraiseRecording> {
+    return this.http.delete<PraiseRecording>(`${this.baseUrl}/praiserecording-delete/${id}`)
+    .catch(this.handleError<PraiseRecording>('Delete PraiseRecording Error'));
+  }
+
+  editPraiseRecording(id:string,praiseRecording:PraiseRecording,fileData:File):Observable<PraiseRecording> {
+    let formData:FormData = new FormData();
+    formData.append('file', fileData);
+    formData.append('title',praiseRecording.title);
+    formData.append('author',praiseRecording.author);
+    formData.append('date',praiseRecording.date);
+    formData.append('body',praiseRecording.body);
+
+    return this.http.put<PraiseRecording>(`${this.baseUrl}/praiserecording-edit/${id}`, formData)
+    .catch(this.handleError<PraiseRecording>('Update PraiseRecording Error'));
+  }
+
+  downloadFile(id:string):Observable<ByteString> {
+    return this.http.get<ByteString>(`${this.baseUrl}/praiserecording-downloadfile/${id}`,HttpHeaders)
+    .catch(this.handleError<ByteString>('Downloading File error'));
+  }
 
   private handleError<T> (operation = 'operation', result?: T) {
    return (error: any): Observable<T> => {

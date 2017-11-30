@@ -6,26 +6,6 @@
   padding-top:10px;
 }
 
-.sermonlist-backgroundimg {
-  background-image: url('../../../../assets/bible2.jpg');
-  background-size: 100% 300px;
-  background-repeat: no-repeat;
-  width:100%;
-  height:300px;
-
-}
-
-.sermonlist-text {
-  display:inline-block;
-  position: relative;
-  top: 50px;
-}
-
-.sermonlist-text p {
-  font-weight:bold;
-  font-size:14px;
-}
-
 .table-column-width-10 {
   width:10%;
 }
@@ -36,10 +16,6 @@
 
 .table-column-width-30 {
   width:30%;
-}
-
-h2 {
-  font-size:20px;
 }
 
 th,td, td > a {
@@ -63,21 +39,6 @@ th,td, td > a {
 @media screen and (min-width: 992px) {
   .row {
     padding-top:20px;
-  }
-  .sermonlist-backgroundimg {
-    background-image: url('../../../../assets/bible2.jpg');
-    background-size: 100% 600px;
-    background-repeat: no-repeat;
-    width:100%;
-    height:600px;
-  }
-  .sermonlist-text h1 {
-    position:relative;
-    top:80px;
-    font-size:80px;
-  }
-  h2 {
-    font-size:30px;
   }
 
   th,td, td > a {

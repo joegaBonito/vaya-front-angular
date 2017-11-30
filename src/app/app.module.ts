@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { FlashMessagesModule } from 'angular2-flash-messages';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
+import {FileSelectDirective, FileDropDirective} from 'ng2-file-upload';
 
 //Components
 import { AppComponent } from './app.component';
@@ -54,6 +55,8 @@ import { ComingsoonComponent } from './components/comingsoon/comingsoon.componen
 //Services
 import {SermonService} from './components/sermon/service/sermon.service';
 import {PraiserecordingService} from './components/praise-recording/service/praiserecording.service';
+
+
 const appRoutes:Routes = [
   {path:"",component: LandingPageComponent},
   {path:"about-us",component: AboutUsComponent},
@@ -62,6 +65,9 @@ const appRoutes:Routes = [
   {path:"SermonViewPostComponent/:id", component: SermonViewPostComponent},
   {path:"SermonEditPostComponent/:id", component: SermonEditPostComponent},
   {path:"PraiseRecordingListComponent",component: PraiseRecordingListComponent},
+  {path:"PraiseRecordingCreatePostComponent",component:PraiseRecordingCreatePostComponent},
+  {path:"PraiseRecordingViewPostComponent/:id", component: PraiseRecordingViewPostComponent},
+  {path:"PraiseRecordingEditPostComponent/:id", component: PraiseRecordingEditPostComponent},
   {path:"YoungAdultsColumnListComponent",component: YoungAdultsColumnListComponent},
   {path:"PictureListComponent",component: PictureListComponent},
   {path:"VideoListComponent",component: VideoListComponent},
@@ -110,7 +116,8 @@ const appRoutes:Routes = [
     VideoViewPostComponent,
     WorshipBannerComponent,
     ContactUsComponent,
-    ComingsoonComponent
+    ComingsoonComponent,
+    FileSelectDirective
   ],
   imports: [
     BrowserModule,
