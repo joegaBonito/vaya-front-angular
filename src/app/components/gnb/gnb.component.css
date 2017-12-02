@@ -28,6 +28,10 @@ li.dropdown:hover {
   box-shadow: 2px 2px 10px rgba(0,0,0,0.4);
 }
 
+.box-shadow{
+  box-shadow:0px -2px 5px black;
+}
+
 /* Small devices (landscape phones, 576px and up) */
 @media screen and (min-width: 576px) {}
 

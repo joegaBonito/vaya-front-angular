@@ -13,11 +13,17 @@ export class SermonListComponent implements OnInit {
 
   items:SermonPost[];
   selectedPost:SermonPost;
+  isLoading: boolean = false;
 
   constructor(private sermonService:SermonService) { }
 
   getSermonPosts():void {
-    this.sermonService.getSermonPosts().subscribe(sermonPosts=> this.items = sermonPosts);
+    this.isLoading = true;
+    this.sermonService.getSermonPosts()
+    .subscribe(sermonPosts=>{
+      this.items = sermonPosts;
+      this.isLoading = false;
+    });
   }
 
   ngOnInit() {

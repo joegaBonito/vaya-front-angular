@@ -7,7 +7,7 @@ import 'rxjs/add/operator/catch';
 import {PraiseRecording} from '../model/PraiseRecording';
 
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
 };
 
 @Injectable()
@@ -58,9 +58,9 @@ export class PraiserecordingService {
     .catch(this.handleError<PraiseRecording>('Update PraiseRecording Error'));
   }
 
-  downloadFile(id:string):Observable<ByteString> {
-    return this.http.get<ByteString>(`${this.baseUrl}/praiserecording-downloadfile/${id}`,HttpHeaders)
-    .catch(this.handleError<ByteString>('Downloading File error'));
+  downloadFile(id:string): Observable<Blob> {
+      return this.http.get(`${this.baseUrl}/praiserecording-file/${id}`,{responseType:'blob'})
+          .catch(this.handleError('File Downloading Error'));
   }
 
   private handleError<T> (operation = 'operation', result?: T) {

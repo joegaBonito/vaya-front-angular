@@ -11,12 +11,17 @@ export class PraiseRecordingListComponent implements OnInit {
 
   items:PraiseRecording[];
   selectedPost:PraiseRecording;
+  isLoading: boolean = false;
 
   constructor(private praiserecordingService:PraiserecordingService) { }
 
   getPraiseRecordings():void {
+    this.isLoading=true;
     this.praiserecordingService.getPraiseRecordings()
-    .subscribe(praiseRecordings => this.items = praiseRecordings);
+    .subscribe(praiseRecordings => {
+      this.items = praiseRecordings;
+      this.isLoading = false;
+    });
   }
 
   ngOnInit() {

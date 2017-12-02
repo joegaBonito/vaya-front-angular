@@ -14,6 +14,7 @@
         </tr>
       </thead>
       <tbody>
+        <tr *ngIf="isLoading"><td>Loading...</td></tr>
         <tr *ngFor="let item of items; let i = index">
           <td class="table-column-width-10">{{i+1}}</td>
           <td class="table-column-width-20">{{item.author}}</td>

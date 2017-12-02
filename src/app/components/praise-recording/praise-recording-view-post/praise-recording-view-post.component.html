@@ -1,4 +1,11 @@
 <!-- <app-worship-banner></app-worship-banner> -->
+<div *ngIf="!praiseRecording">
+  <div class="row">
+    <div class="col-3 offset-1 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
+      Loading...
+    </div>
+  </div>
+</div>
 <div *ngIf="praiseRecording">
   <div class="row">
     <div class="col-3 offset-1 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
@@ -7,19 +14,17 @@
   </div>
   <div class="row">
     <div class="col-4 offset-1 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
-      {{praiseRecording.author}}
+      Author: {{praiseRecording.author}}
     </div>
     <div class="col-4 offset-1 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
-      {{praiseRecording.date}}
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-10 offset-1 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
-      <img width="200" height="200" *ngIf="imageFile" [src]="imageFile">
-      <!-- <button (click)="downloadFile()">Download File</button> -->
+      Date: {{praiseRecording.date}}
     </div>
     <div class="col-10 offset-1 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
-      {{praiseRecording.body}}
+      Description: {{praiseRecording.body}}
+    </div>
+    <div class="col-10 offset-1 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
+    <!-- <img width="200" height="200" *ngIf="imageFile" [src]="imageFile"> -->
+    <button class="btn btn-primary" (click)="downloadFile()">Download File</button>
     </div>
   </div>
   <div class="row">
