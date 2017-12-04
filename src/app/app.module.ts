@@ -55,6 +55,7 @@ import { ComingsoonComponent } from './components/comingsoon/comingsoon.componen
 //Services
 import {SermonService} from './components/sermon/service/sermon.service';
 import {PraiserecordingService} from './components/praise-recording/service/praiserecording.service';
+import {YacolumnService } from './components/young-adults-column/service/yacolumn.service'
 
 
 const appRoutes:Routes = [
@@ -69,6 +70,9 @@ const appRoutes:Routes = [
   {path:"PraiseRecordingViewPostComponent/:id", component: PraiseRecordingViewPostComponent},
   {path:"PraiseRecordingEditPostComponent/:id", component: PraiseRecordingEditPostComponent},
   {path:"YoungAdultsColumnListComponent",component: YoungAdultsColumnListComponent},
+  {path:"YoungAdultsColumnCreatePostComponent",component: YoungAdultsColumnCreatePostComponent},
+  {path:"YoungAdultsColumnViewPostComponent/:id",component: YoungAdultsColumnViewPostComponent},
+  {path:"YoungAdultsColumnEditPostComponent/:id",component: YoungAdultsColumnEditPostComponent},
   {path:"PictureListComponent",component: PictureListComponent},
   {path:"VideoListComponent",component: VideoListComponent},
   {path:"ComingsoonComponent", component:ComingsoonComponent}
@@ -133,7 +137,8 @@ const appRoutes:Routes = [
   providers: [
     HttpClientModule,
     SermonService,
-    PraiserecordingService
+    PraiserecordingService,
+    YacolumnService
   ],
   bootstrap: [AppComponent]
 })

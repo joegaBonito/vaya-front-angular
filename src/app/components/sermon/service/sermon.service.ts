@@ -22,14 +22,6 @@ export class SermonService {
     .catch(this.handleError('getSermonPosts', []));
   }
 
-  // getSermonPost(id:number):Promise<SermonPost> {
-  //   for(let i = 0; i < SermonPosts.length; i++) {
-  //     if(id === SermonPosts[i].id) {
-  //         return Promise.resolve(SermonPosts[i]);
-  //     }
-  //   }
-  // }
-
   getSermonPost(id: string): Observable<SermonPost> {
     return this.http.get<SermonPost>(`${this.baseUrl}/sermon-readpost/${id}`)
         .catch(this.handleError<SermonPost>(`getSermonPost id=${id}`));

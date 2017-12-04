@@ -7,6 +7,10 @@
   padding-bottom:30px;
 }
 
+.padding-zero {
+  padding: 0px 0px 0px 0px;
+}
+
 .row {
   margin: 0px auto;
   width:100%;

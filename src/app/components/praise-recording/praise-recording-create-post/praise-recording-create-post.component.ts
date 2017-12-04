@@ -35,9 +35,8 @@ export class PraiseRecordingCreatePostComponent implements OnInit {
     } else {
       this.praiserecordingService.newSermonPost(value,this.fileData).subscribe(()=>{
         this.router.navigate(['/PraiseRecordingListComponent']);
+        this.flashMessagesService.show('New Post has been added',{cssClass:'alert-success',timeout:3000});
       });
-      this.flashMessagesService.show('New Post has been added',{cssClass:'alert-success',timeout:3000});
-
     }
   }
 

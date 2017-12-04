@@ -1,3 +1,28 @@
-<p>
-  young-adults-column-list works!
-</p>
+<!-- <app-worship-banner></app-worship-banner> -->
+  <div class="row">
+    <div class="col-5 offset-1 col-lg-4 offset-lg-2">
+      <h2>청년칼럼</h2>
+    </div>
+  </div>
+  <div class="row">
+    <table class="table table-responsive col-10 offset-1 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
+      <thead>
+        <tr>
+          <th class="table-column-width-10">#</th>
+          <th class="table-column-width-20">Author</th>
+          <th class="table-column-width-30">Title</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngIf="isLoading"><td>Loading...</td></tr>
+        <tr *ngFor="let item of items; let i = index">
+          <td class="table-column-width-10">{{i+1}}</td>
+          <td class="table-column-width-20">{{item.author}}</td>
+          <td class="table-column-width-30"><a [routerLink]="['/YoungAdultsColumnViewPostComponent',item.id]" href="" >{{item.title}}</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-2 offset-1 col-lg-4 offset-lg-2">
+    <button class="btn btn-primary" routerLink="/YoungAdultsColumnCreatePostComponent">New</button>
+  </div>

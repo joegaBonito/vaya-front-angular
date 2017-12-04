@@ -6,6 +6,10 @@
   padding-top:10px;
 }
 
+h2 {
+  word-break:keep-all;
+}
+
 .table-column-width-10 {
   width:10%;
 }

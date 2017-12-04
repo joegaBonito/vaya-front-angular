@@ -52,9 +52,8 @@ export class PraiseRecordingEditPostComponent implements OnInit {
         this.praiserecordingService.editPraiseRecording(this.route.snapshot.params.id,value,this.fileData)
         .subscribe(res=>{
           this.router.navigate(['/PraiseRecordingListComponent']);
+          this.flashMessagesService.show('Client has been edited',{cssClass:'alert-success',timeout:3000});
       });
-        this.flashMessagesService.show('Client has been edited',{cssClass:'alert-success',timeout:3000});
-
       }
     }
 

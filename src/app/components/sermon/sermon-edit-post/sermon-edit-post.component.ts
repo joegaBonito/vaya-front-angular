@@ -33,10 +33,11 @@ export class SermonEditPostComponent implements OnInit {
       this.flashMessagesService.show('Please fill in all required fields', {cssClass:'alert-danger', timeout:3000});
       this.router.navigate(['SermonEditPostComponent',this.sermonPost.id]);
     } else {
-      this.route.paramMap.switchMap((params:ParamMap)=>this.sermonService.editSermonPost(params.get('id'),value))
-      .subscribe(res=>console.log("successfully submitted"));
-      this.flashMessagesService.show('Client has been edited',{cssClass:'alert-success',timeout:3000});
-      this.router.navigate(['/SermonListComponent']);
+      this.sermonService.editSermonPost(this.route.snapshot.params.id,value)
+      .subscribe(res=>{
+        this.router.navigate(['/SermonListComponent']);
+        this.flashMessagesService.show('Client has been edited',{cssClass:'alert-success',timeout:3000});
+      });
     }
   }
 }

@@ -1,3 +1,36 @@
-<p>
-  young-adults-column-view-post works!
-</p>
+<!-- <app-worship-banner></app-worship-banner> -->
+<div *ngIf="!yaColumn">
+  <div class="row">
+    <div class="col-3 offset-1 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
+      Loading...
+    </div>
+  </div>
+</div>
+<div *ngIf="yaColumn">
+  <div class="row">
+    <div class="col-3 offset-1 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
+      <h2>{{yaColumn.title}}</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-4 offset-1 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
+      {{yaColumn.author}}
+    </div>
+    <div class="col-4 offset-1 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
+      {{yaColumn.date}}
+    </div>
+    <div class="col-10 offset-1 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
+      {{yaColumn.mainVerse}}
+    </div>
+    <div class="col-10 offset-1 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
+      {{yaColumn.body}}
+    </div>
+  </div>
+  <div class="row btn-row">
+    <div class="col-10 offset-1 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
+      <button class="btn btn-primary" (click)="goBack()">Back</button>
+      <button class="btn btn-secondary" [routerLink]="['/YoungAdultsColumnEditPostComponent',yaColumn.id]">Edit</button>
+      <button class="btn btn-danger" (click) = "onClickDelete()">Delete</button>
+    </div>
+  </div>
+</div>
