@@ -34,13 +34,13 @@ export class PraiseRecordingViewPostComponent implements OnInit {
          .switchMap((params: ParamMap) => this.praiserecordingService.getPraiseRecording(params.get('id')))
          .subscribe(praiseRecording => {
            this.praiseRecording = praiseRecording;
+           this.getImage();
          });
-    this.getImage();
   }
 
   getImage() {
       this.imageFile = `${this.baseUrl}/praiserecording-file/${this.route.snapshot.params.id}`;
-      this.fileName = "File#" + this.route.snapshot.params.id + ".mp3";
+      this.fileName =  this.praiseRecording.title + ".mp3";
   }
 
   downloadFile() {

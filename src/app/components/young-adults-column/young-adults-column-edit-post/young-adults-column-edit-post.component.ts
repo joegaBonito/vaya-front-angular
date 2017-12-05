@@ -12,6 +12,7 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 export class YoungAdultsColumnEditPostComponent implements OnInit {
 
   yaColumn:YAColumn;
+
   submitted:boolean = false;
 
   constructor(
@@ -19,12 +20,14 @@ export class YoungAdultsColumnEditPostComponent implements OnInit {
     private flashMessagesService:FlashMessagesService,
     private router:Router,
     private route:ActivatedRoute) {
-
+      this.yacolumnService.getYAColumn(this.route.snapshot.params.id)
+      .subscribe(yaColumn => {
+        this.yaColumn = yaColumn;
+      });
     }
 
   ngOnInit() {
-    this.yacolumnService.getYAColumn(this.route.snapshot.params.id)
-    .subscribe(yaColumn => this.yaColumn = yaColumn);
+
   }
 
   onSubmit({value,valid}:{value:YAColumn, valid:boolean}) {
@@ -35,7 +38,7 @@ export class YoungAdultsColumnEditPostComponent implements OnInit {
       this.yacolumnService.editYAColumn(this.route.snapshot.params.id,value)
       .subscribe(res=>{
         this.router.navigate(['/YoungAdultsColumnListComponent']);
-        this.flashMessagesService.show('Client has been edited',{cssClass:'alert-success',timeout:3000});
+        this.flashMessagesService.show('Young Adults Column has been edited',{cssClass:'alert-success',timeout:3000});
       });
     }
   }

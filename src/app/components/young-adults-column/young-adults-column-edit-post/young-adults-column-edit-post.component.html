@@ -4,15 +4,15 @@
       <h2>Edit Post</h2>
     </div>
   </div>
-  <form (ngSubmit)="onSubmit(yaColumnEditForm)" #yaColumnEditForm="ngForm" novalidate>
+  <form *ngIf="yaColumn" (ngSubmit)="onSubmit(yaColumnEditForm)" #yaColumnEditForm="ngForm" novalidate>
   <div class="row">
       <div class="col-10 offset-1 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
         <label for="title">Title: </label>
       </div>
       <div class="col-10 offset-1 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
-        <input type="text" class="form-control" id="title" [(ngModel)]="title" name="title" #yaColumnTitle = "ngModel" [value]="yaColumn?.title" required>
+        <input type="text" class="form-control" [(ngModel)]="yaColumn.title" name="title" #yaColumnTitle ="ngModel" required>
         <div *ngIf="yaColumnTitle.errors?.required && yaColumnTitle.touched" class="alert alert-danger">
-          Title has not been changed.
+          Title is required.
         </div>
       </div>
   </div>
@@ -21,9 +21,9 @@
         <label for="author">Author: </label>
       </div>
       <div class="col-10 offset-1  col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
-        <input type="textarea" class="form-control" id="author" [(ngModel)]="author" name="author" #yaColumnAuthor = "ngModel" [value]="yaColumn?.author" required/>
+        <input type="text" class="form-control" id="author" [(ngModel)]="yaColumn.author" name="author" #yaColumnAuthor = "ngModel" required>
         <div *ngIf="yaColumnAuthor.errors?.required && yaColumnAuthor.touched" class="alert alert-danger">
-          Author has not been changed.
+          Author is required.
         </div>
       </div>
   </div>
@@ -32,9 +32,9 @@
         <label for="author">Main Verse: </label>
       </div>
       <div class="col-10 offset-1  col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
-        <input type="textarea" class="form-control" id="mainVerse" [(ngModel)]="mainVerse" name="mainVerse" #sermonMainVerse = "ngModel" [value]="yaColumn?.mainVerse" required/>
+        <input type="text" class="form-control" id="mainVerse" [(ngModel)]="yaColumn.mainVerse" name="mainVerse" #sermonMainVerse = "ngModel" required>
         <div *ngIf="sermonMainVerse.errors?.required && sermonMainVerse.touched" class="alert alert-danger">
-          Main Verse has not been changed.
+          Main Verse is required.
         </div>
       </div>
   </div>
@@ -43,9 +43,9 @@
         <label for="date">Date: </label>
       </div>
       <div class="col-10 offset-1  col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
-        <input type="text" class="form-control" id="date" [(ngModel)]="date" name="date" #yaColumnDate = "ngModel" [value]="yaColumn?.date" required/>
+        <input type="text" class="form-control" id="date" [(ngModel)]="yaColumn.date" name="date" #yaColumnDate = "ngModel" required>
         <div *ngIf="yaColumnDate.errors?.required && yaColumnDate.touched" class="alert alert-danger">
-          Date has not been changed.
+          Date is required.
         </div>
       </div>
   </div>
@@ -54,9 +54,9 @@
         <label for="body">Body: </label>
       </div>
       <div class="col-10 offset-1  col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
-        <textarea class="form-control" id="body" name="body" cols="10" rows="5" required [(ngModel)]="body" #yaColumnBody = ngModel [value]="yaColumn?.body"></textarea>
+        <textarea class="form-control" id="body" name="body" cols="10" rows="5"  [(ngModel)]="yaColumn.body" #yaColumnBody = ngModel required></textarea>
         <div *ngIf="yaColumnBody.errors?.required && yaColumnBody.touched" class="alert alert-danger">
-          Body has not been changed.
+          Body is required.
         </div>
       </div>
   </div>

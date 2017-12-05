@@ -45,9 +45,6 @@ export class PraiseRecordingEditPostComponent implements OnInit {
       if(!valid) {
         this.flashMessagesService.show('Please fill in all required fields', {cssClass:'alert-danger', timeout:3000});
         this.router.navigate(['PraiseRecordingEditPostComponent',this.praiseRecording.id]);
-      } else if(this.fileDataChanged == false) {
-        this.flashMessagesService.show('The file was not changed.', {cssClass:'alert-danger', timeout:3000});
-        this.router.navigate(['PraiseRecordingEditPostComponent',this.praiseRecording.id]);
       } else {
         this.praiserecordingService.editPraiseRecording(this.route.snapshot.params.id,value,this.fileData)
         .subscribe(res=>{
