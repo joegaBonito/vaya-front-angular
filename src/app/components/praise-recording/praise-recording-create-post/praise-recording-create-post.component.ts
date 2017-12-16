@@ -11,11 +11,13 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 })
 export class PraiseRecordingCreatePostComponent implements OnInit {
 
+  praiseRecording:PraiseRecording = new PraiseRecording();
   fileData:File;
 
   constructor(private router:Router,
-              private praiserecordingService:PraiserecordingService,
-              private flashMessagesService:FlashMessagesService) {
+              private flashMessagesService:FlashMessagesService,
+              private praiserecordingService:PraiserecordingService
+              ) {
 
   }
 

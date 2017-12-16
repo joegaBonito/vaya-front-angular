@@ -35,8 +35,7 @@ export class YacolumnService {
   }
 
   newYAColumn(yaColumn:YAColumn):Observable<YAColumn>{
-    return this.http.post<YAColumn>(`${this.baseUrl}/yacolumn-create`,yaColumn)
-    .catch(this.handleError('Create YaColumn', []));
+    return this.http.post<YAColumn>(`${this.baseUrl}/yacolumn-create`,yaColumn).catch(this.handleError<YAColumn>('Create YaColumn Error'));
   }
 
   private handleError<T> (operation = 'operation', result?: T) {

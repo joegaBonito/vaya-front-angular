@@ -1,13 +1,12 @@
 //Modules
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, Component } from '@angular/core';
+import { NgModule, Component, NO_ERRORS_SCHEMA } from '@angular/core';
 import { AgmCoreModule} from '@agm/core';
 import { Routes, RouterModule} from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { FlashMessagesModule } from 'angular2-flash-messages';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
-import {FileSelectDirective, FileDropDirective} from 'ng2-file-upload';
 
 //Components
 import { AppComponent } from './app.component';
@@ -19,7 +18,7 @@ import { Front3Component } from './components/front3/front3.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { LoginComponent } from './components/login/login.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
-import { RegisterComponent } from './components/register/register.component';
+import { RegisterComponent } from './components/login/register/register.component';
 import { AboutUsComponent } from './components/about-us/about-us.component';
 import { WorshipServiceComponent } from './components/worship-service/worship-service.component';
 import { AlbumComponent } from './components/album/album.component';
@@ -51,31 +50,36 @@ import { VideoViewPostComponent } from './components/video/video-view-post/video
 import { WorshipBannerComponent } from './components/worship-banner/worship-banner.component';
 import { ContactUsComponent } from './components/contact-us/contact-us.component';
 import { ComingsoonComponent } from './components/comingsoon/comingsoon.component';
+import { AuthGuard } from './components/guards/auth.guard';
 
 //Services
 import {SermonService} from './components/sermon/service/sermon.service';
 import {PraiserecordingService} from './components/praise-recording/service/praiserecording.service';
 import {YacolumnService } from './components/young-adults-column/service/yacolumn.service'
-
+import {LoginService} from './components/login/service/login.service';
+import { PLATFORM_ID, APP_ID, Inject } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 const appRoutes:Routes = [
   {path:"",component: LandingPageComponent},
   {path:"about-us",component: AboutUsComponent},
-  {path:"SermonListComponent",component: SermonListComponent},
-  {path:"SermonCreatePostComponent",component:SermonCreatePostComponent},
-  {path:"SermonViewPostComponent/:id", component: SermonViewPostComponent},
-  {path:"SermonEditPostComponent/:id", component: SermonEditPostComponent},
-  {path:"PraiseRecordingListComponent",component: PraiseRecordingListComponent},
-  {path:"PraiseRecordingCreatePostComponent",component:PraiseRecordingCreatePostComponent},
-  {path:"PraiseRecordingViewPostComponent/:id", component: PraiseRecordingViewPostComponent},
-  {path:"PraiseRecordingEditPostComponent/:id", component: PraiseRecordingEditPostComponent},
-  {path:"YoungAdultsColumnListComponent",component: YoungAdultsColumnListComponent},
-  {path:"YoungAdultsColumnCreatePostComponent",component: YoungAdultsColumnCreatePostComponent},
-  {path:"YoungAdultsColumnViewPostComponent/:id",component: YoungAdultsColumnViewPostComponent},
-  {path:"YoungAdultsColumnEditPostComponent/:id",component: YoungAdultsColumnEditPostComponent},
+  {path:"SermonListComponent",component: SermonListComponent, canActivate:[AuthGuard]},
+  {path:"SermonCreatePostComponent",component:SermonCreatePostComponent, canActivate:[AuthGuard]},
+  {path:"SermonViewPostComponent/:id", component: SermonViewPostComponent, canActivate:[AuthGuard]},
+  {path:"SermonEditPostComponent/:id", component: SermonEditPostComponent, canActivate:[AuthGuard]},
+  {path:"PraiseRecordingListComponent",component: PraiseRecordingListComponent, canActivate:[AuthGuard]},
+  {path:"PraiseRecordingCreatePostComponent",component:PraiseRecordingCreatePostComponent, canActivate:[AuthGuard]},
+  {path:"PraiseRecordingViewPostComponent/:id", component: PraiseRecordingViewPostComponent, canActivate:[AuthGuard]},
+  {path:"PraiseRecordingEditPostComponent/:id", component: PraiseRecordingEditPostComponent, canActivate:[AuthGuard]},
+  {path:"YoungAdultsColumnListComponent",component: YoungAdultsColumnListComponent, canActivate:[AuthGuard]},
+  {path:"YoungAdultsColumnCreatePostComponent",component: YoungAdultsColumnCreatePostComponent, canActivate:[AuthGuard]},
+  {path:"YoungAdultsColumnViewPostComponent/:id",component: YoungAdultsColumnViewPostComponent, canActivate:[AuthGuard]},
+  {path:"YoungAdultsColumnEditPostComponent/:id",component: YoungAdultsColumnEditPostComponent, canActivate:[AuthGuard]},
   {path:"PictureListComponent",component: PictureListComponent},
   {path:"VideoListComponent",component: VideoListComponent},
-  {path:"ComingsoonComponent", component:ComingsoonComponent}
+  {path:"ComingsoonComponent", component:ComingsoonComponent},
+  {path:"LoginComponent", component:LoginComponent},
+  {path:"RegisterComponent",component:RegisterComponent}
 ];
 
 @NgModule({
@@ -120,11 +124,10 @@ const appRoutes:Routes = [
     VideoViewPostComponent,
     WorshipBannerComponent,
     ContactUsComponent,
-    ComingsoonComponent,
-    FileSelectDirective
+    ComingsoonComponent
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'VAYA-SSR' }),
     HttpModule,
     HttpClientModule,
     FormsModule,
@@ -138,8 +141,21 @@ const appRoutes:Routes = [
     HttpClientModule,
     SermonService,
     PraiserecordingService,
-    YacolumnService
+    YacolumnService,
+    LoginService,
+    AuthGuard
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [
+    NO_ERRORS_SCHEMA
+  ]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: Object,
+    @Inject(APP_ID) private appId: string) {
+    const platform = isPlatformBrowser(platformId) ?
+      'on the server' : 'in the browser';
+    console.log(`Running ${platform} with appId=${appId}`);
+  }
+}

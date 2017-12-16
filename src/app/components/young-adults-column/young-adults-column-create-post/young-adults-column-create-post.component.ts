@@ -12,7 +12,7 @@ import {Router} from '@angular/router';
 export class YoungAdultsColumnCreatePostComponent implements OnInit {
 
 
-    yaColumn:YAColumn;
+    yaColumn:YAColumn = new YAColumn();
     submitted:boolean = false;
 
     constructor(

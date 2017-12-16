@@ -1,0 +1,33 @@
+/* Extra small devices (portrait phones, less than 576px)
+/ No media query since this is the default in Bootstrap */
+form {
+  margin-top:15px;
+  margin-bottom:15px;
+}
+.btn {
+  display:inline-block;
+  width:49%;
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media screen and (min-width: 576px) {}
+
+
+/* Medium devices (tablets, 768px and up)*/
+@media screen and (min-width: 768px) {}
+
+
+/* Large devices (desktops, 992px and up)*/
+@media screen and (min-width: 992px) {
+  form {
+    margin-top:30px;
+    margin-bottom:30px;
+  }
+  .btn {
+    display:inline-block;
+    width:49%;
+  }
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media screen and (min-width: 1200px) {}

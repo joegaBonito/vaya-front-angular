@@ -11,7 +11,7 @@ import {Router} from '@angular/router';
 })
 export class SermonCreatePostComponent implements OnInit {
 
-  sermonPost:SermonPost;
+  sermonPost:SermonPost = new SermonPost();
   submitted:boolean = false;
 
   constructor(
