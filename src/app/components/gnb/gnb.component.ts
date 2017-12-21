@@ -56,12 +56,28 @@ export class GnbComponent implements OnInit {
    }
    this.checkAuthenticationStatus();
 }
+
+onSermonListComponent() {
+  this.router.navigate(['/SermonListComponent']);
+  this.toggleCollapse();
+  this.checkAuthenticationStatus();
+}
+onPraiseRecordingListComponent() {
+  this.router.navigate(['/PraiseRecordingListComponent']);
+  this.toggleCollapse();
+  this.checkAuthenticationStatus();
+}
+onYoungAdultsColumnListComponent(){
+  this.router.navigate(['/YoungAdultsColumnListComponent']);
+  this.toggleCollapse();
+  this.checkAuthenticationStatus();
+}
+
   //Toggle GNB if the resolution is below 992px
   toggleCollapse() {
     if(this.innerWidth < 992){
       this.show = !this.show;
     }
-    this.checkAuthenticationStatus();
   }
 
   //Make 'show' false on clicking the logo if the resolution is below 992px

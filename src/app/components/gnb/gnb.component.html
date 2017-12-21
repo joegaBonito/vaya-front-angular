@@ -19,9 +19,9 @@ Angular GNB Toggle w/ Mobile & PC
           예배
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink1">
-          <a class="dropdown-item" href="#" routerLink="SermonListComponent" (click) = "toggleCollapse()">설교요약</a>
-          <a class="dropdown-item" href="#" routerLink="PraiseRecordingListComponent" (click)="toggleCollapse()">찬양녹음</a>
-          <a class="dropdown-item" href="#" routerLink="YoungAdultsColumnListComponent" (click)="toggleCollapse()">청년칼럼</a>
+          <a class="dropdown-item" (click)="onSermonListComponent()">설교요약</a>
+          <a class="dropdown-item" (click)="onPraiseRecordingListComponent()">찬양녹음</a>
+          <a class="dropdown-item" (click)="onYoungAdultsColumnListComponent()">청년칼럼</a>
         </div>
       </li>
       <li class="nav-item">
