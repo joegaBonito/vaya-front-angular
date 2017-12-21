@@ -3,7 +3,7 @@ import {Member} from './model/Member';
 import { Router } from '@angular/router';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { LoginService } from './service/login.service';
-
+import { EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-login',
@@ -12,6 +12,7 @@ import { LoginService } from './service/login.service';
 })
 export class LoginComponent implements OnInit  {
   member:Member = new Member();
+  token:any;
 
   constructor(private router:Router,
               private flashMessagesService:FlashMessagesService,
@@ -27,8 +28,7 @@ export class LoginComponent implements OnInit  {
     } else {
       this.loginService.login(value.email,value.password).subscribe((res)=>{
         //-Save the JWT token in local storage. localStorage is object available on windows, so it does not have to be imported.
-        window.localStorage.setItem('token',JSON.stringify(res.token));
-        this.loginService.setAuthentication(JSON.stringify(res.token));
+        localStorage.setItem('token',res.token);
         this.router.navigate(['/']);
         this.flashMessagesService.show('Log In Successful!',{cssClass:'alert-success',timeout:3000});
       });

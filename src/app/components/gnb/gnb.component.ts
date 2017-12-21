@@ -2,7 +2,6 @@ import { Component, Inject, PLATFORM_ID, OnInit } from '@angular/core';
 import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 import { Router } from '@angular/router';
 import { LoginService } from '../login/service/login.service';
-
 @Component({
   selector: 'app-gnb',
   templateUrl: './gnb.component.html',
@@ -16,9 +15,8 @@ export class GnbComponent implements OnInit {
   isAuthenticated:boolean = false;
 
   constructor(private router:Router,
-              private loginService:LoginService,
-            @Inject(PLATFORM_ID) private platformId:Object) {
-
+    private loginService:LoginService,
+              @Inject(PLATFORM_ID) private platformId:Object) {
  }
 
   ngOnInit() {
@@ -34,14 +32,11 @@ export class GnbComponent implements OnInit {
         this.showLoginDesktop = false;
         this.showLoginMobile = true;
       }
-      if(this.loginService.getAuthentication()){
-        this.isAuthenticated = true;
-      }
-      //Controls Sign In or Sign Out in GNB using service and EventEmitter.
-      this.loginService.getTokenEmitter.subscribe(token => {
-        if(token == window.localStorage.getItem('token'))
+      if(localStorage.getItem('token')) {
           this.isAuthenticated = true;
-      });
+      }else{
+          this.isAuthenticated = false;
+      }
     } else {
       //Server Only Code
     }
@@ -59,23 +54,34 @@ export class GnbComponent implements OnInit {
      this.showLoginDesktop = false;
      this.showLoginMobile = true;
    }
+   this.checkAuthenticationStatus();
 }
   //Toggle GNB if the resolution is below 992px
   toggleCollapse() {
     if(this.innerWidth < 992){
       this.show = !this.show;
     }
+    this.checkAuthenticationStatus();
   }
 
   //Make 'show' false on clicking the logo if the resolution is below 992px
   onClickLogo() {
     if(this.innerWidth < 992)
       this.show = false;
+    this.checkAuthenticationStatus();
   }
 
   signOut() {
     localStorage.removeItem('token');
     this.isAuthenticated = false;
     this.router.navigate(['/']);
+  }
+
+  checkAuthenticationStatus() {
+    if(localStorage.getItem('token')) {
+        this.isAuthenticated = true;
+    }else{
+        this.isAuthenticated = false;
+    }
   }
 }
