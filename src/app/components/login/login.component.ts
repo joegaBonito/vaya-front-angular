@@ -13,18 +13,24 @@ import { EventEmitter } from '@angular/core';
 export class LoginComponent implements OnInit  {
   member:Member = new Member();
   token:any;
+  isAuthenticated:boolean;
 
   constructor(private router:Router,
               private flashMessagesService:FlashMessagesService,
               private loginService:LoginService) { }
 
   ngOnInit() {
+    //Shares the authenticated state between GNB Component and LoginComponent.
+    this.loginService.isAuthenticatedCurrent.subscribe(isAuthenticated => {
+      this.isAuthenticated = isAuthenticated;
+    })
   }
 
   onSubmit({value,valid}:{value:Member, valid:boolean}) {
     if(!valid) {
       this.flashMessagesService.show('Please fill in all required fields', {cssClass:'alert-danger', timeout:500});
       this.router.navigate(['LoginComponent']);
+      this.loginService.changeAuthenticationStatus(false);
     } else {
       this.loginService.login(value.email,value.password).subscribe((res)=>{
         //-Save the JWT token in local storage. localStorage is object available on windows, so it does not have to be imported.
@@ -32,6 +38,7 @@ export class LoginComponent implements OnInit  {
         this.router.navigate(['/']);
         this.flashMessagesService.show('Log In Successful!',{cssClass:'alert-success',timeout:500});
       });
+      this.loginService.changeAuthenticationStatus(true);
     }
   }
 

@@ -8,10 +8,16 @@ import {Member} from '../model/Member';
 import { Router, CanActivate } from '@angular/router';
 import { LoginComponent } from '../login.component';
 
+//Allows to share a state between components.
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+
 @Injectable()
 export class LoginService {
   private baseUrl = 'http://localhost:3175'
   members:Member[];
+  //Allows to share a state between components.
+  private isAuthenticated = new BehaviorSubject<boolean>(false);
+  isAuthenticatedCurrent = this.isAuthenticated.asObservable();
 
   constructor(private http:HttpClient,
               private router:Router) {
@@ -37,10 +43,16 @@ export class LoginService {
     .catch(this.handleError<any>('Authentication Error'))
   }
 
+  //This functions allows to update the authenticated state between components.
+  changeAuthenticationStatus(status:boolean) {
+    this.isAuthenticated.next(status);
+  }
+
   private handleError<T> (operation = 'operation', result?: T) {
    return (error: any): Observable<T> => {
 
      // TODO: send the error to remote logging infrastructure
+     if(error != null && error.length < 1)
      console.error(error); // log to console instead
 
      // TODO: better job of transforming error for user consumption

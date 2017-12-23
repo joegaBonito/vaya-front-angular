@@ -12,7 +12,8 @@ export class YoungAdultsColumnListComponent implements OnInit {
   selectedPost:YAColumn;
   isLoading: boolean = false;
 
-  constructor(private yacolumnService:YacolumnService) { }
+  constructor(private yacolumnService:YacolumnService) {
+  }
 
   getYAColumns():void {
     this.isLoading = true;

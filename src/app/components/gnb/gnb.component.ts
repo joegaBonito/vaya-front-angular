@@ -73,11 +73,24 @@ export class GnbComponent implements OnInit {
     this.router.navigate(['/']);
   }
 
+/*
+ * For GNB, 'this.loginService.getAuthentication()'' function needed to be called
+ * in order to make first click on first load work.
+ * Also, 'this.loginService.isAuthenticatedCurrent' is called to share the authenticated state between
+ * the GNB component and the Login Component.
+ */
   checkAuthenticationStatus() {
-    if(localStorage.getItem('token')) {
+    this.loginService.isAuthenticatedCurrent.subscribe(isAuthenticated=>{
+      this.isAuthenticated = isAuthenticated;
+    });
+    this.loginService.getAuthentication().subscribe((token)=>{
+      if(!token) {
+          this.isAuthenticated = false;
+          this.router.navigate(['/LoginComponent']);
+      } else {
         this.isAuthenticated = true;
-    }else{
-        this.isAuthenticated = false;
-    }
+      }
+    });
+    console.log(this.isAuthenticated);
   }
 }
