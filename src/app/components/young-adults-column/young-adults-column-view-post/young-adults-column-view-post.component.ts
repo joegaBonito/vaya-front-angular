@@ -22,8 +22,12 @@ export class YoungAdultsColumnViewPostComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.yacolumnService.getYAColumn(this.route.snapshot.params.id)
-         .subscribe(yaColumn => this.yaColumn = yaColumn);
+    this.route.paramMap
+          // (+) converts string 'id' to a number (+params.get('id'))
+         .switchMap((params: ParamMap) => this.yacolumnService.getYAColumn(params.get('id')))
+         .subscribe(yaColumn => {
+           this.yaColumn = yaColumn;
+         });
   }
 
   goBack(): void {

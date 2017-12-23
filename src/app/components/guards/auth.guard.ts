@@ -6,22 +6,22 @@ import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
-  isAuthenticated:boolean;
-  constructor (private loginService:LoginService, private router:Router) {
+  isAuthenticated:boolean = true;
+  constructor (private loginService:LoginService,
+               private router:Router) {
 
   }
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    this.loginService.getAuthentication().subscribe((token) => {
-      if(token) {
-        this.isAuthenticated = true;
-      }
-      else {
-        this.router.navigate(['/LoginComponent']);
-        this.isAuthenticated = false;
-      }
-    });
-    return this.isAuthenticated;
+      this.loginService.getAuthentication().subscribe((token) => {
+        if(!token) {
+          this.isAuthenticated = false;
+          this.router.navigate(['/LoginComponent']);
+        } else {
+          this.isAuthenticated = true;
+        }
+      });
+      return this.isAuthenticated;
   }
 }

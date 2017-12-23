@@ -22,12 +22,12 @@ export class RegisterComponent implements OnInit {
 
   onSubmit({value,valid}:{value:Member,valid:boolean}) {
     if(!valid) {
-      this.flashMessagesService.show('Please fill in all required fields', {cssClass:'alert-danger', timeout:3000});
+      this.flashMessagesService.show('Please fill in all required fields', {cssClass:'alert-danger', timeout:500});
       this.router.navigate(['RegisterComponent']);
     } else {
       this.loginService.createMember(value.email,value.password).subscribe(()=>{
         this.router.navigate(['/LoginComponent']);
-        this.flashMessagesService.show('Register Successful!',{cssClass:'alert-success',timeout:3000});
+        this.flashMessagesService.show('Register Successful!',{cssClass:'alert-success',timeout:500});
       });
     }
   }

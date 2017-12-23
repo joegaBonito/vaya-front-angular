@@ -9,6 +9,11 @@ label,a,p {
   font-family:sans-serif;
 }
 
+.ngx-pagination {
+  position:relative;
+  left:30%;
+  width:40%;
+}
 
 /* Extra small devices (portrait phones, less than 576px)
 / No media query since this is the default in Bootstrap */

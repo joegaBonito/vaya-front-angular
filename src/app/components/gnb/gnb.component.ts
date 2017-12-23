@@ -17,6 +17,7 @@ export class GnbComponent implements OnInit {
   constructor(private router:Router,
     private loginService:LoginService,
               @Inject(PLATFORM_ID) private platformId:Object) {
+
  }
 
   ngOnInit() {
@@ -32,11 +33,7 @@ export class GnbComponent implements OnInit {
         this.showLoginDesktop = false;
         this.showLoginMobile = true;
       }
-      if(localStorage.getItem('token')) {
-          this.isAuthenticated = true;
-      }else{
-          this.isAuthenticated = false;
-      }
+      this.checkAuthenticationStatus();
     } else {
       //Server Only Code
     }
@@ -54,23 +51,6 @@ export class GnbComponent implements OnInit {
      this.showLoginDesktop = false;
      this.showLoginMobile = true;
    }
-   this.checkAuthenticationStatus();
-}
-
-onSermonListComponent() {
-  this.router.navigate(['/SermonListComponent']);
-  this.toggleCollapse();
-  this.checkAuthenticationStatus();
-}
-onPraiseRecordingListComponent() {
-  this.router.navigate(['/PraiseRecordingListComponent']);
-  this.toggleCollapse();
-  this.checkAuthenticationStatus();
-}
-onYoungAdultsColumnListComponent(){
-  this.router.navigate(['/YoungAdultsColumnListComponent']);
-  this.toggleCollapse();
-  this.checkAuthenticationStatus();
 }
 
   //Toggle GNB if the resolution is below 992px

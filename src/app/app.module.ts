@@ -60,6 +60,9 @@ import {LoginService} from './components/login/service/login.service';
 import { PLATFORM_ID, APP_ID, Inject } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 
+//npm libraries
+import {NgxPaginationModule} from 'ngx-pagination';
+
 const appRoutes:Routes = [
   {path:"",component: LandingPageComponent},
   {path:"about-us",component: AboutUsComponent},
@@ -132,6 +135,7 @@ const appRoutes:Routes = [
     HttpClientModule,
     FormsModule,
     FlashMessagesModule,
+    NgxPaginationModule,
     RouterModule.forRoot(appRoutes),
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyD72lQaX_Ki1nZlA9Y2OoczB8GvKBY_hIg'

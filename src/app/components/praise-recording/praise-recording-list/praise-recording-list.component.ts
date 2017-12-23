@@ -12,6 +12,8 @@ export class PraiseRecordingListComponent implements OnInit {
   items:PraiseRecording[];
   selectedPost:PraiseRecording;
   isLoading: boolean = false;
+  p: number = 1;
+  collection: any[] = this.items;
 
   constructor(private praiserecordingService:PraiserecordingService) { }
 
