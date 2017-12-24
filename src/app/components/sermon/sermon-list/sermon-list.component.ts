@@ -14,6 +14,8 @@ export class SermonListComponent implements OnInit {
   items:SermonPost[];
   selectedPost:SermonPost;
   isLoading: boolean = false;
+  p: number = 1;
+  collection: any[] = this.items;
 
   constructor(private sermonService:SermonService) { }
 

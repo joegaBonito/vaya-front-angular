@@ -22,7 +22,9 @@ export class AuthGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-      this.loginService.getAuthentication().subscribe((token) => {
+      //'map' is used instead of 'subscribe' because 'map' is to assign values and 'subscribe' is to execute them.
+      //For the reason, this now finally fixed the GNB first click issue.
+      return this.loginService.getAuthentication().map((token) => {
         if(!token) {
           this.isAuthenticated = false;
           this.loginService.changeAuthenticationStatus(false);
@@ -31,7 +33,7 @@ export class AuthGuard implements CanActivate {
           this.isAuthenticated = true;
           this.loginService.changeAuthenticationStatus(true);
         }
+        return this.isAuthenticated;
       });
-      return this.isAuthenticated;
   }
 }
