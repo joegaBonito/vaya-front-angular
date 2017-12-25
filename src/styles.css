@@ -10,9 +10,12 @@ label,a,p {
 }
 
 .ngx-pagination {
-  position:relative;
-  left:30%;
-  width:40%;
+  font-size:12px;
+  text-align:left;
+}
+
+button {
+  font-size:12px !important;
 }
 
 /* Extra small devices (portrait phones, less than 576px)
@@ -30,7 +33,16 @@ label,a,p {
 
 /* Large devices (desktops, 992px and up)*/
 @media screen and (min-width: 992px) {
-
+  .ngx-pagination {
+    position:relative;
+    left:30%;
+    width:40%;
+    text-align:center;
+    font-size:16px;
+  }
+  button {
+    font-size:16px !important;
+  }
 }
 
 /* Extra large devices (large desktops, 1200px and up) */

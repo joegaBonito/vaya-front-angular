@@ -13,7 +13,7 @@ export class YoungAdultsColumnListComponent implements OnInit {
   isLoading: boolean = false;
   p: number = 1;
   collection: any[] = this.items;
-  
+
   constructor(private yacolumnService:YacolumnService) {
   }
 
