@@ -28,8 +28,12 @@ export class PraiseRecordingEditPostComponent implements OnInit {
       }
 
     ngOnInit() {
-      this.praiserecordingService.getPraiseRecording(this.route.snapshot.params.id)
-      .subscribe(praiseRecording => this.praiseRecording = praiseRecording);
+      this.route.paramMap
+            // (+) converts string 'id' to a number (+params.get('id'))
+           .switchMap((params: ParamMap) => this.praiserecordingService.getPraiseRecording(params.get('id')))
+           .subscribe(praiseRecording => {
+             this.praiseRecording = praiseRecording;
+           });
     }
 
     fileChange(event) {

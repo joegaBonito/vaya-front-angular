@@ -57,7 +57,8 @@ export class PraiserecordingService {
 
   downloadFile(id:string): Observable<Blob> {
     let apiURL = `${this.baseUrl}/praiserecording-file/${id}`;
-    return this.http.get<Blob>(apiURL).catch(this.handleError<Blob>('File Downloading Error'));
+    //{responseType:'blob' as 'blob'} has been added to the requester header because the 'type' undefined error when download.
+    return this.http.get(apiURL, {responseType:'blob' as 'blob'}).catch(this.handleError<Blob>('File Downloading Error'));
   }
 
   private handleError<T> (operation = 'operation', result?: T) {

@@ -5,7 +5,7 @@ import { Location }                 from '@angular/common';
 import { PraiserecordingService } from '../service/praiserecording.service';
 import { Http, Headers } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
-import { saveAs as importedSaveAs } from 'file-saver/FileSaver';
+import * as FileSaver from 'file-saver';
 
 @Component({
   selector: 'app-praise-recording-view-post',
@@ -44,8 +44,8 @@ export class PraiseRecordingViewPostComponent implements OnInit {
   }
 
   downloadFile() {
-    this.praiserecordingService.downloadFile(this.route.snapshot.params.id).subscribe(blob => {
-            importedSaveAs(blob, this.fileName);
+    this.praiserecordingService.downloadFile(this.route.snapshot.params.id).subscribe(data => {
+            FileSaver.saveAs(data,this.fileName);
         }
     )
   }
