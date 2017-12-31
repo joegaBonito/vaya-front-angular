@@ -28,9 +28,9 @@
   </div>
   <div class="row btn-row">
     <div class="col-10 offset-1 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
-      <button class="btn btn-primary" (click)="goBack()">Back</button>
-      <button class="btn btn-secondary" [routerLink]="['/SermonEditPostComponent',sermonPost.id]">Edit</button>
-      <button class="btn btn-danger" (click) = "onClickDelete()">Delete</button>
+      <button class="btn btn-primary"  (click)="goBack()">Back</button>
+      <button class="btn btn-secondary" *ngIf="isAdmin || isOwner" [routerLink]="['/SermonEditPostComponent',sermonPost.id]">Edit</button>
+      <button class="btn btn-danger" *ngIf="isAdmin || isOwner" (click) = "onClickDelete()">Delete</button>
     </div>
   </div>
 </div>

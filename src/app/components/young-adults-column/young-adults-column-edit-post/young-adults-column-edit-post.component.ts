@@ -3,6 +3,7 @@ import { YAColumn } from '../model/YAColumn';
 import { YacolumnService} from '../service/yacolumn.service';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { LoginService } from '../../login/service/login.service';
 
 @Component({
   selector: 'app-young-adults-column-edit-post',
@@ -19,15 +20,16 @@ export class YoungAdultsColumnEditPostComponent implements OnInit {
     private yacolumnService:YacolumnService,
     private flashMessagesService:FlashMessagesService,
     private router:Router,
-    private route:ActivatedRoute) {
-      this.yacolumnService.getYAColumn(this.route.snapshot.params.id)
-      .subscribe(yaColumn => {
-        this.yaColumn = yaColumn;
-      });
+    private route:ActivatedRoute,
+    private loginService:LoginService) {
     }
 
   ngOnInit() {
-
+    this.yacolumnService.getYAColumn(this.route.snapshot.params.id)
+    .subscribe(yaColumn => {
+      this.yaColumn = yaColumn;
+      this.yaColumn.author = this.loginService.getUsername();
+    });
   }
 
   onSubmit({value,valid}:{value:YAColumn, valid:boolean}) {

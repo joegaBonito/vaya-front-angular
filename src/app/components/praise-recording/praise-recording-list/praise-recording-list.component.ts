@@ -17,6 +17,10 @@ export class PraiseRecordingListComponent implements OnInit {
 
   constructor(private praiserecordingService:PraiserecordingService) { }
 
+  ngOnInit() {
+    this.getPraiseRecordings();
+  }
+
   getPraiseRecordings():void {
     this.isLoading=true;
     this.praiserecordingService.getPraiseRecordings()
@@ -24,10 +28,6 @@ export class PraiseRecordingListComponent implements OnInit {
       this.items = praiseRecordings;
       this.isLoading = false;
     });
-  }
-
-  ngOnInit() {
-    this.getPraiseRecordings();
   }
 
 }

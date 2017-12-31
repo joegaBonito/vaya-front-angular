@@ -4,6 +4,7 @@ import { PraiserecordingService } from '../service/praiserecording.service';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Location }                 from '@angular/common';
+import { LoginService } from '../../login/service/login.service';
 
 @Component({
   selector: 'app-praise-recording-edit-post',
@@ -23,7 +24,8 @@ export class PraiseRecordingEditPostComponent implements OnInit {
       private flashMessagesService:FlashMessagesService,
       private router:Router,
       private route:ActivatedRoute,
-      private location:Location) {
+      private location:Location,
+      private loginService:LoginService) {
 
       }
 
@@ -33,6 +35,7 @@ export class PraiseRecordingEditPostComponent implements OnInit {
            .switchMap((params: ParamMap) => this.praiserecordingService.getPraiseRecording(params.get('id')))
            .subscribe(praiseRecording => {
              this.praiseRecording = praiseRecording;
+             this.praiseRecording.author = this.loginService.getUsername();
            });
     }
 

@@ -7,6 +7,7 @@ import 'rxjs/add/operator/catch';
 import {Member} from '../model/Member';
 import { Router, CanActivate } from '@angular/router';
 import { LoginComponent } from '../login.component';
+import * as jwtDecode from 'jwt-decode';
 
 //Allows to share a state between components.
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -15,6 +16,8 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 export class LoginService {
   private baseUrl = 'http://localhost:3175'
   members:Member[];
+  username:string;
+
   //Allows to share a state between components.
   private isAuthenticated = new BehaviorSubject<boolean>(false);
   isAuthenticatedCurrent = this.isAuthenticated.asObservable();
@@ -35,11 +38,22 @@ export class LoginService {
         .catch(this.handleError<any>('Login Error'));
   }
   /*
+  * Decodes JWT token and returns username.
+  */
+  getUsername():string{
+    var token = localStorage.getItem('token');
+    var decoded = jwtDecode(token);
+    return decoded.sub;
+  }
+  /*
   * Handles authentication based on JWT received at the point of log in.
   * This is being used in AuthGuard.
   */
   getAuthentication():Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/refresh`,{headers:{Authorization: localStorage.getItem('token')}})
+    let headers = new HttpHeaders({
+      authorization: localStorage.getItem('token')
+    })
+    return this.http.get<any>(`${this.baseUrl}/refresh`,{headers})
     .catch(this.handleError<any>('Authentication Error'))
   }
 

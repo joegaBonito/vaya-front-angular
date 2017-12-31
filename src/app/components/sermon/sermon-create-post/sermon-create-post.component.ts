@@ -3,6 +3,7 @@ import {SermonPost} from '../model/SermonPost';
 import { SermonService } from '../service/sermon.service';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import {Router} from '@angular/router';
+import {LoginService} from '../../login/service/login.service';
 
 @Component({
   selector: 'app-sermon-create-post',
@@ -13,15 +14,17 @@ export class SermonCreatePostComponent implements OnInit {
 
   sermonPost:SermonPost = new SermonPost();
   submitted:boolean = false;
+  loggedInEmail:string;
 
   constructor(
     private sermonService:SermonService,
     private flashMessagesService:FlashMessagesService,
-    private router:Router) {
+    private router:Router,
+    private loginService:LoginService) {
   }
 
   ngOnInit() {
-
+    this.sermonPost.author = this.loginService.getUsername();
   }
 
 

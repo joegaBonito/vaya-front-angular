@@ -61,6 +61,17 @@ export class PraiserecordingService {
     return this.http.get(apiURL, {responseType:'blob' as 'blob'}).catch(this.handleError<Blob>('File Downloading Error'));
   }
 
+  onCheckAdmin():Observable<boolean> {
+    let headers = new HttpHeaders(
+      {
+        authorization:localStorage.getItem('token'),
+      }
+    )
+      return this.http.get<boolean>(`${this.baseUrl}/admin`,{headers})
+      .catch(this.handleError<boolean>('Checking Admin Error'))
+  }
+
+
   private handleError<T> (operation = 'operation', result?: T) {
    return (error: any): Observable<T> => {
 

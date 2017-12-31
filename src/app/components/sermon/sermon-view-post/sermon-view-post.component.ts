@@ -4,6 +4,7 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Location }                 from '@angular/common';
 import { SermonPost } from '../model/SermonPost';
 import { SermonService } from '../service/sermon.service';
+import { LoginService } from '../../login/service/login.service';
 
 @Component({
   selector: 'app-sermon-view-post',
@@ -11,15 +12,16 @@ import { SermonService } from '../service/sermon.service';
   styleUrls: ['./sermon-view-post.component.css']
 })
 export class SermonViewPostComponent implements OnInit {
-
+  isAdmin:boolean = false;
+  isOwner:boolean = false;
   sermonPost:SermonPost;
 
   constructor(
     private sermonService: SermonService,
     private router:Router,
     private route:ActivatedRoute,
-    private location:Location
-
+    private location:Location,
+    private loginService:LoginService
   ) { }
 
   ngOnInit() {
@@ -27,6 +29,7 @@ export class SermonViewPostComponent implements OnInit {
           // (+) converts string 'id' to a number (+params.get('id'))
          .switchMap((params: ParamMap) => this.sermonService.getSermonPost(params.get('id')))
          .subscribe(sermonPost => this.sermonPost = sermonPost);
+    this.onCheckAdmin();
   }
 
   goBack(): void {
@@ -37,6 +40,25 @@ export class SermonViewPostComponent implements OnInit {
     this.route.paramMap
     .switchMap((params:ParamMap) => this.sermonService.deleteSermonPost(params.get('id')))
     .subscribe(()=> this.router.navigate(['/SermonListComponent']));
+  }
+
+  onCheckAdmin(){
+    this.sermonService.onCheckAdmin().subscribe((res)=> {
+      if(res == true) {
+        this.isAdmin = true;
+      } else {
+        this.isAdmin = false;
+        this.onCheckOwner();
+      }
+    });
+  }
+
+  onCheckOwner(){
+      if(this.loginService.getUsername() == this.sermonPost.author) {
+        this.isOwner = true;
+      } else {
+        this.isOwner = false;
+      }
   }
 
 }

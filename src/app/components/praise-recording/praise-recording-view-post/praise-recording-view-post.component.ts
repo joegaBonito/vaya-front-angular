@@ -6,6 +6,7 @@ import { PraiserecordingService } from '../service/praiserecording.service';
 import { Http, Headers } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import * as FileSaver from 'file-saver';
+import { LoginService } from '../../login/service/login.service';
 
 @Component({
   selector: 'app-praise-recording-view-post',
@@ -16,6 +17,8 @@ export class PraiseRecordingViewPostComponent implements OnInit {
   praiseRecording:PraiseRecording;
   imageFile:ByteString;
   fileName:string;
+  isAdmin:boolean = false;
+  isOwner:boolean = false;
 
   private baseUrl = 'http://localhost:3175';
   constructor(
@@ -23,7 +26,8 @@ export class PraiseRecordingViewPostComponent implements OnInit {
     private praiserecordingService:PraiserecordingService,
     private router:Router,
     private location:Location,
-    private http:Http
+    private http:Http,
+    private loginService:LoginService
   ) {
 
   }
@@ -36,6 +40,7 @@ export class PraiseRecordingViewPostComponent implements OnInit {
            this.praiseRecording = praiseRecording;
            this.getImage();
          });
+    this.onCheckAdmin();
   }
 
   getImage() {
@@ -57,5 +62,24 @@ export class PraiseRecordingViewPostComponent implements OnInit {
   onClickDelete() {
      this.praiserecordingService.deletePraiseRecording(this.route.snapshot.params.id)
     .subscribe(()=> this.router.navigate(['/PraiseRecordingListComponent']));
+  }
+
+  onCheckAdmin(){
+    this.praiserecordingService.onCheckAdmin().subscribe((res)=> {
+      if(res == true) {
+        this.isAdmin = true;
+      } else {
+        this.isAdmin = false;
+        this.onCheckOwner();
+      }
+    });
+  }
+
+  onCheckOwner(){
+      if(this.loginService.getUsername() == this.praiseRecording.author) {
+        this.isOwner = true;
+      } else {
+        this.isOwner = false;
+      }
   }
 }

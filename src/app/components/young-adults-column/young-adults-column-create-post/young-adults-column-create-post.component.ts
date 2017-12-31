@@ -3,6 +3,7 @@ import { YAColumn } from '../model/YAColumn';
 import { YacolumnService} from '../service/yacolumn.service';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import {Router} from '@angular/router';
+import {LoginService} from '../../login/service/login.service';
 
 @Component({
   selector: 'app-young-adults-column-create-post',
@@ -18,10 +19,12 @@ export class YoungAdultsColumnCreatePostComponent implements OnInit {
     constructor(
       private yacolumnService:YacolumnService,
       private flashMessagesService:FlashMessagesService,
-      private router:Router) {
+      private router:Router,
+      private loginService:LoginService) {
     }
 
     ngOnInit() {
+      this.yaColumn.author = this.loginService.getUsername();
     }
 
     onSubmit({value,valid}:{value:YAColumn, valid:boolean}) {

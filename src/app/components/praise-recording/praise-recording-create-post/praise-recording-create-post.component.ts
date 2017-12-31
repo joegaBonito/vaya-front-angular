@@ -3,6 +3,7 @@ import { PraiseRecording } from '../model/PraiseRecording';
 import { Router } from '@angular/router';
 import {PraiserecordingService} from '../service/praiserecording.service';
 import { FlashMessagesService } from 'angular2-flash-messages';
+import {LoginService} from '../../login/service/login.service';
 
 @Component({
   selector: 'app-praise-recording-create-post',
@@ -16,12 +17,14 @@ export class PraiseRecordingCreatePostComponent implements OnInit {
 
   constructor(private router:Router,
               private flashMessagesService:FlashMessagesService,
-              private praiserecordingService:PraiserecordingService
+              private praiserecordingService:PraiserecordingService,
+              private loginService:LoginService
               ) {
 
   }
 
   ngOnInit() {
+    this.praiseRecording.author = this.loginService.getUsername();
   }
 
   fileChange(event) {

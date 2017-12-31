@@ -3,6 +3,7 @@ import {SermonPost} from '../model/SermonPost';
 import { SermonService } from '../service/sermon.service';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { LoginService } from '../../login/service/login.service';
 
 @Component({
   selector: 'app-sermon-edit-post',
@@ -18,14 +19,18 @@ export class SermonEditPostComponent implements OnInit {
     private sermonService:SermonService,
     private flashMessagesService:FlashMessagesService,
     private router:Router,
-    private route:ActivatedRoute) {
+    private route:ActivatedRoute,
+    private loginService:LoginService) {
 
     }
 
   ngOnInit() {
     this.route.paramMap
     .switchMap((params:ParamMap)=>this.sermonService.getSermonPost(params.get('id')))
-    .subscribe(sermonPost => this.sermonPost = sermonPost);
+    .subscribe(sermonPost =>{
+      this.sermonPost = sermonPost;
+      this.sermonPost.author = this.loginService.getUsername();
+    });
   }
 
   onSubmit({value,valid}:{value:SermonPost, valid:boolean}) {
