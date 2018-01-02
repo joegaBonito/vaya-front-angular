@@ -1,5 +1,5 @@
 import { TestBed, async, inject } from '@angular/core/testing';
-
+import 'jasmine';
 import { AuthGuard } from './auth.guard';
 
 describe('AuthGuard', () => {

@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import 'jasmine';
 import { VideoViewPostComponent } from './video-view-post.component';
 
 describe('VideoViewPostComponent', () => {

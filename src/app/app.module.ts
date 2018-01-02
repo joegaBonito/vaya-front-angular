@@ -59,6 +59,7 @@ import {YacolumnService } from './components/young-adults-column/service/yacolum
 import {LoginService} from './components/login/service/login.service';
 import { PLATFORM_ID, APP_ID, Inject } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
+import {PictureService } from './components/picture/service/picture.service';
 
 //npm libraries
 import {NgxPaginationModule} from 'ngx-pagination';
@@ -147,7 +148,8 @@ const appRoutes:Routes = [
     PraiserecordingService,
     YacolumnService,
     LoginService,
-    AuthGuard
+    AuthGuard,
+    PictureService
   ],
   bootstrap: [AppComponent],
   schemas: [

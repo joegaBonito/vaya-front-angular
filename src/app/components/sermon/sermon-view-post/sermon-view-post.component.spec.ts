@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import 'jasmine';
 import { SermonViewPostComponent } from './sermon-view-post.component';
 
 describe('SermonViewPostComponent', () => {

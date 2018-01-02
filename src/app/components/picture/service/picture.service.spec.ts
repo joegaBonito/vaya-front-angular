@@ -1,5 +1,5 @@
 import { TestBed, inject } from '@angular/core/testing';
-
+import 'jasmine';
 import { PictureService } from './picture.service';
 
 describe('PictureService', () => {

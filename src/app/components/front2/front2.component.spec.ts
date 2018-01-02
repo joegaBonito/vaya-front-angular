@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import 'jasmine';
 import { Front2Component } from './front2.component';
 
 describe('Front2Component', () => {

@@ -8,25 +8,25 @@ import {YacolumnService} from '../service/yacolumn.service';
   styleUrls: ['./young-adults-column-list.component.css']
 })
 export class YoungAdultsColumnListComponent implements OnInit {
-  items:YAColumn[];
-  selectedPost:YAColumn;
+  items: YAColumn[];
+  selectedPost: YAColumn;
   isLoading: boolean = false;
   p: number = 1;
   collection: any[] = this.items;
 
-  constructor(private yacolumnService:YacolumnService) {
+  constructor(private yacolumnService: YacolumnService) {
   }
 
-  getYAColumns():void {
+  getYAColumns(): void {
     this.isLoading = true;
     this.yacolumnService.getYAColumns()
-    .subscribe(yaColumns=>{
-      this.items = yaColumns;
-      this.isLoading = false;
-    });
+      .subscribe(yaColumns => {
+        this.items = yaColumns;
+        this.isLoading = false;
+      });
   }
 
   ngOnInit() {
-    this.getYAColumns();
+      this.getYAColumns();
   }
 }

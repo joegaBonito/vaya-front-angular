@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import 'jasmine';
 import { YoungAdultsColumnViewPostComponent } from './young-adults-column-view-post.component';
 
 describe('YoungAdultsColumnViewPostComponent', () => {

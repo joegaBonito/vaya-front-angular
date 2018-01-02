@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import 'jasmine';
 import { PraiseRecordingCreatePostComponent } from './praise-recording-create-post.component';
 
 describe('PraiseRecordingCreatePostComponent', () => {

@@ -13,30 +13,31 @@ import {LoginService} from '../../login/service/login.service';
 export class YoungAdultsColumnCreatePostComponent implements OnInit {
 
 
-    yaColumn:YAColumn = new YAColumn();
-    submitted:boolean = false;
+  yaColumn: YAColumn = new YAColumn();
+  submitted: boolean = false;
 
-    constructor(
-      private yacolumnService:YacolumnService,
-      private flashMessagesService:FlashMessagesService,
-      private router:Router,
-      private loginService:LoginService) {
-    }
+  constructor(
+    private yacolumnService: YacolumnService,
+    private flashMessagesService: FlashMessagesService,
+    private router: Router,
+    private loginService: LoginService) {
+  }
 
-    ngOnInit() {
+  ngOnInit() {
       this.yaColumn.author = this.loginService.getUsername();
-    }
+  }
 
-    onSubmit({value,valid}:{value:YAColumn, valid:boolean}) {
-      if(!valid) {
-        this.flashMessagesService.show('Please fill in all required fields', {cssClass:'alert-danger', timeout:3000});
-        this.router.navigate(['YoungAdultsColumnCreatePostComponent']);
-      } else {
-        this.yacolumnService.newYAColumn(value)
-        .subscribe(res=> {
-          this.router.navigate(['/YoungAdultsColumnListComponent']); });
-          this.flashMessagesService.show('New Client has been added',{cssClass:'alert-success',timeout:3000});
-      }
+  onSubmit({value, valid}: { value: YAColumn, valid: boolean }) {
+    if (!valid) {
+      this.flashMessagesService.show('Please fill in all required fields', { cssClass: 'alert-danger', timeout: 3000 });
+      this.router.navigate(['YoungAdultsColumnCreatePostComponent']);
+    } else {
+      this.yacolumnService.newYAColumn(value)
+        .subscribe(res => {
+          this.router.navigate(['/YoungAdultsColumnListComponent']);
+        });
+      this.flashMessagesService.show('New Client has been added', { cssClass: 'alert-success', timeout: 3000 });
     }
+  }
 
 }

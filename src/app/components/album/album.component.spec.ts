@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import 'jasmine';
 import { AlbumComponent } from './album.component';
 
 describe('AlbumComponent', () => {

@@ -25,7 +25,6 @@
   font-size:14px;
   word-break:keep-all;
   animation: fadein 3s;
-  text-shadow: 1px 1px;
 }
 
 @keyframes fadein {

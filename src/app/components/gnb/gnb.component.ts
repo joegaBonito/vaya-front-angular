@@ -15,7 +15,7 @@ export class GnbComponent implements OnInit {
   isAuthenticated:boolean = false;
 
   constructor(private router:Router,
-    private loginService:LoginService,
+              private loginService:LoginService,
               @Inject(PLATFORM_ID) private platformId:Object) {
 
  }
