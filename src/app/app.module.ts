@@ -50,7 +50,6 @@ import { VideoViewPostComponent } from './components/video/video-view-post/video
 import { WorshipBannerComponent } from './components/worship-banner/worship-banner.component';
 import { ContactUsComponent } from './components/contact-us/contact-us.component';
 import { ComingsoonComponent } from './components/comingsoon/comingsoon.component';
-import { AuthGuard } from './components/guards/auth.guard';
 
 //Services
 import {SermonService} from './components/sermon/service/sermon.service';
@@ -61,12 +60,16 @@ import { PLATFORM_ID, APP_ID, Inject } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import {PictureService } from './components/picture/service/picture.service';
 
+//Guards
+import { AuthGuard } from './components/guards/auth.guard';
+import { GnbStatusGuard } from './components/guards/gnb-status.guard';
+
 //npm libraries
 import {NgxPaginationModule} from 'ngx-pagination';
 
 const appRoutes:Routes = [
-  {path:"",component: LandingPageComponent},
-  {path:"about-us",component: AboutUsComponent},
+  {path:"",component: LandingPageComponent, canActivate:[GnbStatusGuard]},
+  {path:"about-us",component: AboutUsComponent, canActivate:[GnbStatusGuard]},
   {path:"SermonListComponent",component: SermonListComponent, canActivate:[AuthGuard]},
   {path:"SermonCreatePostComponent",component:SermonCreatePostComponent, canActivate:[AuthGuard]},
   {path:"SermonViewPostComponent/:id", component: SermonViewPostComponent, canActivate:[AuthGuard]},
@@ -79,11 +82,14 @@ const appRoutes:Routes = [
   {path:"YoungAdultsColumnCreatePostComponent",component: YoungAdultsColumnCreatePostComponent, canActivate:[AuthGuard]},
   {path:"YoungAdultsColumnViewPostComponent/:id",component: YoungAdultsColumnViewPostComponent, canActivate:[AuthGuard]},
   {path:"YoungAdultsColumnEditPostComponent/:id",component: YoungAdultsColumnEditPostComponent, canActivate:[AuthGuard]},
-  {path:"PictureListComponent",component: PictureListComponent},
-  {path:"VideoListComponent",component: VideoListComponent},
-  {path:"ComingsoonComponent", component:ComingsoonComponent},
-  {path:"LoginComponent", component:LoginComponent},
-  {path:"RegisterComponent",component:RegisterComponent}
+  {path:"PictureListComponent",component: PictureListComponent, canActivate:[GnbStatusGuard]},
+  {path:"PictureCreatePostComponent",component: PictureCreatePostComponent, canActivate:[AuthGuard]},
+  {path:"PictureViewPostComponent/:id",component: PictureViewPostComponent, canActivate:[AuthGuard]},
+  {path:"PictureEditPostComponent/:id",component: PictureEditPostComponent, canActivate:[AuthGuard]},
+  {path:"VideoListComponent",component: VideoListComponent, canActivate:[GnbStatusGuard]},
+  {path:"ComingsoonComponent", component:ComingsoonComponent, canActivate:[GnbStatusGuard]},
+  {path:"LoginComponent", component:LoginComponent, canActivate:[GnbStatusGuard]},
+  {path:"RegisterComponent",component:RegisterComponent, canActivate:[GnbStatusGuard]}
 ];
 
 @NgModule({
@@ -149,6 +155,7 @@ const appRoutes:Routes = [
     YacolumnService,
     LoginService,
     AuthGuard,
+    GnbStatusGuard,
     PictureService
   ],
   bootstrap: [AppComponent],

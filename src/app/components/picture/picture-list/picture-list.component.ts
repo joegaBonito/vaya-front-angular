@@ -10,7 +10,6 @@ import { PictureService } from '../service/picture.service';
 export class PictureListComponent implements OnInit {
   items:Picture[] = [];
   isLoading:boolean = false;
-
   constructor(private pictureService:PictureService) { }
 
   ngOnInit() {
@@ -25,5 +24,4 @@ export class PictureListComponent implements OnInit {
       this.isLoading = false;
     });
   }
-
 }

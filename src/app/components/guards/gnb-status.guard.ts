@@ -4,8 +4,11 @@ import { Observable } from 'rxjs/Observable';
 import { LoginService } from '../login/service/login.service';
 import { Router } from '@angular/router';
 
+/*
+ * This guard checks for GNB Login status when auth.guard is not in use.
+*/
 @Injectable()
-export class AuthGuard implements CanActivate {
+export class GnbStatusGuard implements CanActivate {
   isAuthenticated: boolean;
   constructor(private loginService: LoginService,
     private router: Router) {
@@ -23,11 +26,10 @@ export class AuthGuard implements CanActivate {
       return this.loginService.getAuthentication().map((token) => {
         if (!token) {
           this.loginService.changeAuthenticationStatus(false);
-          this.router.navigate(['/LoginComponent']);
         } else {
           this.loginService.changeAuthenticationStatus(true);
         }
-        return this.isAuthenticated;
+        return true;
       });
     }
 }

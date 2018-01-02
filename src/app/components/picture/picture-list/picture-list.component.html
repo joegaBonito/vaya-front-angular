@@ -1,12 +1,18 @@
 <div class="row">
-  <div class="col-md-4 offset-md-2 col-lg-4 offset-lg-2" *ngFor="let item of items">
+  <div class="col-10 offset-1 col-lg-4 offset-lg-2" *ngFor="let item of items">
     <div class="card">
       <img class="card-img-top" src="..." alt="Card image cap">
       <div class="card-body">
         <h5 class="card-title">{{item.title}}</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
+        <p class="card-text">{{item.body}}</p>
+        <a href="#" class="btn btn-primary" [routerLink]="['/PictureViewPostComponent',item.id]">Go somewhere</a>
       </div>
     </div>
+  </div>
+
+</div>
+<div class="row">
+  <div class="col-2 offset-1 col-lg-4 offset-lg-2">
+    <button class="btn btn-primary" routerLink="/PictureCreatePostComponent">New</button>
   </div>
 </div>

@@ -3,5 +3,5 @@ export class Picture {
   title:string;
   author:string;
   date:string;
-  description:string;
+  body:string;
 }
