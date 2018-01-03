@@ -1,13 +1,5 @@
-//Modules
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, Component, NO_ERRORS_SCHEMA } from '@angular/core';
-import { AgmCoreModule} from '@agm/core';
-
-import { AppRoutingModule } from './app-routing.module';
-import { FormsModule } from '@angular/forms';
-import { FlashMessagesModule } from 'angular2-flash-messages';
-import { HttpModule } from '@angular/http';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { Routes, RouterModule} from '@angular/router';
 
 //Components
 import { AppComponent } from './app.component';
@@ -52,101 +44,42 @@ import { WorshipBannerComponent } from './components/worship-banner/worship-bann
 import { ContactUsComponent } from './components/contact-us/contact-us.component';
 import { ComingsoonComponent } from './components/comingsoon/comingsoon.component';
 
-//Services
-import {SermonService} from './components/sermon/service/sermon.service';
-import {PraiserecordingService} from './components/praise-recording/service/praiserecording.service';
-import {YacolumnService } from './components/young-adults-column/service/yacolumn.service'
-import {LoginService} from './components/login/service/login.service';
-import { PLATFORM_ID, APP_ID, Inject } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
-import {PictureService } from './components/picture/service/picture.service';
-
 //Guards
 import { AuthGuard } from './components/guards/auth.guard';
 import { GnbStatusGuard } from './components/guards/gnb-status.guard';
 
-//npm libraries
-import {NgxPaginationModule} from 'ngx-pagination';
-
-
+const appRoutes:Routes = [
+  {path:"",component: LandingPageComponent, canActivate:[GnbStatusGuard]},
+  {path:"about-us",component: AboutUsComponent, canActivate:[GnbStatusGuard]},
+  {path:"SermonListComponent",component: SermonListComponent, canActivate:[AuthGuard]},
+  {path:"SermonCreatePostComponent",component:SermonCreatePostComponent, canActivate:[AuthGuard]},
+  {path:"SermonViewPostComponent/:id", component: SermonViewPostComponent, canActivate:[AuthGuard]},
+  {path:"SermonEditPostComponent/:id", component: SermonEditPostComponent, canActivate:[AuthGuard]},
+  {path:"PraiseRecordingListComponent",component: PraiseRecordingListComponent, canActivate:[AuthGuard]},
+  {path:"PraiseRecordingCreatePostComponent",component:PraiseRecordingCreatePostComponent, canActivate:[AuthGuard]},
+  {path:"PraiseRecordingViewPostComponent/:id", component: PraiseRecordingViewPostComponent, canActivate:[AuthGuard]},
+  {path:"PraiseRecordingEditPostComponent/:id", component: PraiseRecordingEditPostComponent, canActivate:[AuthGuard]},
+  {path:"YoungAdultsColumnListComponent",component: YoungAdultsColumnListComponent, canActivate:[AuthGuard]},
+  {path:"YoungAdultsColumnCreatePostComponent",component: YoungAdultsColumnCreatePostComponent, canActivate:[AuthGuard]},
+  {path:"YoungAdultsColumnViewPostComponent/:id",component: YoungAdultsColumnViewPostComponent, canActivate:[AuthGuard]},
+  {path:"YoungAdultsColumnEditPostComponent/:id",component: YoungAdultsColumnEditPostComponent, canActivate:[AuthGuard]},
+  {path:"PictureListComponent",component: PictureListComponent, canActivate:[GnbStatusGuard]},
+  {path:"PictureCreatePostComponent",component: PictureCreatePostComponent, canActivate:[AuthGuard]},
+  {path:"PictureViewPostComponent/:id",component: PictureViewPostComponent, canActivate:[AuthGuard]},
+  {path:"PictureEditPostComponent/:id",component: PictureEditPostComponent, canActivate:[AuthGuard]},
+  {path:"VideoListComponent",component: VideoListComponent, canActivate:[GnbStatusGuard]},
+  {path:"ComingsoonComponent", component:ComingsoonComponent, canActivate:[GnbStatusGuard]},
+  {path:"LoginComponent", component:LoginComponent, canActivate:[GnbStatusGuard]},
+  {path:"RegisterComponent",component:RegisterComponent, canActivate:[GnbStatusGuard]}
+];
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    GnbComponent,
-    BannerComponent,
-    Front1Component,
-    Front2Component,
-    Front3Component,
-    FooterComponent,
-    LoginComponent,
-    PageNotFoundComponent,
-    RegisterComponent,
-    AboutUsComponent,
-    WorshipServiceComponent,
-    AlbumComponent,
-    ResourceComponent,
-    NewsComponent,
-    LandingPageComponent,
-    DashboardComponent,
-    GoogleMapsComponent,
-    SermonListComponent,
-    SermonCreatePostComponent,
-    SermonEditPostComponent,
-    SermonViewPostComponent,
-    PraiseRecordingListComponent,
-    PraiseRecordingCreatePostComponent,
-    PraiseRecordingEditPostComponent,
-    PraiseRecordingViewPostComponent,
-    YoungAdultsColumnListComponent,
-    YoungAdultsColumnCreatePostComponent,
-    YoungAdultsColumnEditPostComponent,
-    YoungAdultsColumnViewPostComponent,
-    PictureListComponent,
-    PictureCreatePostComponent,
-    PictureEditPostComponent,
-    PictureViewPostComponent,
-    VideoListComponent,
-    VideoCreatePostComponent,
-    VideoEditPostComponent,
-    VideoViewPostComponent,
-    WorshipBannerComponent,
-    ContactUsComponent,
-    ComingsoonComponent
+  imports:[
+    RouterModule.forRoot(appRoutes)
   ],
-  imports: [
-    BrowserModule.withServerTransition({ appId: 'VAYA-SSR' }),
-    AppRoutingModule,
-    HttpModule,
-    HttpClientModule,
-    FormsModule,
-    FlashMessagesModule,
-    NgxPaginationModule,
-    AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyD72lQaX_Ki1nZlA9Y2OoczB8GvKBY_hIg'
-    })
-  ],
-  providers: [
-    HttpClientModule,
-    SermonService,
-    PraiserecordingService,
-    YacolumnService,
-    LoginService,
-    AuthGuard,
-    GnbStatusGuard,
-    PictureService
-  ],
-  bootstrap: [AppComponent],
-  schemas: [
-    NO_ERRORS_SCHEMA
+  exports:[
+    RouterModule
   ]
 })
-export class AppModule {
-  constructor(
-    @Inject(PLATFORM_ID) private platformId: Object,
-    @Inject(APP_ID) private appId: string) {
-    const platform = isPlatformBrowser(platformId) ?
-      'on the server' : 'in the browser';
-    console.log(`Running ${platform} with appId=${appId}`);
-  }
-}
+
+export class AppRoutingModule{}
