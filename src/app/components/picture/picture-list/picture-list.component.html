@@ -2,8 +2,8 @@
   <div class="col-10 offset-1">
     <div class="row">
     <div *ngFor="let item of items">
-        <div class="col-12">
-          <div class="card">
+        <div class="col-12 padding-on-each-card">
+          <div class="card shadow-on-each-card">
             <img class="card-img-top" [src]="filePath+item.id" alt="Card image cap">
             <div class="card-body">
               <h5 class="card-title">{{item.title}}</h5>

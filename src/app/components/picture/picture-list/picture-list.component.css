@@ -11,7 +11,16 @@ h2 {
 }
 
 img {
-  width:200px;
+  box-shadow: 0 0 1px black;
+  width:250px;
+}
+
+.padding-on-each-card {
+  padding-bottom: 10px;
+}
+
+.shadow-on-each-card {
+  box-shadow:1px 1px 5px 0px black;
 }
 
 /* Small devices (landscape phones, 576px and up) */
