@@ -10,6 +10,10 @@ h2 {
   word-break:keep-all;
 }
 
+img {
+  width:200px;
+}
+
 /* Small devices (landscape phones, 576px and up) */
 @media screen and (min-width: 576px) {
 
@@ -26,6 +30,9 @@ h2 {
 @media screen and (min-width: 992px) {
   .row {
     padding-top:20px;
+  }
+  img {
+    width:370px;
   }
 }
 

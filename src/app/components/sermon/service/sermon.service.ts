@@ -12,7 +12,7 @@ const httpOptions = {
 
 @Injectable()
 export class SermonService {
-  private baseUrl = 'http://localhost:3175'
+  private baseUrl = 'http://192.168.0.2:3175'
   sermonPosts:SermonPost[];
   constructor(private http:HttpClient) {
   }
