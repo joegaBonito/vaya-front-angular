@@ -9,7 +9,7 @@ import {PraiseRecording} from '../model/PraiseRecording';
 
 @Injectable()
 export class PraiserecordingService {
-  private baseUrl = 'http://localhost:3175'
+  private baseUrl = `http://192.168.0.2:3175`;
   praiseRecodrings: PraiseRecording[];
 
   constructor(private http: HttpClient) {

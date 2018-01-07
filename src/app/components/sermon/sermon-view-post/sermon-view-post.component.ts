@@ -39,7 +39,7 @@ export class SermonViewPostComponent implements OnInit {
   onClickDelete() {
     this.route.paramMap
     .switchMap((params:ParamMap) => this.sermonService.deleteSermonPost(params.get('id')))
-    .subscribe(()=> this.router.navigate(['/SermonListComponent']));
+    .subscribe(()=> this.router.navigate(['/sermon/list']));
   }
 
   onCheckAdmin(){

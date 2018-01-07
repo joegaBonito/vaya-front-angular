@@ -4,6 +4,10 @@ import { NgModule, Component, NO_ERRORS_SCHEMA } from '@angular/core';
 import { AgmCoreModule} from '@agm/core';
 
 import { AppRoutingModule } from './app-routing.module';
+import { SermonModule } from './components/sermon/sermon.module';
+import { YAColumnModule } from './components/young-adults-column/yacolumn.module';
+import { PraiseRecordingModule} from './components/praise-recording/praise-recording.module';
+import { PictureModule } from './components/picture/picture.module';
 import { FormsModule } from '@angular/forms';
 import { FlashMessagesModule } from 'angular2-flash-messages';
 import { HttpModule } from '@angular/http';
@@ -28,26 +32,6 @@ import { NewsComponent } from './components/news/news.component';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { GoogleMapsComponent } from './components/google-maps/google-maps.component';
-import { SermonListComponent } from './components/sermon/sermon-list/sermon-list.component';
-import { PraiseRecordingListComponent } from './components/praise-recording/praise-recording-list/praise-recording-list.component';
-import { YoungAdultsColumnListComponent } from './components/young-adults-column/young-adults-column-list/young-adults-column-list.component';
-import { SermonCreatePostComponent } from './components/sermon/sermon-create-post/sermon-create-post.component';
-import { SermonEditPostComponent } from './components/sermon/sermon-edit-post/sermon-edit-post.component';
-import { PraiseRecordingCreatePostComponent } from './components/praise-recording/praise-recording-create-post/praise-recording-create-post.component';
-import { PraiseRecordingEditPostComponent } from './components/praise-recording/praise-recording-edit-post/praise-recording-edit-post.component';
-import { YoungAdultsColumnCreatePostComponent } from './components/young-adults-column/young-adults-column-create-post/young-adults-column-create-post.component';
-import { YoungAdultsColumnEditPostComponent } from './components/young-adults-column/young-adults-column-edit-post/young-adults-column-edit-post.component';
-import { YoungAdultsColumnViewPostComponent } from './components/young-adults-column/young-adults-column-view-post/young-adults-column-view-post.component';
-import { PraiseRecordingViewPostComponent } from './components/praise-recording/praise-recording-view-post/praise-recording-view-post.component';
-import { SermonViewPostComponent } from './components/sermon/sermon-view-post/sermon-view-post.component';
-import { PictureListComponent } from './components/picture/picture-list/picture-list.component';
-import { PictureCreatePostComponent } from './components/picture/picture-create-post/picture-create-post.component';
-import { PictureEditPostComponent } from './components/picture/picture-edit-post/picture-edit-post.component';
-import { PictureViewPostComponent } from './components/picture/picture-view-post/picture-view-post.component';
-import { VideoListComponent } from './components/video/video-list/video-list.component';
-import { VideoCreatePostComponent } from './components/video/video-create-post/video-create-post.component';
-import { VideoEditPostComponent } from './components/video/video-edit-post/video-edit-post.component';
-import { VideoViewPostComponent } from './components/video/video-view-post/video-view-post.component';
 import { WorshipBannerComponent } from './components/worship-banner/worship-banner.component';
 import { ContactUsComponent } from './components/contact-us/contact-us.component';
 import { ComingsoonComponent } from './components/comingsoon/comingsoon.component';
@@ -67,8 +51,6 @@ import { GnbStatusGuard } from './components/guards/gnb-status.guard';
 
 //npm libraries
 import {NgxPaginationModule} from 'ngx-pagination';
-
-
 
 @NgModule({
   declarations: [
@@ -90,26 +72,6 @@ import {NgxPaginationModule} from 'ngx-pagination';
     LandingPageComponent,
     DashboardComponent,
     GoogleMapsComponent,
-    SermonListComponent,
-    SermonCreatePostComponent,
-    SermonEditPostComponent,
-    SermonViewPostComponent,
-    PraiseRecordingListComponent,
-    PraiseRecordingCreatePostComponent,
-    PraiseRecordingEditPostComponent,
-    PraiseRecordingViewPostComponent,
-    YoungAdultsColumnListComponent,
-    YoungAdultsColumnCreatePostComponent,
-    YoungAdultsColumnEditPostComponent,
-    YoungAdultsColumnViewPostComponent,
-    PictureListComponent,
-    PictureCreatePostComponent,
-    PictureEditPostComponent,
-    PictureViewPostComponent,
-    VideoListComponent,
-    VideoCreatePostComponent,
-    VideoEditPostComponent,
-    VideoViewPostComponent,
     WorshipBannerComponent,
     ContactUsComponent,
     ComingsoonComponent
@@ -117,6 +79,9 @@ import {NgxPaginationModule} from 'ngx-pagination';
   imports: [
     BrowserModule.withServerTransition({ appId: 'VAYA-SSR' }),
     AppRoutingModule,
+    PraiseRecordingModule,
+    YAColumnModule,
+    PictureModule,
     HttpModule,
     HttpClientModule,
     FormsModule,

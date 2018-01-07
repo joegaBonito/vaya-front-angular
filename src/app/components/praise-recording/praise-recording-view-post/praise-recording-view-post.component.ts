@@ -61,7 +61,7 @@ export class PraiseRecordingViewPostComponent implements OnInit {
 
   onClickDelete() {
      this.praiserecordingService.deletePraiseRecording(this.route.snapshot.params.id)
-    .subscribe(()=> this.router.navigate(['/PraiseRecordingListComponent']));
+    .subscribe(()=> this.router.navigate(['/praise-recording/list']));
   }
 
   onCheckAdmin(){

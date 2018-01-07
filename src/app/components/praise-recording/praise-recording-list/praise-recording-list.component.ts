@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {PraiseRecording} from '../model/PraiseRecording';
 import {PraiserecordingService} from '../service/praiserecording.service';
+import 'rxjs/add/operator/map';
 
 @Component({
   selector: 'app-praise-recording-list',

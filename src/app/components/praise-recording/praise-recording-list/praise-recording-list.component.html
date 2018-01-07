@@ -18,7 +18,7 @@
         <tr *ngFor="let item of items | paginate: { itemsPerPage: 5, currentPage: p }; let i = index">
             <td class="table-column-width-10">{{i+1}}</td>
             <td class="table-column-width-20">{{item?.author}}</td>
-            <td class="table-column-width-30"><a [routerLink]="['/PraiseRecordingViewPostComponent',item.id]" href="" >{{item?.title}}</a></td>
+            <td class="table-column-width-30"><a [routerLink]="['/praise-recording',item.id]" href="" >{{item?.title}}</a></td>
         </tr>
       </tbody>
       <div class="row"></div>
@@ -26,5 +26,5 @@
     </table>
   </div>
   <div class="col-2 offset-1 col-lg-4 offset-lg-2">
-    <button class="btn btn-primary" routerLink="/PraiseRecordingCreatePostComponent">New</button>
+    <button class="btn btn-primary" routerLink="/praise-recording/create">New</button>
   </div>

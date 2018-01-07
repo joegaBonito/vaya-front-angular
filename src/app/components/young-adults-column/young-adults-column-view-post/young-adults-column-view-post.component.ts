@@ -40,7 +40,7 @@ export class YoungAdultsColumnViewPostComponent implements OnInit {
 
   onClickDelete() {
     this.yacolumnService.deleteYAColumn(this.route.snapshot.params.id)
-      .subscribe(() => this.router.navigate(['/YoungAdultsColumnListComponent']));
+      .subscribe(() => this.router.navigate(['/yacolumn/list']));
   }
 
   onCheckAdmin() {
