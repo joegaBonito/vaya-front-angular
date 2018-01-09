@@ -8,7 +8,7 @@ import { Picture } from '../model/Picture';
 
 @Injectable()
 export class PictureService {
-  private baseUrl = 'http://192.168.0.2:3175';
+  private baseUrl = 'http://192.168.0.6:3175';
   picture:Picture;
 
   constructor(private http:HttpClient) { }
@@ -18,13 +18,14 @@ export class PictureService {
     .catch(this.handleError<Picture[]>('getPictures', []));
   }
 
-  newPicturePost(picture:Picture,fileData:File):Observable<Picture>{
+  newPicturePost(picture:Picture,fileData:File, originalFileName:string):Observable<Picture>{
     let formData:FormData = new FormData();
     formData.append('file', fileData);
     formData.append('title',picture.title);
     formData.append('author',picture.author);
     formData.append('date',picture.date);
     formData.append('body',picture.body);
+    formData.append('originalFileName',originalFileName);
 
     let apiURL = `${this.baseUrl}/picture-create`;
     return this.http.post<Picture>(apiURL,formData)

@@ -51,11 +51,11 @@ export class PraiseRecordingEditPostComponent implements OnInit {
     onSubmit({value,valid}:{value:PraiseRecording, valid:boolean}) {
       if(!valid) {
         this.flashMessagesService.show('Please fill in all required fields', {cssClass:'alert-danger', timeout:3000});
-        this.router.navigate(['PraiseRecordingEditPostComponent',this.praiseRecording.id]);
+        this.router.navigate(['/praise-recording/edit',this.praiseRecording.id]);
       } else {
         this.praiserecordingService.editPraiseRecording(this.route.snapshot.params.id,value,this.fileData)
         .subscribe(res=>{
-          this.router.navigate(['/PraiseRecordingListComponent']);
+          this.router.navigate(['//praise-recording/list']);
           this.flashMessagesService.show('Client has been edited',{cssClass:'alert-success',timeout:3000});
       });
       }

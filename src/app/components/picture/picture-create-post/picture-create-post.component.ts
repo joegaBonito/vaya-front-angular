@@ -13,6 +13,7 @@ import {LoginService} from '../../login/service/login.service';
 export class PictureCreatePostComponent implements OnInit {
   picture:Picture = new Picture();
   fileData:File;
+  originalFileName:string;
 
   constructor(private router:Router,
               private flashMessagesService:FlashMessagesService,
@@ -25,17 +26,16 @@ export class PictureCreatePostComponent implements OnInit {
 
   fileChange(event) {
       this.fileData = event.target.files[0];
-      let fileName = this.fileData.name;
-      console.log(fileName);
+      this.originalFileName = this.fileData.name;
   }
 
   onSubmit({value,valid}:{value:Picture, valid:boolean}) {
     if(!valid) {
       this.flashMessagesService.show('Please fill in all required fields', {cssClass:'alert-danger', timeout:3000});
-      this.router.navigate(['PictureCreatePostComponent']);
+      this.router.navigate(['/picture/create']);
     } else {
-      this.pictureService.newPicturePost(value,this.fileData).subscribe(()=>{
-        this.router.navigate(['/PictureListComponent']);
+      this.pictureService.newPicturePost(value,this.fileData,this.originalFileName).subscribe(()=>{
+        this.router.navigate(['/picture/list']);
         this.flashMessagesService.show('New Post has been added',{cssClass:'alert-success',timeout:3000});
       });
     }

@@ -9,8 +9,8 @@ import {YAColumn} from '../model/YAColumn';
 @Injectable()
 export class YacolumnService {
 
-  private baseUrl = 'http://192.168.0.2:3175';
-  
+  private baseUrl = 'http://192.168.0.6:3175';
+
   yaColumns:YAColumn[];
   constructor(private http:HttpClient) {
   }

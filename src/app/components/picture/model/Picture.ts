@@ -4,5 +4,5 @@ export class Picture {
   author:string;
   date:string;
   body:string;
-  filePath:string;
+  originalFileName:string;
 }

@@ -31,12 +31,12 @@ export class SermonCreatePostComponent implements OnInit {
   onSubmit({value,valid}:{value:SermonPost, valid:boolean}) {
     if(!valid) {
       this.flashMessagesService.show('Please fill in all required fields', {cssClass:'alert-danger', timeout:3000});
-      this.router.navigate(['SermonCreatePostComponent']);
+      this.router.navigate(['/sermon/create']);
     } else {
       this.sermonService.newSermonPost(value)
       .subscribe(res=>{
         this.flashMessagesService.show('New Client has been added',{cssClass:'alert-success',timeout:3000});
-        this.router.navigate(['/SermonListComponent']);
+        this.router.navigate(['/sermon/list']);
       });
     }
   }

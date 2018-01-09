@@ -30,11 +30,11 @@ export class YoungAdultsColumnCreatePostComponent implements OnInit {
   onSubmit({value, valid}: { value: YAColumn, valid: boolean }) {
     if (!valid) {
       this.flashMessagesService.show('Please fill in all required fields', { cssClass: 'alert-danger', timeout: 3000 });
-      this.router.navigate(['YoungAdultsColumnCreatePostComponent']);
+      this.router.navigate(['/yacolumn/create']);
     } else {
       this.yacolumnService.newYAColumn(value)
         .subscribe(res => {
-          this.router.navigate(['/YoungAdultsColumnListComponent']);
+          this.router.navigate(['/yacolumn/list']);
         });
       this.flashMessagesService.show('New Client has been added', { cssClass: 'alert-success', timeout: 3000 });
     }

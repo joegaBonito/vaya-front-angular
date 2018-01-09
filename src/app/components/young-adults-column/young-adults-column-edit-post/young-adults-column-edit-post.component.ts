@@ -35,11 +35,11 @@ export class YoungAdultsColumnEditPostComponent implements OnInit {
   onSubmit({value,valid}:{value:YAColumn, valid:boolean}) {
     if(!valid) {
       this.flashMessagesService.show('Please fill in all required fields', {cssClass:'alert-danger', timeout:3000});
-      this.router.navigate(['YoungAdultsColumnEditPostComponent',this.yaColumn.id]);
+      this.router.navigate(['/yacolumn/edit',this.yaColumn.id]);
     } else {
       this.yacolumnService.editYAColumn(this.route.snapshot.params.id,value)
       .subscribe(res=>{
-        this.router.navigate(['/YoungAdultsColumnListComponent']);
+        this.router.navigate(['/yacolumn/list']);
         this.flashMessagesService.show('Young Adults Column has been edited',{cssClass:'alert-success',timeout:3000});
       });
     }

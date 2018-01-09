@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Picture} from '../model/Picture';
 import { PictureService } from '../service/picture.service';
-import { ActivatedRoute, Params} from '@angular/router';
+import { ActivatedRoute, Params, Router} from '@angular/router';
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/Observable';
 
@@ -15,9 +15,11 @@ export class PictureListComponent implements OnInit {
   isLoading:boolean = false;
   id:number;
   filePath:string;
-  private baseUrl = 'http://192.168.0.2:3175';
 
-  constructor(private pictureService:PictureService) { }
+  private baseUrl = 'http://192.168.0.6:3175';
+
+  constructor(private pictureService:PictureService,
+              private router:Router) { }
 
 
 
@@ -34,5 +36,4 @@ export class PictureListComponent implements OnInit {
       this.isLoading = false;
     });
   }
-
 }

@@ -40,7 +40,7 @@ export class SermonEditPostComponent implements OnInit {
     } else {
       this.sermonService.editSermonPost(this.route.snapshot.params.id,value)
       .subscribe(res=>{
-        this.router.navigate(['/SermonListComponent']);
+        this.router.navigate(['/sermon/list']);
         this.flashMessagesService.show('Sermon Post has been edited',{cssClass:'alert-success',timeout:3000});
       });
     }

@@ -14,7 +14,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Injectable()
 export class LoginService {
-  private baseUrl = 'http://192.168.0.2:3175'
+  private baseUrl = 'http://192.168.0.6:3175'
   members:Member[];
   username:string;
 
