@@ -16,7 +16,7 @@ export class PictureListComponent implements OnInit {
   id:number;
   filePath:string;
 
-  private baseUrl = 'http://192.168.0.6:3175';
+  private baseUrl = 'http://localhost:3175';
 
   constructor(private pictureService:PictureService,
               private router:Router) { }
