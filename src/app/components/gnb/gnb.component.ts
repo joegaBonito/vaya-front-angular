@@ -2,6 +2,7 @@ import { Component, Inject, PLATFORM_ID, OnInit } from '@angular/core';
 import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 import { Router } from '@angular/router';
 import { LoginService } from '../login/service/login.service';
+import { FlashMessagesService } from 'angular2-flash-messages';
 @Component({
   selector: 'app-gnb',
   templateUrl: './gnb.component.html',
@@ -16,6 +17,7 @@ export class GnbComponent implements OnInit {
 
   constructor(private router:Router,
               private loginService:LoginService,
+              private flashMessagesService:FlashMessagesService,
               @Inject(PLATFORM_ID) private platformId:Object) {
 
  }
@@ -71,6 +73,7 @@ export class GnbComponent implements OnInit {
     localStorage.removeItem('token');
     this.isAuthenticated = false;
     this.router.navigate(['/']);
+    this.flashMessagesService.show('Log out Successful!',{cssClass:'alert-danger',timeout:1000});
   }
 
 /*

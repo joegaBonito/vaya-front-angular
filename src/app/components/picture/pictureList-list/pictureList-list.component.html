@@ -1,0 +1,25 @@
+<div class="row">
+  <div class="col-10 offset-1">
+    <div class="row">
+      <div *ngFor="let item of items">
+        <div class="col-12 padding-on-each-card">
+          <div class="card shadow-on-each-card">
+            <a [routerLink]="['/picture/list',item.id]">
+              <img class="card-img-top" [src]="filePath + item.id" alt="Card image cap">
+            </a>
+            <div class="card-body">
+              <h5 class="card-title">{{item.title}}</h5>
+              <p class="card-text">{{item.year}}</p>
+              <a href="#" class="btn btn-primary" [routerLink]="['/picture/pictureList-edit',item.id]">Edit</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-2 offset-1 col-lg-4 offset-lg-2">
+    <button class="btn btn-primary" routerLink="/picture/pictureList-create">New</button>
+  </div>
+</div>

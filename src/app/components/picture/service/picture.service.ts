@@ -5,20 +5,39 @@ import { of } from 'rxjs/observable/of';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import { Picture } from '../model/Picture';
+import { PictureList } from '../model/PictureList';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Injectable()
 export class PictureService {
-  private baseUrl = 'http://192.168.0.6:3175';
+  baseUrl = 'http://localhost:3175';
   picture:Picture;
 
   constructor(private http:HttpClient) { }
 
-  getPictures():Observable<Picture[]> {
-    return this.http.get<Picture[]>(`${this.baseUrl}/picture-list`)
+  getPictureLists():Observable<PictureList[]> {
+    return this.http.get<PictureList[]>(`${this.baseUrl}/pictureList-list`)
+    .catch(this.handleError<PictureList[]>('getPictures', []));
+  }
+
+  getPictures(id:string):Observable<Picture[]> {
+    return this.http.get<Picture[]>(`${this.baseUrl}/picture-list/${id}`)
     .catch(this.handleError<Picture[]>('getPictures', []));
   }
 
-  newPicturePost(picture:Picture,fileData:File, originalFileName:string):Observable<Picture>{
+  newPictureListPost(pictureList:PictureList,fileData:File, originalFileName:string):Observable<PictureList>{
+    let formData:FormData = new FormData();
+    formData.append('file', fileData);
+    formData.append('title',pictureList.title);
+    formData.append('year',pictureList.year);
+    formData.append('originalFileName',originalFileName);
+
+    let apiURL = `${this.baseUrl}/pictureList-create`;
+    return this.http.post<PictureList>(apiURL,formData)
+    .catch(this.handleError<PictureList>('Create PictureList Error'));
+  }
+  
+  newPicturePost(picture:Picture,fileData:File, originalFileName:string,categoryId:string):Observable<Picture>{
     let formData:FormData = new FormData();
     formData.append('file', fileData);
     formData.append('title',picture.title);
@@ -26,11 +45,14 @@ export class PictureService {
     formData.append('date',picture.date);
     formData.append('body',picture.body);
     formData.append('originalFileName',originalFileName);
+    formData.append('categoryId',categoryId);
 
     let apiURL = `${this.baseUrl}/picture-create`;
     return this.http.post<Picture>(apiURL,formData)
     .catch(this.handleError<Picture>('Create Picture Error'));
   }
+
+
 
   private handleError<T> (operation = 'operation', result?: T) {
    return (error: any): Observable<T> => {

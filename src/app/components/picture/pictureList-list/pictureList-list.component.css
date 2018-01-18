@@ -1,0 +1,53 @@
+/* Extra small devices (portrait phones, less than 576px)
+/ No media query since this is the default in Bootstrap */
+.row {
+  margin: 0px auto;
+  width:100%;
+  padding-top:10px;
+}
+
+h2 {
+  word-break:keep-all;
+}
+
+img {
+  box-shadow: 0 0 1px black;
+  width:250px;
+}
+
+.padding-on-each-card {
+  padding-bottom: 10px;
+}
+
+.shadow-on-each-card {
+  box-shadow:1px 1px 5px 0px black;
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media screen and (min-width: 576px) {
+
+}
+
+
+/* Medium devices (tablets, 768px and up)*/
+@media screen and (min-width: 768px) {
+
+}
+
+
+/* Large devices (desktops, 992px and up)*/
+@media screen and (min-width: 992px) {
+  .row {
+    padding-top:20px;
+  }
+  img {
+    width:230px;
+    height:250px;
+  }
+}
+
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media screen and (min-width: 1200px) {
+
+}

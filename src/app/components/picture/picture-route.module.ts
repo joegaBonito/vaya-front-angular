@@ -3,10 +3,18 @@ import { Routes, RouterModule} from '@angular/router';
 
 //Components
 import { Picture } from './picture.component';
-import { PictureListComponent } from './picture-list/picture-list.component';
-import { PictureCreatePostComponent } from './picture-create-post/picture-create-post.component';
-import { PictureEditPostComponent } from './picture-edit-post/picture-edit-post.component';
-import { PictureViewPostComponent } from './picture-view-post/picture-view-post.component';
+
+//Picture Components
+import { PictureListComponent} from './picture-list/picture-list.component';
+import { PictureCreateComponent} from './picture-create/picture-create.component';
+import { PictureEditComponent} from './picture-edit/picture-edit.component';
+import { PictureViewComponent} from './picture-view/picture-view.component';
+
+//Picture-List Components
+import { PictureListListComponent } from './pictureList-list/pictureList-list.component';
+import { PictureListCreatePostComponent } from './pictureList-create-post/pictureList-create-post.component';
+import { PictureListEditPostComponent } from './pictureList-edit-post/pictureList-edit-post.component';
+import { PictureListViewPostComponent } from './pictureList-view-post/pictureList-view-post.component';
 
 //Guards
 import { AuthGuard } from '../../components/guards/auth.guard';
@@ -14,10 +22,14 @@ import { GnbStatusGuard } from '../../components/guards/gnb-status.guard';
 
 const appRoutes:Routes = [
   {path:"",component:Picture, children:[
-    {path:"list",component: PictureListComponent, canActivate:[GnbStatusGuard]},
-    {path:"create",component: PictureCreatePostComponent, canActivate:[AuthGuard]},
-    {path:"edit/:id",component: PictureEditPostComponent, canActivate:[AuthGuard]},
-    {path:":id",component: PictureViewPostComponent, canActivate:[AuthGuard]}
+    {path:"pictureList-list",component: PictureListListComponent, canActivate:[GnbStatusGuard]},
+    {path:"pictureList-create",component: PictureListCreatePostComponent, canActivate:[AuthGuard]},
+    {path:"pictureList-edit/:id",component: PictureListEditPostComponent, canActivate:[AuthGuard]},
+    {path:"pictureList/:id",component: PictureListViewPostComponent, canActivate:[AuthGuard]},
+    {path:"list/:id",component: PictureListComponent, canActivate:[GnbStatusGuard]},
+    {path:"create/:id",component: PictureCreateComponent, canActivate:[AuthGuard]},
+    {path:"edit/:id",component: PictureEditComponent, canActivate:[AuthGuard]},
+    {path:":id",component: PictureViewComponent, canActivate:[AuthGuard]},
   ]}
 ];
 

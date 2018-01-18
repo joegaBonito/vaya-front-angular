@@ -5,6 +5,7 @@ import { Location }                 from '@angular/common';
 import { PraiserecordingService } from '../service/praiserecording.service';
 import { Http, Headers } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
+import 'rxjs/add/operator/switchMap';
 import * as FileSaver from 'file-saver';
 import { LoginService } from '../../login/service/login.service';
 
