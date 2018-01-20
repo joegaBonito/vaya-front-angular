@@ -18,6 +18,7 @@ import { PictureListViewPostComponent } from './pictureList-view-post/pictureLis
 
 //npm libraries
 import {NgxPaginationModule} from 'ngx-pagination';
+import { NgxGalleryModule } from 'ngx-gallery';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import {NgxPaginationModule} from 'ngx-pagination';
       CommonModule,
       FormsModule,
       NgxPaginationModule,
-      PictureRouteModule
+      PictureRouteModule,
+      NgxGalleryModule
   ]
 })
 export class PictureModule {}

@@ -51,6 +51,7 @@ import { GnbStatusGuard } from './components/guards/gnb-status.guard';
 
 //npm libraries
 import {NgxPaginationModule} from 'ngx-pagination';
+import { NgxGalleryModule } from 'ngx-gallery';
 
 @NgModule({
   declarations: [
@@ -89,7 +90,8 @@ import {NgxPaginationModule} from 'ngx-pagination';
     NgxPaginationModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyD72lQaX_Ki1nZlA9Y2OoczB8GvKBY_hIg'
-    })
+    }),
+    NgxGalleryModule
   ],
   providers: [
     HttpClientModule,
