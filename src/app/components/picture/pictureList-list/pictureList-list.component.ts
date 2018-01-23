@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {PictureList} from '../model/PictureList';
 import { PictureService } from '../service/picture.service';
 import { ActivatedRoute, Params, Router} from '@angular/router';
-import 'rxjs/add/operator/mergeMap';
 import 'rxjs/Observable';
 
 @Component({
@@ -15,6 +14,7 @@ export class PictureListListComponent implements OnInit {
   isLoading:boolean = false;
   id:number;
   filePath:string;
+  isAdmin:boolean = false;
 
   private baseUrl = this.pictureService.baseUrl;
 
@@ -22,16 +22,24 @@ export class PictureListListComponent implements OnInit {
               private router:Router) { }
 
   ngOnInit() {
-    this.getPictures();
-    this.filePath = this.baseUrl + "/pictureList-file/";
-  }
-
-  getPictures():void {
     this.isLoading=true;
     this.pictureService.getPictureLists()
-    .subscribe(pictures => {
-      this.items = pictures;
-      this.isLoading = false;
+    .map((pictures:PictureList[]) => {
+      this.items = pictures;  
+      this.isLoading = false
+    })
+    .subscribe();
+    this.filePath = this.baseUrl + "/pictureList-file/";
+    this.onCheckAdmin();
+  }
+
+  onCheckAdmin(){
+    this.pictureService.onCheckAdmin().subscribe((res)=> {
+      if(res == true) {
+        this.isAdmin = true;
+      } else {
+        this.isAdmin = false;
+      }
     });
   }
 }

@@ -23,6 +23,11 @@
     .row {
       padding-top:20px;
     }
+
+    #ngx-gallery {
+        position:relative;
+        left:200px;
+    }
   
   }
   

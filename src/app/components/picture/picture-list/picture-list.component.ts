@@ -2,9 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { PictureService } from '../service/picture.service';
 import { Picture } from '../model/Picture';
+import { Location } from '@angular/common';
 import { NgxGalleryOptions, NgxGalleryImage, NgxGalleryAnimation } from 'ngx-gallery';
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/map';
+import { LoginService } from '../../login/service/login.service';
 
 @Component({
     selector: 'app-picture-list-post',
@@ -12,17 +14,21 @@ import 'rxjs/add/operator/map';
     styleUrls: ['./picture-list.component.css']
 })
 export class PictureListComponent implements OnInit {
+    picture:Picture;
     items: Picture[];
     categoryId: string;
     filePath: string;
     galleryOptions: NgxGalleryOptions[] = [];
     galleryImages: NgxGalleryImage[] = [];
-
+    hiddenVar:boolean = true;
+    isAdmin:boolean = false;
 
     private baseUrl = this.pictureService.baseUrl;
     constructor(private route: ActivatedRoute,
         private router: Router,
-        private pictureService: PictureService) {
+        private pictureService: PictureService,
+        private location:Location,
+        private loginService:LoginService) {
     }
 
     ngOnInit() {
@@ -46,8 +52,8 @@ export class PictureListComponent implements OnInit {
             .subscribe();
         this.galleryOptions = [
             {
-                width: '600px',
-                height: '400px',
+                width: '800px',
+                height: '600px',
                 thumbnailsColumns: 4,
                 imageAnimation: NgxGalleryAnimation.Slide,
                 thumbnailsRemainingCount: true,
@@ -77,6 +83,7 @@ export class PictureListComponent implements OnInit {
                 arrowNextIcon: 'fa fa-arrow-circle-right',
             }
         ];
+        this.onCheckAdmin();
     }
 
     navShow() {
@@ -86,4 +93,21 @@ export class PictureListComponent implements OnInit {
     navHide() {
         document.querySelector("nav").style.display = 'none';
     }
+
+    goBack() {
+        this.location.back();
+    }
+    onEdit() {
+        this.hiddenVar = false;
+    }
+
+    onCheckAdmin(){
+        this.pictureService.onCheckAdmin().subscribe((res)=> {
+          if(res == true) {
+            this.isAdmin = true;
+          } else {
+            this.isAdmin = false;
+          }
+        });
+      }
 }

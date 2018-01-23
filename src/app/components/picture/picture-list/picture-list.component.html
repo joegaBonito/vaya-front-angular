@@ -1,37 +1,35 @@
-<!-- <div class="row">
-    <div class="col-10 offset-1">
-        <div class="row">
-            <div *ngFor="let item of items">
-                <div class="col-12 padding-on-each-card">
-                    <div class="card shadow-on-each-card">
-                        <a [routerLink]="['/picture',item.id]">
-                            <img class="card-img-top" [src]="filePath + item.id" alt="Card image cap">
-                        </a>
-                        <div class="card-body">
-                            <h5 class="card-title">{{item.title}}</h5>
-                            <p class="card-text">{{item.body}}</p>
-                            <a href="#" class="btn btn-primary" [routerLink]="['/picture/edit',item.id]">Edit</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-2 offset-1 col-lg-4 offset-lg-2">
-        <button class="btn btn-primary" [routerLink]="['/picture/create',categoryId]">Add</button>
-    </div>
-</div> -->
 <div class="row margin">
     <div class="col-10 offset-1">
         <div class="row">
-                <ngx-gallery [options]="galleryOptions" [images]="galleryImages" (previewOpen) = "navHide()" (previewClose) ="navShow()" ></ngx-gallery>
+            <ngx-gallery id="ngx-gallery" [options]="galleryOptions" [images]="galleryImages" (previewOpen)="navHide()" (previewClose)="navShow()"></ngx-gallery>
         </div>
     </div>
 </div>
+<div class="row" [hidden]="hiddenVar">
+        <table class="table table-responsive col-10 offset-1 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
+          <thead>
+            <tr>
+              <th class="table-column-width-10">#</th>
+              <th class="table-column-width-20">Author</th>
+              <th class="table-column-width-30">Title</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngIf="isLoading"><td>Loading...</td></tr>
+            <tr *ngFor="let item of items | paginate: { itemsPerPage: 5, currentPage: p }; let i = index">
+                <td class="table-column-width-10">{{i+1}}</td>
+                <td class="table-column-width-20">{{item?.author}}</td>
+                <td class="table-column-width-30"><a [routerLink]="['/picture/edit', categoryId ,item.id]">{{item?.title}}</a></td>
+            </tr>
+          </tbody>
+          <div class="row"></div>
+          <pagination-controls class="pagination-css" (pageChange)="p = $event"></pagination-controls>
+        </table>
+</div>
 <div class="row">
     <div class="col-2 offset-1 col-lg-4 offset-lg-2">
-        <button class="btn btn-primary" [routerLink]="['/picture/create',categoryId]">Add</button>
+        <button class="btn btn-primary" (click)="goBack()">Back</button>
+        <button class="btn btn-primary" *ngIf="isAdmin" [routerLink]="['/picture/create',categoryId]">Add</button>
+        <button class="btn btn-primary" *ngIf="isAdmin" (click)="onEdit()">Edit</button>
     </div>
 </div>

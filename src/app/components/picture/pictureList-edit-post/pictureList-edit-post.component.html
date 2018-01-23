@@ -1,3 +1,49 @@
-<p>
-  pictureList-edit-post works!
-</p>
+<div class="row">
+  <div class="col-10 offset-1 col-lg-10 offset-lg-1">
+    <h2>Edit Post</h2>
+  </div>
+</div>
+<form *ngIf="pictureList" (ngSubmit)="onSubmit(pictureListEditForm)" #pictureListEditForm="ngForm" novalidate>
+  <div class="row">
+    <div class="col-10 offset-1 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
+      <label for="title">Title: </label>
+    </div>
+    <div class="col-10 offset-1 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
+      <input type="text" class="form-control" id="title" [(ngModel)]="pictureList.title" name="title" #pictureListTitle="ngModel"
+        required>
+      <div *ngIf="pictureListTitle.errors?.required && pictureListTitle.touched" class="alert alert-danger">
+        Title is required
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-10 offset-1  col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
+      <label for="year">Year: </label>
+    </div>
+    <div class="col-10 offset-1  col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
+      <input type="text" class="form-control" id="year" [(ngModel)]="pictureList.year" name="year" #pictureListYear="ngModel" required/>
+      <div *ngIf="pictureListYear.errors?.required && pictureListYear.touched" class="alert alert-danger">
+        Year is required
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-10 offset-1 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
+      <label for="fileData">File: </label>
+    </div>
+    <div class="col-10 offset-1  col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
+      <input type="file" class="form-control" id="fileData" name="fileData" (change)="fileChange($event)" />
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-10 offset-1 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
+      <img class="img-responsive" [src]="filePath + pictureList.id" [alt]="originalFileName">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-10 offset-1  col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
+      <button type="submit" class="btn btn-success">Submit</button>
+      <button type="button" class="btn btn-primary" (click)="goBack()">Back</button>
+    </div>
+  </div>
+</form>

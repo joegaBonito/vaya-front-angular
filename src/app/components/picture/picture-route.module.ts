@@ -28,7 +28,7 @@ const appRoutes:Routes = [
     {path:"pictureList/:id",component: PictureListViewPostComponent, canActivate:[AuthGuard]},
     {path:"list/:id",component: PictureListComponent, canActivate:[GnbStatusGuard]},
     {path:"create/:id",component: PictureCreateComponent, canActivate:[AuthGuard]},
-    {path:"edit/:id",component: PictureEditComponent, canActivate:[AuthGuard]},
+    {path:"edit/:id1/:id2",component: PictureEditComponent, canActivate:[AuthGuard]},
     {path:":id",component: PictureViewComponent, canActivate:[AuthGuard]},
   ]}
 ];

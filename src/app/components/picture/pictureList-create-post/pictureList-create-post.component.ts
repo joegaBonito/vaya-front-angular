@@ -11,7 +11,7 @@ import {LoginService} from '../../login/service/login.service';
   styleUrls: ['./pictureList-create-post.component.css']
 })
 export class PictureListCreatePostComponent implements OnInit {
-  pictureList:PictureList = new PictureList();
+  pictureList:PictureList;
   fileData:File;
   originalFileName:string;
 
