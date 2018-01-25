@@ -12,6 +12,7 @@
               <th class="table-column-width-10">#</th>
               <th class="table-column-width-20">Author</th>
               <th class="table-column-width-30">Title</th>
+              <th *ngIf="isAdmin" class="table-column-width-30">Delete</th>
             </tr>
           </thead>
           <tbody>
@@ -20,6 +21,7 @@
                 <td class="table-column-width-10">{{i+1}}</td>
                 <td class="table-column-width-20">{{item?.author}}</td>
                 <td class="table-column-width-30"><a [routerLink]="['/picture/edit', categoryId ,item.id]">{{item?.title}}</a></td>
+                <td *ngIf="isAdmin" class="table-column-width-30"><button class="btn btn-danger" (click) = "onClickDelete(item.id)">Delete</button></td>
             </tr>
           </tbody>
           <div class="row"></div>
@@ -30,6 +32,6 @@
     <div class="col-2 offset-1 col-lg-4 offset-lg-2">
         <button class="btn btn-primary" (click)="goBack()">Back</button>
         <button class="btn btn-primary" *ngIf="isAdmin" [routerLink]="['/picture/create',categoryId]">Add</button>
-        <button class="btn btn-primary" *ngIf="isAdmin" (click)="onEdit()">Edit</button>
+        <button class="btn btn-primary" *ngIf="isAdmin" (click)="onClickEdit()">Edit</button>
     </div>
 </div>

@@ -10,7 +10,7 @@
         <label for="email">Email: </label>
       </div>
       <div class="col-10 offset-1 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
-        <input type="text" class="form-control" id="title" name="email" [(ngModel)]="member.email" #memberEmail = "ngModel" required>
+        <input type="text" class="form-control" id="title" name="email" [(ngModel)]="member.email" #memberEmail = "ngModel" email required>
         <div *ngIf="memberEmail.errors?.required && memberEmail.touched" class="alert alert-danger">
           Email is required
         </div>

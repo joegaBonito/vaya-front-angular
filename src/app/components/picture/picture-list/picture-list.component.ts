@@ -97,8 +97,14 @@ export class PictureListComponent implements OnInit {
     goBack() {
         this.location.back();
     }
-    onEdit() {
+    onClickEdit() {
         this.hiddenVar = false;
+    }
+    onClickDelete(id:string) {
+        this.pictureService.deletePicture(id)
+        .subscribe(()=>{
+            window.location.reload();
+        });
     }
 
     onCheckAdmin(){

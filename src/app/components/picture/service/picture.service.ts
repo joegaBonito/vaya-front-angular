@@ -88,6 +88,16 @@ export class PictureService {
     .catch(this.handleError<Picture>('Update Picture Error'));
   }
 
+  deletePicture(id:string):Observable<Picture>{
+    let apiURL = `${this.baseUrl}/picture-delete/${id}`;
+    return this.http.delete<Picture>(apiURL).catch(this.handleError<Picture>('Delete Picture Error'));
+  }
+
+  deletePictureList(id:string):Observable<PictureList> {
+    let apiURL = `${this.baseUrl}/pictureList-delete/${id}`;
+    return this.http.delete<PictureList>(apiURL).catch(this.handleError<PictureList>('Delete PictureList Error'));
+  }
+
   onCheckAdmin(): Observable<boolean> {
     let headers = new HttpHeaders(
       {

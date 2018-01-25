@@ -42,4 +42,11 @@ export class PictureListListComponent implements OnInit {
       }
     });
   }
+
+  onClickDelete(id:string) {
+    this.pictureService.deletePictureList(id)
+    .subscribe(()=> {
+      window.location.reload();
+    });
+  }
 }

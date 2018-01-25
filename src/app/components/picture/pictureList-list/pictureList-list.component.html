@@ -11,6 +11,7 @@
               <h5 class="card-title">{{item.title}}</h5>
               <p class="card-text">{{item.year}}</p>
               <a href="#" *ngIf="isAdmin" class="btn btn-primary" [routerLink]="['/picture/pictureList-edit',item.id]">Edit</a>
+              <button class="btn btn-danger" *ngIf="isAdmin" (click) = "onClickDelete(item.id)">Delete</button>
             </div>
           </div>
         </div>
