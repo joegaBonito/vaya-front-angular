@@ -1,0 +1,78 @@
+<form *ngIf="news" (ngSubmit)="onSubmit(newsEditForm)" #newsEditForm="ngForm" novalidate>
+    <div class="row">
+        <div class="col-10 offset-1 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
+            <label for="title1">Title #1: </label>
+        </div>
+        <div class="col-10 offset-1 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
+            <input type="text" class="form-control" id="title1" [(ngModel)]="news.title1" name="title1" #newsTitle1="ngModel">
+        </div>
+        <div class="col-10 offset-1 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
+            <label for="description1">Description #1: </label>
+        </div>
+        <div class="col-10 offset-1 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
+            <input type="text" class="form-control" id="description1" [(ngModel)]="news.description1" name="description1" #newsdescription1="ngModel">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-10 offset-1 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
+            <label for="title1">Title #2: </label>
+        </div>
+        <div class="col-10 offset-1 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
+            <input type="text" class="form-control" id="title2" [(ngModel)]="news.title2" name="title2" #newsTitle2="ngModel">
+        </div>
+        <div class="col-10 offset-1 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
+            <label for="description2">Description #2: </label>
+        </div>
+        <div class="col-10 offset-1 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
+            <input type="text" class="form-control" id="description2" [(ngModel)]="news.description2" name="description2" #newsdescription2="ngModel">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-10 offset-1 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
+            <label for="title3">Title #3: </label>
+        </div>
+        <div class="col-10 offset-1 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
+            <input type="text" class="form-control" id="title3" [(ngModel)]="news.title3" name="title3" #newsTitle3="ngModel">
+        </div>
+        <div class="col-10 offset-1 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
+            <label for="description3">Description #3: </label>
+        </div>
+        <div class="col-10 offset-1 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
+            <input type="text" class="form-control" id="description3" [(ngModel)]="news.description3" name="description3" #newsdescription3="ngModel">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-10 offset-1 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
+            <label for="title4">Title #4: </label>
+        </div>
+        <div class="col-10 offset-1 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
+            <input type="text" class="form-control" id="title4" [(ngModel)]="news.title4" name="title4" #newsTitle4="ngModel">
+        </div>
+        <div class="col-10 offset-1 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
+            <label for="description4">Description #4: </label>
+        </div>
+        <div class="col-10 offset-1 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
+            <input type="text" class="form-control" id="description4" [(ngModel)]="news.description4" name="description4" #newsdescription4="ngModel">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-10 offset-1 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
+            <label for="title5">Title #5: </label>
+        </div>
+        <div class="col-10 offset-1 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
+            <input type="text" class="form-control" id="title5" [(ngModel)]="news.title5" name="title5" #newsTitle5="ngModel">
+        </div>
+        <div class="col-10 offset-1 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
+            <label for="description5">Description #5: </label>
+        </div>
+        <div class="col-10 offset-1 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
+            <input type="text" class="form-control" id="description5" [(ngModel)]="news.description5" name="description5" #newsdescription5="ngModel">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-10 offset-1  col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
+            <button type="submit" class="btn btn-success">Submit</button>
+            <button type="button" class="btn btn-primary" (click)="onClickCancel()">Cancel</button>
+        </div>
+    </div>
+</form>

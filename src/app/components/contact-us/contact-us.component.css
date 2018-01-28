@@ -1,35 +1,35 @@
 
 /* Extra small devices (portrait phones, less than 576px)
 / No media query since this is the default in Bootstrap */
-
-#form1-2w {
-  padding-top:30px;
-  padding-bottom:30px;
-}
-
-.padding-zero {
-  padding: 0px 0px 0px 0px;
-}
-
 .row {
   margin: 0px auto;
   width:100%;
+
 }
 
 h2 {
+  margin-top: 10px;
   font-size:38px;
   word-break:keep-all;
 }
 
-h3 {
-  font-size:14px;
-  word-break:keep-all;
+.contact-us {
+  text-align:center;
 }
 .contact-us-backgroundimg {
-  background: url('../../../assets/manhattan_1.jpg');
-  z-index:-1;
-  background-repeat: no-repeat;
-  width:100%;
+  background-image: url('../../../assets/manhattan_1.jpg');
+    background-size: 100% auto;
+    background-repeat: repeat;
+    width:100%;
+    height:auto;
+}
+
+form{ 
+  text-align:left;
+}
+
+form .row { 
+  padding-bottom:5px;
 }
 
 /* Small devices (landscape phones, 576px and up) */
@@ -47,11 +47,11 @@ h3 {
 /* Large devices (desktops, 992px and up)*/
 @media screen and (min-width: 992px) {
   h2 {
-    font-size:94px;
+    font-size:50px;
   }
 
-  h3 {
-    font-size:30px;
+  form .row { 
+    padding-bottom:10px;
   }
 }
 

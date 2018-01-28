@@ -35,6 +35,7 @@ import { GoogleMapsComponent } from './components/google-maps/google-maps.compon
 import { WorshipBannerComponent } from './components/worship-banner/worship-banner.component';
 import { ContactUsComponent } from './components/contact-us/contact-us.component';
 import { ComingsoonComponent } from './components/comingsoon/comingsoon.component';
+import { NewsEditComponent } from './components/news/news-edit/news-edit.component';
 
 //Services
 import {SermonService} from './components/sermon/service/sermon.service';
@@ -44,6 +45,9 @@ import {LoginService} from './components/login/service/login.service';
 import { PLATFORM_ID, APP_ID, Inject } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import {PictureService } from './components/picture/service/picture.service';
+import {NewsService} from './components/news/service/news.service';
+import {LandingPageService} from './components/landing-page/service/landing-page.service';
+import {ContactUsService} from './components/contact-us/service/contact-us.service';
 
 //Guards
 import { AuthGuard } from './components/guards/auth.guard';
@@ -75,7 +79,8 @@ import { NgxGalleryModule } from 'ngx-gallery';
     GoogleMapsComponent,
     WorshipBannerComponent,
     ContactUsComponent,
-    ComingsoonComponent
+    ComingsoonComponent,
+    NewsEditComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'VAYA-SSR' }),
@@ -101,7 +106,10 @@ import { NgxGalleryModule } from 'ngx-gallery';
     LoginService,
     AuthGuard,
     GnbStatusGuard,
-    PictureService
+    PictureService,
+    NewsService,
+    LandingPageService,
+    ContactUsService
   ],
   bootstrap: [AppComponent],
   schemas: [

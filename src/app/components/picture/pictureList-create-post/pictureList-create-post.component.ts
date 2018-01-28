@@ -22,6 +22,7 @@ export class PictureListCreatePostComponent implements OnInit {
 
   ngOnInit() {
     //this.picture.author = this.loginService.getUsername();
+    this.pictureList = new PictureList();
   }
 
   fileChange(event) {

@@ -21,6 +21,6 @@
 </div>
 <div class="row">
   <div class="col-2 offset-1 col-lg-4 offset-lg-2">
-    <button class="btn btn-primary" routerLink="/picture/pictureList-create">New</button>
+    <button class="btn btn-primary" *ngIf="isAdmin"  routerLink="/picture/pictureList-create">New</button>
   </div>
 </div>

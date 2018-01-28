@@ -98,7 +98,7 @@ export class PictureListComponent implements OnInit {
         this.location.back();
     }
     onClickEdit() {
-        this.hiddenVar = false;
+        this.hiddenVar = !this.hiddenVar;
     }
     onClickDelete(id:string) {
         this.pictureService.deletePicture(id)

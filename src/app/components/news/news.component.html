@@ -1,3 +1,21 @@
-<p>
-  news works!
-</p>
+<div class="row">
+  <div *ngIf="news" class="col-12 news-backgroundimg">
+    <div *ngIf="newsFieldStatus" class="news-text">
+      <h3>This Week's News</h3>
+      <ul>
+        <li *ngIf="news.title1 && news.description1">
+          <span class="list-title">{{news.title1}}:</span> {{news?.description1}}</li>
+        <li *ngIf="news.title2 && news.description2">
+          <span class="list-title">{{news.title2}}:</span> {{news?.description2}}</li>
+        <li *ngIf="news.title3 && news.description3">
+          <span class="list-title">{{news.title3}}:</span> {{news?.description3}}</li>
+        <li *ngIf="news.title4 && news.description4">
+          <span class="list-title">{{news.title4}}:</span> {{news?.description4}}</li>
+        <li *ngIf="news.title5 && news.description5">
+          <span class="list-title">{{news.title5}}:</span> {{news?.description5}}</li>
+      </ul>
+    </div>
+    <news-edit-component *ngIf="!newsFieldStatus"></news-edit-component>
+    <button *ngIf="newsFieldStatus && isAdmin" class="btn btn-primary edit-button" type="button" (click)="onClickEdit()">Edit</button>
+  </div>
+</div>

@@ -23,6 +23,7 @@ import { GoogleMapsComponent } from './components/google-maps/google-maps.compon
 import { WorshipBannerComponent } from './components/worship-banner/worship-banner.component';
 import { ContactUsComponent } from './components/contact-us/contact-us.component';
 import { ComingsoonComponent } from './components/comingsoon/comingsoon.component';
+import { NewsEditComponent } from './components/news/news-edit/news-edit.component';
 
 //Guards
 import { AuthGuard } from './components/guards/auth.guard';

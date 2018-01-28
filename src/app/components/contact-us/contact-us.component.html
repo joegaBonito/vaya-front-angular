@@ -1,55 +1,56 @@
-<section class="mbr-section form1 cid-qv5ApHdm7c mbr-parallax-background contact-us-backgroundimg " id="form1-2w" data-rv-view="12343">
-    <div class="mbr-overlay" style="opacity: 0.9; background-color: rgb(189, 224, 235);">
-    </div>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="title col-12 col-lg-8 text-center">
-                <h2 class="mbr-section-title align-center pb-3 mbr-fonts-style display-2"><strong>
-                    CONTACT US</strong></h2>
-                <h3 class="mbr-section-subtitle align-center mbr-light pb-3 mbr-fonts-style display-5">
-                    문의가 있으시다면 아래 Form을 통해 알려주세요
-                </h3>
-            </div>
-        </div>
-    </div>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="media-container-column col-lg-8" data-form-type="formoid">
-                    <div data-form-alert="" hidden="">
-                        Thanks for filling out the form!
+<!-- <app-worship-banner></app-worship-banner> -->
+<div class="row">
+    <div class="col-12 contact-us contact-us-backgroundimg">
+        <h2>Contact Us</h2>
+        <form (ngSubmit)="onSubmit(contactUsForm)" #contactUsForm="ngForm" novalidate>
+            <div class="row">
+                <div class="col-10 offset-1 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
+                    <label for="username">Name: </label>
+                </div>
+                <div class="col-10 offset-1 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
+                    <input type="username" class="form-control" id="username" [(ngModel)]="email.username" name="username" #emailUsername="ngModel"
+                        required>
+                    <div *ngIf="emailUsername.errors?.required && emailUsername.touched" class="alert alert-danger">
+                        Name is required
                     </div>
-
-                    <form class="mbr-form" action="mailto:joejung5678@gmail.com" method="post" data-form-title="Mobirise Form"><input type="hidden" data-form-email="true" value="kqFqno2KW04bIxijjgoylF6ETUVDNjUuM15pCRb1Z1NIkWeNIFLZV5P1Onc+TtVXaw3wVPYZkv7wMQ1GgcLvB06GO2ITS2amXSKW/NIIZl3twLRAXVVHmthuow1K9SwK">
-                        <div class="row row-sm-offset">
-                            <div class="col-md-3 multi-horizontal padding-zero" data-for="name">
-                                <div class="form-group">
-                                    <label class="form-control-label mbr-fonts-style display-7" for="name-form1-2w">Name</label>
-                                    <input type="text" class="form-control" name="name" data-form-field="Name" required="" id="name-form1-2w">
-                                </div>
-                            </div>
-                            <div class="col-md-4 offset-md-1 multi-horizontal padding-zero" data-for="email">
-                                <div class="form-group">
-                                    <label class="form-control-label mbr-fonts-style display-7" for="email-form1-2w">Email</label>
-                                    <input type="email" class="form-control" name="email" data-form-field="Email" required="" id="email-form1-2w">
-                                </div>
-                            </div>
-                            <div class="col-md-3 offset-md-1 multi-horizontal padding-zero" data-for="phone">
-                                <div class="form-group">
-                                    <label class="form-control-label mbr-fonts-style display-7" for="phone-form1-2w">Phone</label>
-                                    <input type="tel" class="form-control" name="phone" data-form-field="Phone" id="phone-form1-2w">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group" data-for="message">
-                            <label class="form-control-label mbr-fonts-style display-7" for="message-form1-2w">Message</label>
-                            <textarea type="text" class="form-control" name="message" rows="7" data-form-field="Message" id="message-form1-2w"></textarea>
-                        </div>
-
-                        <span class="input-group-btn">
-                            <button href="" type="submit" class="btn btn-primary btn-form display-4">SEND FORM</button>
-                        </span>
-                    </form>
+                </div>
             </div>
-        </div>
+            <div class="row">
+                <div class="col-10 offset-1 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
+                    <label for="email">Email: </label>
+                </div>
+                <div class="col-10 offset-1  col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
+                    <input type="email" class="form-control" id="email" [(ngModel)]="email.email" name="email" #emailEmail="ngModel" email required/>
+                    <div *ngIf="emailEmail.errors?.required && emailEmail.touched" class="alert alert-danger">
+                        Email is required
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-10 offset-1 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
+                    <label for="phone">Phone#: </label>
+                </div>
+                <div class="col-10 offset-1  col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
+                    <input type="text" class="form-control" id="phone" [(ngModel)]="email.phone" name="phone" #emailPhone="ngModel" [maxlength]=12/>
+                    
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-10 offset-1  col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
+                    <label for="body">Body: </label>
+                </div>
+                <div class="col-10 offset-1  col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
+                    <textarea class="form-control" id="body" name="body" cols="10" rows="5" required [(ngModel)]="email.body" #emailBody="ngModel" [maxlength]=1000 required></textarea>
+                    <div *ngIf="emailBody.errors?.required && emailBody.touched" class="alert alert-danger">
+                        Body is required
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-10 offset-1  col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
+                    <button type="submit" class="btn btn-success">Submit</button>
+                </div>
+            </div>
+        </form>
     </div>
-</section>
+</div>
