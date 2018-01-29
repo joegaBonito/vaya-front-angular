@@ -12,10 +12,13 @@ import { ContactUsService } from './service/contact-us.service';
 export class ContactUsComponent implements OnInit {
   email:Email;
   
+
   constructor(private route:ActivatedRoute,
               private router:Router,
               private flashMessagesService:FlashMessagesService,
-              private contactUsService:ContactUsService) { }
+              private contactUsService:ContactUsService) { 
+                
+              }
 
   ngOnInit() {
     this.email = new Email();
