@@ -1,36 +1,43 @@
 <!-- <app-worship-banner></app-worship-banner> -->
-<div *ngIf="!sermonPost">
-  <div class="row">
-    <div class="col-3 offset-1 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
-      Loading...
+<div class="row">
+  <div class="col-10 offset-1">
+    <div class="border">
+      <div *ngIf="!sermonPost">
+        <div class="row">
+          <div class="col-3 offset-1 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
+            Loading...
+          </div>
+        </div>
+      </div>
+      <div *ngIf="sermonPost">
+        <div class="row">
+          <div class="col-10 offset-1">
+            <h2><span class="title">말씀 주제:</span> {{sermonPost.title}}</h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-10 offset-1 font">
+              <span class="title">작성자:</span> {{sermonPost.author}}
+          </div>
+          <div class="col-10 offset-1 font">
+              <span class="title">작성 날짜:</span> {{sermonPost.date}}
+          </div>
+          <div class="col-10 offset-1 font">
+              <span class="title">본문 말씀:</span> {{sermonPost.mainVerse}}
+          </div>
+          <div class="col-10 offset-1 font">
+              <span class="title">내용:</span><br/>
+            {{sermonPost.body}}
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
-<div *ngIf="sermonPost">
-  <div class="row">
-    <div class="col-3 offset-1 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
-      <h2>{{sermonPost.title}}</h2>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-4 offset-1 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
-      {{sermonPost.author}}
-    </div>
-    <div class="col-4 offset-1 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
-      {{sermonPost.date}}
-    </div>
-    <div class="col-10 offset-1 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
-      {{sermonPost.mainVerse}}
-    </div>
-    <div class="col-10 offset-1 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
-      {{sermonPost.body}}
-    </div>
-  </div>
-  <div class="row btn-row">
-    <div class="col-10 offset-1 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
-      <button class="btn btn-primary"  (click)="goBack()">Back</button>
-      <button class="btn btn-secondary" *ngIf="isAdmin || isOwner" [routerLink]="['/sermon/edit',sermonPost.id]">Edit</button>
-      <button class="btn btn-danger" *ngIf="isAdmin || isOwner" (click) = "onClickDelete()">Delete</button>
+    <div class="row btn-row">
+      <div class="col-12">
+        <button class="btn btn-primary" (click)="goBack()">Back</button>
+        <button class="btn btn-secondary" *ngIf="isAdmin || isOwner" [routerLink]="['/sermon/edit',sermonPost.id]">Edit</button>
+        <button class="btn btn-danger" *ngIf="isAdmin || isOwner" (click)="onClickDelete()">Delete</button>
+      </div>
     </div>
   </div>
 </div>

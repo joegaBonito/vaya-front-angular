@@ -1,37 +1,43 @@
 <!-- <app-worship-banner></app-worship-banner> -->
-<div *ngIf="!praiseRecording">
-  <div class="row">
-    <div class="col-3 offset-1 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
-      Loading...
+<div class="row">
+  <div class="col-10 offset-1">
+    <div class="border">
+      <div *ngIf="!praiseRecording">
+        <div class="row">
+          <div class="col-3 offset-1 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
+            Loading...
+          </div>
+        </div>
+      </div>
+      <div *ngIf="praiseRecording">
+        <div class="row">
+          <div class="col-10 offset-1">
+            <h2><span class="title">찬양 곡명:</span> {{praiseRecording.title}}</h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-10 offset-1">
+              <span class="title">작성자:</span> {{praiseRecording.author}}
+          </div>
+          <div class="col-10 offset-1">
+              <span class="title">작성 날짜:</span> {{praiseRecording.date}}
+          </div>
+          <div class="col-10 offset-1">
+              <span class="title">내용:</span><br/> {{praiseRecording.body}}
+          </div>
+          <div class="col-10 offset-1">
+            <!-- <img width="200" height="200" *ngIf="imageFile" [src]="imageFile"> -->
+            <button class="btn btn-primary" (click)="downloadFile()">Download File</button>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
-<div *ngIf="praiseRecording">
-  <div class="row">
-    <div class="col-3 offset-1 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
-      <h2>{{praiseRecording.title}}</h2>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-4 offset-1 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
-      Author: {{praiseRecording.author}}
-    </div>
-    <div class="col-4 offset-1 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
-      Date: {{praiseRecording.date}}
-    </div>
-    <div class="col-10 offset-1 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
-      Description: {{praiseRecording.body}}
-    </div>
-    <div class="col-10 offset-1 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
-    <!-- <img width="200" height="200" *ngIf="imageFile" [src]="imageFile"> -->
-    <button class="btn btn-primary" (click)="downloadFile()">Download File</button>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-10 offset-1 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
-      <button class="btn btn-primary" (click)="goBack()">Back</button>
-      <button class="btn btn-secondary" *ngIf="isAdmin || isOwner" [routerLink]="['/praise-recording/edit',praiseRecording.id]">Edit</button>
-      <button class="btn btn-danger" *ngIf="isAdmin || isOwner" (click) = "onClickDelete()">Delete</button>
+    <div class="row">
+      <div class="col-12">
+        <button class="btn btn-primary" (click)="goBack()">Back</button>
+        <button class="btn btn-secondary" *ngIf="isAdmin || isOwner" [routerLink]="['/praise-recording/edit',praiseRecording.id]">Edit</button>
+        <button class="btn btn-danger" *ngIf="isAdmin || isOwner" (click)="onClickDelete()">Delete</button>
+      </div>
     </div>
   </div>
 </div>

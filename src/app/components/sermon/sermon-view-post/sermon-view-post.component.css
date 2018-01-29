@@ -1,6 +1,21 @@
-.row {
-  padding-top:10px;
-}
+  .row {
+    padding-top:10px;
+  }
+  h2 {
+    word-break:keep-all;
+    font-size:24px;
+  }
+
+  .title {
+    font-weight: bold;
+  }
+
+  .border{
+    word-break:keep-all;
+     border: 0.2px solid gray;
+     box-shadow: 0.5px 0.5px 1px black;
+     padding-bottom:20px;
+  }
 
   /* Small devices (landscape phones, 576px and up) */
   @media screen and (min-width: 576px) {}
@@ -10,6 +25,13 @@
 
   /* Large devices (desktops, 992px and up)*/
   @media screen and (min-width: 992px) {
+    h2 {
+      word-break:keep-all;
+      font-size:36px;
+    }
+    .font{ 
+      font-size:24px;
+    }
   }
 
 
