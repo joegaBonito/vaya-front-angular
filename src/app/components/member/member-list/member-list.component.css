@@ -1,0 +1,60 @@
+/* Extra small devices (portrait phones, less than 576px)
+/ No media query since this is the default in Bootstrap */
+.row {
+    margin: 0px auto;
+    width:100%;
+    padding-top:10px;
+  }
+  
+  h2 {
+    word-break:keep-all;
+  }
+  
+  .table-column-width-10 {
+    width:10%;
+  }
+  
+  .table-column-width-20 {
+    width:20%;
+  }
+  
+  .table-column-width-30 {
+    width:30%;
+  }
+  
+  th,td, td > a {
+    font-size:12px;
+    padding-right:5px;
+  }
+  
+  /* Small devices (landscape phones, 576px and up) */
+  @media screen and (min-width: 576px) {
+  
+  }
+  
+  
+  /* Medium devices (tablets, 768px and up)*/
+  @media screen and (min-width: 768px) {
+  
+  }
+  
+  
+  /* Large devices (desktops, 992px and up)*/
+  @media screen and (min-width: 992px) {
+    .row {
+      padding-top:20px;
+    }
+  
+    th,td, td > a {
+      font-size:16px;
+      padding-right:60px;
+      white-space:nowrap;
+    }
+  }
+  
+  
+  /* Extra large devices (large desktops, 1200px and up) */
+  @media screen and (min-width: 1200px) {
+  
+  }
+  

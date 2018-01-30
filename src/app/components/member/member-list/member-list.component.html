@@ -1,0 +1,33 @@
+<!-- <app-worship-banner></app-worship-banner> -->
+<div class="row">
+    <div class="col-10 offset-1 col-lg-4 offset-lg-2">
+      <h2>멤버관리</h2>
+    </div>
+  </div>
+  <div class="row">
+    <table class="table table-responsive col-10 offset-1 col-lg-8 offset-lg-2">
+      <thead>
+        <tr>
+          <th class="table-column-width-10">#</th>
+          <th class="table-column-width-20">Name</th>
+          <th class="table-column-width-20">Email</th>
+          <th class="table-column-width-20">Role</th>
+          <th class="table-column-width-10">Edit</th>
+          <th class="table-column-width-10">Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngIf="isLoading"><td>Loading...</td></tr>
+        <tr *ngFor="let item of items | paginate: { itemsPerPage: 5, currentPage: p }; let i = index">
+          <td class="table-column-width-10">{{i+1}}</td>
+          <td class="table-column-width-20">{{item?.name}}</td>
+          <td class="table-column-width-20">{{item?.email}}</td>
+          <td class="table-column-width-20">{{item?.role}}</td>
+          <td class="table-column-width-10"><button class="btn btn-primary" [routerLink]="['/member',item.id]" href="" >Edit</button></td>
+          <td class="table-column-width-10"><button class="btn btn-primary" (click)="onClickDelete()" href="" >Delete</button></td>
+        </tr>
+      </tbody>
+      <div class="row"></div>
+      <pagination-controls class="pagination-css" (pageChange)="p = $event"></pagination-controls>
+    </table>
+  </div>

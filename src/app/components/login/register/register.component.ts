@@ -25,7 +25,7 @@ export class RegisterComponent implements OnInit {
       this.flashMessagesService.show('Please fill in all required fields', {cssClass:'alert-danger', timeout:1000});
       this.router.navigate(['RegisterComponent']);
     } else {
-      this.loginService.createMember(value.email,value.password).subscribe(()=>{
+      this.loginService.createMember(value.email,value.name,value.password).subscribe(()=>{
         this.router.navigate(['/LoginComponent']);
         this.flashMessagesService.show('Register Successful!',{cssClass:'alert-success',timeout:1000});
       });

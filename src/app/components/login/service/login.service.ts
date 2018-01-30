@@ -26,8 +26,8 @@ export class LoginService {
               private router:Router) {
   }
 
-  createMember(username:string, password:string):Observable<Member>{
-    return this.http.post<Member>(`${this.baseUrl}/signup`, {username,password})
+  createMember(username:string,name:string, password:string):Observable<Member>{
+    return this.http.post<Member>(`${this.baseUrl}/signup`, {username,name, password})
     .catch(this.handleError<Member>('Create Member Error'));
   }
   /*

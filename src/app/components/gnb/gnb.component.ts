@@ -3,6 +3,10 @@ import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 import { Router } from '@angular/router';
 import { LoginService } from '../login/service/login.service';
 import { FlashMessagesService } from 'angular2-flash-messages';
+import { GnbService } from './service/gnb.service';
+import { Location } from '@angular/common';
+import { Observable } from 'rxjs/Observable';
+
 @Component({
   selector: 'app-gnb',
   templateUrl: './gnb.component.html',
@@ -14,13 +18,14 @@ export class GnbComponent implements OnInit {
   showLoginMobile:boolean = false;
   showLoginDesktop:boolean = false;
   isAuthenticated:boolean = false;
+  isAdmin:boolean  = false;
 
   constructor(private router:Router,
               private loginService:LoginService,
               private flashMessagesService:FlashMessagesService,
+              private gnbService:GnbService,
               @Inject(PLATFORM_ID) private platformId:Object) {
-
- }
+  }
 
   ngOnInit() {
     if(isPlatformBrowser(this.platformId)){
@@ -72,8 +77,9 @@ export class GnbComponent implements OnInit {
   signOut() {
     localStorage.removeItem('token');
     this.isAuthenticated = false;
+    this.isAdmin = false;
     this.router.navigate(['/']);
-    this.flashMessagesService.show('Log out Successful!',{cssClass:'alert-danger',timeout:1000});
+    this.flashMessagesService.show('Log out Successful!',{cssClass:'alert-danger',timeout:10000});
   }
 
 /*
@@ -83,6 +89,19 @@ export class GnbComponent implements OnInit {
   checkAuthenticationStatus() {
     this.loginService.isAuthenticatedCurrent.subscribe(isAuthenticated=>{
       this.isAuthenticated = isAuthenticated;
+      this.onCheckAdmin();
     });
+  }
+
+  onCheckAdmin(){
+    this.gnbService.onCheckAdmin()
+    .map((res) => {
+      if(res == true) {
+        this.isAdmin = true;
+      } else {
+        this.isAdmin = false;
+      }
+    })
+    .subscribe();
   }
 }
