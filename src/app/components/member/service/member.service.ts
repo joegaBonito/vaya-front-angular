@@ -12,10 +12,26 @@ export class MemberService {
 
     constructor(private http:HttpClient){}
 
+    getMember(id:string):Observable<Member> {
+        return this.http.get<Member>(`${this.baseUrl}/members/read/${id}`)
+        .catch(this.handleError<Member>('get Member Error'));
+    }
+
     getMemberList():Observable<Member[]> {
         return this.http.get<Member[]>(`${this.baseUrl}/members/list`)
         .catch(this.handleError<Member[]>('getMemberList Error'));
     }
+
+    editMember(id:string,value:Member):Observable<Member> {
+        let apiURL = `${this.baseUrl}/members/edit/${id}`;
+        console.log(value.role);
+        return this.http.put<Member>(apiURL, value).catch(this.handleError<Member>('Update Member Error'));
+    }
+
+    deleteMember(id: string): Observable<Member> {
+        let apiURL = `${this.baseUrl}/members/delete/${id}`;
+        return this.http.delete<Member>(apiURL).catch(this.handleError<Member>('Delete Member Error'));
+      }
 
     private handleError<T> (operation = 'operation', result?: T) {
         return (error: any): Observable<T> => {

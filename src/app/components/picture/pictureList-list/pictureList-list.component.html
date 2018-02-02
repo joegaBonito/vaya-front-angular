@@ -1,4 +1,8 @@
+
 <div class="row">
+    <div *ngIf="items == 0" class="col-10 offset-1">
+        No pictures are registered yet...
+      </div>
   <div class="col-10 offset-1">
     <div  class="row">
       <div *ngFor="let item of items">

@@ -23,8 +23,8 @@
           <td class="table-column-width-20">{{item?.name}}</td>
           <td class="table-column-width-20">{{item?.email}}</td>
           <td class="table-column-width-20">{{item?.role}}</td>
-          <td class="table-column-width-10"><button class="btn btn-primary" [routerLink]="['/member',item.id]" href="" >Edit</button></td>
-          <td class="table-column-width-10"><button class="btn btn-primary" (click)="onClickDelete()" href="" >Delete</button></td>
+          <td class="table-column-width-10"><button class="btn btn-primary" [routerLink]="['/member/edit',item.id]" >Edit</button></td>
+          <td class="table-column-width-10"><button class="btn btn-primary" (click)="onClickDelete(item.id)">Delete</button></td>
         </tr>
       </tbody>
       <div class="row"></div>

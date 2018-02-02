@@ -18,6 +18,10 @@ button {
   font-size:12px !important;
 }
 
+.alert{
+  margin-bottom:0px !important;
+}
+
 /* Extra small devices (portrait phones, less than 576px)
 / No media query since this is the default in Bootstrap */
 

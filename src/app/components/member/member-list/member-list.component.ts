@@ -1,6 +1,7 @@
 import { OnInit, Component } from "@angular/core";
 import { Member } from "../../login/model/Member";
 import { MemberService } from "../service/member.service";
+import {Location} from '@angular/common';
 
 @Component({
     selector:'app-member-list-component',
@@ -19,5 +20,10 @@ export class MemberListComponent implements OnInit{
             this.items =　res;
         })
         .subscribe();
+    }
+
+    onClickDelete(id:string) {
+        this.memberService.deleteMember(id).subscribe();
+        window.location.reload();
     }
 }

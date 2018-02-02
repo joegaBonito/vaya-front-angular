@@ -79,7 +79,7 @@ export class GnbComponent implements OnInit {
     this.isAuthenticated = false;
     this.isAdmin = false;
     this.router.navigate(['/']);
-    this.flashMessagesService.show('Log out Successful!',{cssClass:'alert-danger',timeout:10000});
+    this.flashMessagesService.show('Log out Successful!',{cssClass:'alert-danger',timeout:1000});
   }
 
 /*

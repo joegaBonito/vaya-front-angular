@@ -4,4 +4,5 @@ export class Member {
   name:string;
   password:string;
   confirmPassword:string;
+  role:string;
 }
