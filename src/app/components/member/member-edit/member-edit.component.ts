@@ -12,6 +12,7 @@ import { MemberService } from "../service/member.service";
     styleUrls: ['./member-edit.component.css']
 })
 export class MemberEditComponent implements OnInit{
+    [x: string]: any;
     member:Member;
 
 
@@ -19,17 +20,38 @@ export class MemberEditComponent implements OnInit{
     private router:Router,
     private route:ActivatedRoute,
     private memberService:MemberService,
+    private loginService:LoginService
 ){
 
     }
 
     ngOnInit() {
-        this.route.paramMap
+      this.route.paramMap
         // (+) converts string 'id' to a number (+params.get('id'))
        .switchMap((params: ParamMap) => this.memberService.getMember(params.get('id')))
        .subscribe(member => {
          this.member = member;
        });
+       this.onCheckAdmin();
+    }
+
+    onCheckAdmin(){
+      this.loginService.onCheckAdmin().subscribe((res)=> {
+        if(res == true) {
+          this.isAdmin = true;
+        } else {
+          this.isAdmin = false;
+          this.onCheckOwner();
+        }
+      });
+    }
+  
+    onCheckOwner(){
+        if(this.loginService.getUsername() == this.member.email) {
+          this.isOwner = true;
+        } else {
+          this.isOwner = false;
+        }
     }
 
     onSubmit({value,valid}:{value:Member,valid:boolean}) {
@@ -43,6 +65,4 @@ export class MemberEditComponent implements OnInit{
           });
         }
       }
-    
-
 }

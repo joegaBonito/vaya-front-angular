@@ -40,7 +40,7 @@ Angular GNB Toggle w/ Mobile & PC
         </div>
       </li>
       <li *ngIf="isAdmin"  class="nav-item">
-        <a class="nav-link" href="#" routerLink="/member/list" (click)="toggleCollapse()">멤버관리</a>
+        <a class="nav-link cursor-pointer" routerLink="/member/list" (click)="toggleCollapse()">멤버관리</a>
       </li>
       <!--<li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -52,13 +52,19 @@ Angular GNB Toggle w/ Mobile & PC
         </div>
       </li>-->
       <li class="nav-item" [hidden]="showLoginMobile">
-        <a class="nav-link" *ngIf="isAuthenticated" href="#" (click)="signOut();toggleCollapse()">Sign Out <i class="fa fa-sign-out" aria-hidden="true"></i></a>
+          <a class="nav-link cursor-pointer" *ngIf="isAuthenticated" [routerLink]="['/profile',authenticatedId]" (click)="toggleCollapse()">{{authenticatedEmail}} <i class="fa fa-user" aria-hidden="true"></i></a>
+      </li>
+      <li class="nav-item" [hidden]="showLoginMobile">
+        <a class="nav-link cursor-pointer" *ngIf="isAuthenticated" (click)="signOut();toggleCollapse()">Sign Out <i class="fa fa-sign-out" aria-hidden="true"></i></a>
         <a class="nav-link" *ngIf="!isAuthenticated" routerLink="LoginComponent" (click)="toggleCollapse()">Sign In <i class="fa fa-user" aria-hidden="true"></i></a>
       </li>
     </ul>
     <ul class="nav navbar-nav pull-right" [hidden]="showLoginDesktop">
       <li class="nav-item">
-        <a class="nav-link" *ngIf="isAuthenticated" href="#" (click)="signOut();toggleCollapse()">Sign Out <i class="fa fa-sign-out" aria-hidden="true"></i></a>
+            <a class="nav-link cursor-pointer" *ngIf="isAuthenticated" [routerLink]="['/profile',authenticatedId]" (click)="toggleCollapse()">{{authenticatedEmail}} <i class="fa fa-user" aria-hidden="true"></i></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link cursor-pointer" *ngIf="isAuthenticated" (click)="signOut();toggleCollapse()">Sign Out <i class="fa fa-sign-out" aria-hidden="true"></i></a>
         <a class="nav-link" *ngIf="!isAuthenticated" routerLink="LoginComponent" (click)="toggleCollapse()">Sign In <i class="fa fa-user" aria-hidden="true"></i></a>
       </li>
     </ul>

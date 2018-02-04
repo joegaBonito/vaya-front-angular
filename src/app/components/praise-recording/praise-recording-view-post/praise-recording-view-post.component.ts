@@ -66,7 +66,7 @@ export class PraiseRecordingViewPostComponent implements OnInit {
   }
 
   onCheckAdmin(){
-    this.praiserecordingService.onCheckAdmin().subscribe((res)=> {
+    this.loginService.onCheckAdmin().subscribe((res)=> {
       if(res == true) {
         this.isAdmin = true;
       } else {

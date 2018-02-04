@@ -44,7 +44,7 @@ export class YoungAdultsColumnViewPostComponent implements OnInit {
   }
 
   onCheckAdmin() {
-    this.yacolumnService.onCheckAdmin().subscribe((res) => {
+    this.loginService.onCheckAdmin().subscribe((res) => {
       if (res == true) {
         this.isAdmin = true;
       } else {

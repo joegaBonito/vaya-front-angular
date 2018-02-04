@@ -39,16 +39,6 @@ export class YacolumnService {
     return this.http.post<YAColumn>(`${this.baseUrl}/yacolumn-create`,yaColumn).catch(this.handleError<YAColumn>('Create YaColumn Error'));
   }
 
-  onCheckAdmin():Observable<boolean> {
-    let headers = new HttpHeaders(
-      {
-        authorization:localStorage.getItem('token'),
-      }
-    )
-      return this.http.get<boolean>(`${this.baseUrl}/admin`,{headers})
-      .catch(this.handleError<boolean>('Checking Admin Error'))
-  }
-
   private handleError<T> (operation = 'operation', result?: T) {
    return (error: any): Observable<T> => {
 

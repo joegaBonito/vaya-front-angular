@@ -10,6 +10,8 @@ import { MemberComponent } from './member.component';
 import { MemberListComponent } from './member-list/member-list.component';
 import { MemberEditComponent } from './member-edit/member-edit.component';
 import { MemberViewComponent } from './member-view/member-view.component';
+import { AdminGuard } from '../guards/admin.guard';
+
 
 @NgModule({
     declarations: [
@@ -23,6 +25,9 @@ import { MemberViewComponent } from './member-view/member-view.component';
           FormsModule,
           NgxPaginationModule,
           MemberRoutingModule
+      ],
+      providers: [
+        AdminGuard
       ]
 })
 

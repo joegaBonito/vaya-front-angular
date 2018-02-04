@@ -20,10 +20,12 @@ import { WorshipBannerComponent } from './components/worship-banner/worship-bann
 import { ContactUsComponent } from './components/contact-us/contact-us.component';
 import { ComingsoonComponent } from './components/comingsoon/comingsoon.component';
 import { NewsEditComponent } from './components/news/news-edit/news-edit.component';
+import { ProfileEditComponent } from './components/login/profile/profile-edit-component';
 
 //Guards
 import { AuthGuard } from './components/guards/auth.guard';
 import { GnbStatusGuard } from './components/guards/gnb-status.guard';
+import { SelfCheckGuard } from './components/guards/self-check.guard';
 
 const appRoutes:Routes = [
   {path:"",component: LandingPageComponent, canActivate:[GnbStatusGuard]},
@@ -31,6 +33,7 @@ const appRoutes:Routes = [
   {path:"ComingsoonComponent", component:ComingsoonComponent, canActivate:[GnbStatusGuard]},
   {path:"LoginComponent", component:LoginComponent, canActivate:[GnbStatusGuard]},
   {path:"RegisterComponent",component:RegisterComponent, canActivate:[GnbStatusGuard]},
+  {path:"profile/:id",component:ProfileEditComponent, canActivate:[GnbStatusGuard,SelfCheckGuard]},
   {path:"sermon", loadChildren:'./components/sermon/sermon.module#SermonModule'},
   {path:"praise-recording", loadChildren:'./components/praise-recording/praise-recording.module#PraiseRecordingModule'},
   {path:"yacolumn", loadChildren:'./components/young-adults-column/yacolumn.module#YAColumnModule'},

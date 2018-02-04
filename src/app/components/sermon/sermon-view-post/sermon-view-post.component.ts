@@ -43,7 +43,7 @@ export class SermonViewPostComponent implements OnInit {
   }
 
   onCheckAdmin(){
-    this.sermonService.onCheckAdmin().subscribe((res)=> {
+    this.loginService.onCheckAdmin().subscribe((res)=> {
       if(res == true) {
         this.isAdmin = true;
       } else {

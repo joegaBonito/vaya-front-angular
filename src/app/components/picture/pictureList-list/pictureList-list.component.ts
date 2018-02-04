@@ -3,6 +3,7 @@ import {PictureList} from '../model/PictureList';
 import { PictureService } from '../service/picture.service';
 import { ActivatedRoute, Params, Router} from '@angular/router';
 import 'rxjs/Observable';
+import { LoginService } from '../../login/service/login.service';
 
 @Component({
   selector: 'app-pictureList-list',
@@ -10,6 +11,7 @@ import 'rxjs/Observable';
   styleUrls: ['./pictureList-list.component.css']
 })
 export class PictureListListComponent implements OnInit {
+  [x: string]: any;
   items:PictureList[] = [];
   isLoading:boolean = false;
   id:number;
@@ -19,7 +21,8 @@ export class PictureListListComponent implements OnInit {
   private baseUrl = this.pictureService.baseUrl;
 
   constructor(private pictureService:PictureService,
-              private router:Router) { }
+              private router:Router,
+              private loginService:LoginService) { }
 
   ngOnInit() {
     this.isLoading=true;
@@ -34,7 +37,7 @@ export class PictureListListComponent implements OnInit {
   }
 
   onCheckAdmin(){
-    this.pictureService.onCheckAdmin().subscribe((res)=> {
+    this.loginService.onCheckAdmin().subscribe((res)=> {
       if(res == true) {
         this.isAdmin = true;
       } else {

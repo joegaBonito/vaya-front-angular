@@ -28,16 +28,17 @@ export class LoginComponent implements OnInit  {
 
   onSubmit({value,valid}:{value:Member, valid:boolean}) {
     if(!valid) {
-      this.flashMessagesService.show('Please fill in all required fields', {cssClass:'alert-danger', timeout:1000});
+      // this.flashMessagesService.show('Please fill in all required fields', {cssClass:'alert-danger', timeout:3000});
       this.router.navigate(['LoginComponent']);
       this.loginService.changeAuthenticationStatus(false);
     } else {
-      this.loginService.login(value.email,value.password).subscribe((res)=>{
+      this.loginService.login(value.email,value.password).map((res)=>{
         //-Save the JWT token in local storage. localStorage is object available on windows, so it does not have to be imported.
         localStorage.setItem('token',res.token);
-        this.router.navigate(['/']);
-        this.flashMessagesService.show('Log In Successful!',{cssClass:'alert-success',timeout:1000});
-      });
+        // this.router.navigate(['/']);
+        window.location.href = "/";
+        //this.flashMessagesService.show('Log In Successful!',{cssClass:'alert-success',timeout:3000});
+      }).subscribe();
       this.loginService.changeAuthenticationStatus(true);
     }
   }

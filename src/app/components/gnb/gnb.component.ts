@@ -19,6 +19,8 @@ export class GnbComponent implements OnInit {
   showLoginDesktop:boolean = false;
   isAuthenticated:boolean = false;
   isAdmin:boolean  = false;
+  authenticatedEmail:string;
+  authenticatedId:string;
 
   constructor(private router:Router,
               private loginService:LoginService,
@@ -78,8 +80,9 @@ export class GnbComponent implements OnInit {
     localStorage.removeItem('token');
     this.isAuthenticated = false;
     this.isAdmin = false;
-    this.router.navigate(['/']);
-    this.flashMessagesService.show('Log out Successful!',{cssClass:'alert-danger',timeout:1000});
+    window.location.href="/";
+    // this.router.navigate(['/']);
+    // this.flashMessagesService.show('Log out Successful!',{cssClass:'alert-danger',timeout:1000});
   }
 
 /*
@@ -90,6 +93,10 @@ export class GnbComponent implements OnInit {
     this.loginService.isAuthenticatedCurrent.subscribe(isAuthenticated=>{
       this.isAuthenticated = isAuthenticated;
       this.onCheckAdmin();
+      this.authenticatedEmail = this.loginService.getUsername();
+      this.loginService.findUserId().do(res=>{this.authenticatedId = res}).subscribe(()=>
+      console.log(this.authenticatedId)
+      );
     });
   }
 
@@ -103,5 +110,10 @@ export class GnbComponent implements OnInit {
       }
     })
     .subscribe();
+  }
+
+  editUserInfo() {
+    console.log("Button is clicked");
+    
   }
 }

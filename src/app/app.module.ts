@@ -32,6 +32,7 @@ import { WorshipBannerComponent } from './components/worship-banner/worship-bann
 import { ContactUsComponent } from './components/contact-us/contact-us.component';
 import { ComingsoonComponent } from './components/comingsoon/comingsoon.component';
 import { NewsEditComponent } from './components/news/news-edit/news-edit.component';
+import { ProfileEditComponent } from './components/login/profile/profile-edit-component';
 
 //Services
 import {SermonService} from './components/sermon/service/sermon.service';
@@ -54,6 +55,7 @@ import { GnbStatusGuard } from './components/guards/gnb-status.guard';
 //npm libraries
 import {NgxPaginationModule} from 'ngx-pagination';
 import { NgxGalleryModule } from 'ngx-gallery';
+import { SelfCheckGuard } from './components/guards/self-check.guard';
 
 @NgModule({
   declarations: [
@@ -74,7 +76,9 @@ import { NgxGalleryModule } from 'ngx-gallery';
     WorshipBannerComponent,
     ContactUsComponent,
     ComingsoonComponent,
-    NewsEditComponent
+    NewsEditComponent,
+    ProfileEditComponent
+    
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'VAYA-SSR' }),
@@ -105,7 +109,8 @@ import { NgxGalleryModule } from 'ngx-gallery';
     LandingPageService,
     ContactUsService,
     GnbService,
-    MemberService
+    MemberService,
+    SelfCheckGuard
   ],
   bootstrap: [AppComponent],
   schemas: [

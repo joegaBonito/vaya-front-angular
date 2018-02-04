@@ -31,7 +31,7 @@ export class MemberService {
     deleteMember(id: string): Observable<Member> {
         let apiURL = `${this.baseUrl}/members/delete/${id}`;
         return this.http.delete<Member>(apiURL).catch(this.handleError<Member>('Delete Member Error'));
-      }
+    }
 
     private handleError<T> (operation = 'operation', result?: T) {
         return (error: any): Observable<T> => {

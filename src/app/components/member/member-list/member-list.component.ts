@@ -10,6 +10,7 @@ import {Location} from '@angular/common';
 })
 export class MemberListComponent implements OnInit{
     items:Member[];
+    p: number = 1;
 
     constructor(private memberService:MemberService){
 

@@ -22,6 +22,7 @@ export class PictureListComponent implements OnInit {
     galleryImages: NgxGalleryImage[] = [];
     hiddenVar:boolean = true;
     isAdmin:boolean = false;
+    p: number = 1;
 
     private baseUrl = this.pictureService.baseUrl;
     constructor(private route: ActivatedRoute,
@@ -108,7 +109,7 @@ export class PictureListComponent implements OnInit {
     }
 
     onCheckAdmin(){
-        this.pictureService.onCheckAdmin().subscribe((res)=> {
+        this.loginService.onCheckAdmin().subscribe((res)=> {
           if(res == true) {
             this.isAdmin = true;
           } else {
