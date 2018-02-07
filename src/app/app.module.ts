@@ -24,7 +24,6 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { RegisterComponent } from './components/login/register/register.component';
 import { AboutUsComponent } from './components/about-us/about-us.component';
 import { WorshipServiceComponent } from './components/worship-service/worship-service.component';
-import { ResourceComponent } from './components/resource/resource.component';
 import { NewsComponent } from './components/news/news.component';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
 import { GoogleMapsComponent } from './components/google-maps/google-maps.component';
@@ -69,7 +68,6 @@ import { SelfCheckGuard } from './components/guards/self-check.guard';
     RegisterComponent,
     AboutUsComponent,
     WorshipServiceComponent,
-    ResourceComponent,
     NewsComponent,
     LandingPageComponent,
     GoogleMapsComponent,

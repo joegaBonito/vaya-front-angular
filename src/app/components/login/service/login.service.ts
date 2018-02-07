@@ -12,10 +12,11 @@ import * as jwtDecode from 'jwt-decode';
 
 //Allows to share a state between components.
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { config } from '../../../config';
 
 @Injectable()
 export class LoginService {
-  private baseUrl = 'http://localhost:3175'
+  private baseUrl = config.backendAPIUrl;
   members: Member[];
   username: string;
 

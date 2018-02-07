@@ -5,6 +5,7 @@ import { of } from 'rxjs/observable/of';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import {SermonPost} from '../model/SermonPost';
+import { config } from '../../../config';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -12,7 +13,7 @@ const httpOptions = {
 
 @Injectable()
 export class SermonService {
-  private baseUrl = 'http://localhost:3175'
+  private baseUrl = config.backendAPIUrl;
   sermonPosts:SermonPost[];
   constructor(private http:HttpClient) {
   }

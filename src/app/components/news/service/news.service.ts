@@ -3,6 +3,7 @@ import {News} from '../model/news';
 import { Observable } from "rxjs/Observable";
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { of } from "rxjs/observable/of";
+import { config } from "../../../config";
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -11,7 +12,7 @@ const httpOptions = {
 @Injectable()
 export class NewsService {
 
-    baseUrl = `http://localhost:3175`;
+    private baseUrl = config.backendAPIUrl;
 
     constructor(private http:HttpClient){}
 

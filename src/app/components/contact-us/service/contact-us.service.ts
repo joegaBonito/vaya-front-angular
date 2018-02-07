@@ -3,10 +3,11 @@ import { HttpClient } from "@angular/common/http";
 import { Email } from "../model/Email";
 import { Observable } from "rxjs/Observable";
 import { of } from "rxjs/observable/of";
+import { config } from "../../../config";
 
 @Injectable()
 export class ContactUsService {
-    baseUrl = `http://localhost:3175`;
+    private baseUrl = config.backendAPIUrl;
 
     constructor(private http:HttpClient){}
 

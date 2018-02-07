@@ -2,11 +2,12 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs/Observable";
 import { HttpHeaders, HttpClient } from "@angular/common/http";
 import { of } from "rxjs/observable/of";
+import { config } from "../../../config";
 
 @Injectable()
 export class GnbService {
 
-    private baseUrl = `http://localhost:3175`;
+    private baseUrl = config.backendAPIUrl;
 
     constructor(private http:HttpClient) {
 

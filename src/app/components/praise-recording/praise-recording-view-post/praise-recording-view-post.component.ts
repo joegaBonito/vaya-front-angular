@@ -8,6 +8,7 @@ import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/switchMap';
 import * as FileSaver from 'file-saver';
 import { LoginService } from '../../login/service/login.service';
+import { config } from '../../../config';
 
 @Component({
   selector: 'app-praise-recording-view-post',
@@ -21,7 +22,8 @@ export class PraiseRecordingViewPostComponent implements OnInit {
   isAdmin:boolean = false;
   isOwner:boolean = false;
 
-  private baseUrl = 'http://localhost:3175';
+  private baseUrl = config.backendAPIUrl;
+
   constructor(
     private route:ActivatedRoute,
     private praiserecordingService:PraiserecordingService,

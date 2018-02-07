@@ -7,10 +7,11 @@ import 'rxjs/add/operator/catch';
 import { Picture } from '../model/Picture';
 import { PictureList } from '../model/PictureList';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { config } from '../../../config';
 
 @Injectable()
 export class PictureService {
-  baseUrl = 'http://localhost:3175';
+  baseUrl = config.backendAPIUrl;
   picture:Picture;
 
   constructor(private http:HttpClient) { }

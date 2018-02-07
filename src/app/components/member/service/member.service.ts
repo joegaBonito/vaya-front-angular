@@ -3,12 +3,13 @@ import { Member } from "../../login/model/Member";
 import { Observable } from "rxjs/Observable";
 import { HttpClient} from "@angular/common/http";
 import { of } from "rxjs/observable/of";
+import { config } from "../../../config";
 
 
 @Injectable()
 export class MemberService {
 
-    baseUrl = `http://localhost:3175`;
+    private baseUrl = config.backendAPIUrl;
 
     constructor(private http:HttpClient){}
 

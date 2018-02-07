@@ -5,11 +5,13 @@ import { of } from 'rxjs/observable/of';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import {PraiseRecording} from '../model/PraiseRecording';
+import { config } from '../../../config';
 
 
 @Injectable()
 export class PraiserecordingService {
-  private baseUrl = `http://localhost:3175`;
+  private baseUrl = config.backendAPIUrl;
+  
   praiseRecodrings: PraiseRecording[];
 
   constructor(private http: HttpClient) {
