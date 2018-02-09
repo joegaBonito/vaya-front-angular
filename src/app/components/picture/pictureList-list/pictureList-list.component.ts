@@ -32,7 +32,7 @@ export class PictureListListComponent implements OnInit {
       this.isLoading = false
     })
     .subscribe();
-    this.filePath = this.baseUrl + "/pictureList-file/";
+    this.filePath = `${this.baseUrl}/pictureList-file?filename=`;
     this.onCheckAdmin();
   }
 

@@ -36,14 +36,14 @@ export class PictureListComponent implements OnInit {
         this.route.params.subscribe((params: Params) => {
             this.categoryId = params['id'];
         })
-        this.filePath = this.baseUrl + "/picture-file/";
+        this.filePath = this.baseUrl + "/picture-file?filename=";
         this.pictureService.getPictures(this.categoryId)
             .mergeMap((res:Picture[]) => {
                 res.map(item => {
                         this.galleryImages.push({
-                            small: this.filePath + item.id,
-                            medium: this.filePath + item.id,
-                            big: this.filePath + item.id
+                            small: this.filePath + item.originalFileName,
+                            medium: this.filePath + item.originalFileName,
+                            big: this.filePath + item.originalFileName
                         })
                     }
                 )

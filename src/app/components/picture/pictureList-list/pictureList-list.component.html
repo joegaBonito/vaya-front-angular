@@ -9,7 +9,7 @@
         <div  class="col-12 padding-on-each-card">
           <div class="card shadow-on-each-card">
             <a [routerLink]="['/picture/list',item.id]">
-              <img class="card-img-top" [src]="filePath + item.id" alt="Card image cap">
+              <img class="card-img-top" [src]="filePath + item.originalFileName" alt="Card image cap">
             </a>
             <div class="card-body">
               <h5 class="card-title">{{item.title}}</h5>
