@@ -56,7 +56,6 @@ import { SelfCheckGuard } from './components/guards/self-check.guard';
 //npm libraries
 import {NgxPaginationModule} from 'ngx-pagination';
 import { NgxGalleryModule } from 'ngx-gallery';
-import { DateValueAccessorModule } from 'angular-date-value-accessor';
 
 @NgModule({
   declarations: [
@@ -94,8 +93,7 @@ import { DateValueAccessorModule } from 'angular-date-value-accessor';
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyD72lQaX_Ki1nZlA9Y2OoczB8GvKBY_hIg'
     }),
-    NgxGalleryModule,
-    DateValueAccessorModule
+    NgxGalleryModule
   ],
   providers: [
     HttpClientModule,
