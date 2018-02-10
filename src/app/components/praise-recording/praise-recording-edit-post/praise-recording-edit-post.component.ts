@@ -44,8 +44,8 @@ export class PraiseRecordingEditPostComponent implements OnInit {
         this.fileDataChanged = true;
     }
 
-    goBack():void {
-      this.location.back();
+    onClickBack(){
+      this.router.navigate(['/praise-recording/list']);
     }
 
     onSubmit({value,valid}:{value:PraiseRecording, valid:boolean}) {

@@ -16,6 +16,17 @@
         </div>
     </div>
     <div class="row">
+            <div class="col-10 offset-1  col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
+                <label for="date">Date: </label>
+            </div>
+            <div class="col-10 offset-1  col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
+                    <input type="text" class="form-control" id="date" (ngModel)="picture.date=$event" [ngModel]="picture.date | date:'shortDate'" name="date" #pictureDate = "ngModel" required/>
+                <div *ngIf="pictureDate.errors?.required && pictureDate.touched" class="alert alert-danger">
+                    Date is required
+                </div>
+            </div>
+        </div>
+    <div class="row">
         <div class="col-10 offset-1  col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
             <label for="body">Description: </label>
         </div>
@@ -35,8 +46,11 @@
         </div>
     </div>
     <div class="row">
+            <div class="col-10 offset-1 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
+                    <label>As-Is: </label>
+                </div>
         <div class="col-10 offset-1 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
-            <img class="img-responsive" [src]="filePath + picture.id" [alt]="originalFileName">
+            <img class="img-responsive" [src]="filePath + picture.originalFileName" [alt]="originalFileName">
         </div>
     </div>
     <div class="row">

@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { FlashMessagesModule } from 'angular2-flash-messages';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { DatePipe } from '@angular/common';
 
 //Components
 import { AppComponent } from './app.component';
@@ -50,11 +51,12 @@ import {MemberService} from './components/member/service/member.service';
 //Guards
 import { AuthGuard } from './components/guards/auth.guard';
 import { GnbStatusGuard } from './components/guards/gnb-status.guard';
+import { SelfCheckGuard } from './components/guards/self-check.guard';
 
 //npm libraries
 import {NgxPaginationModule} from 'ngx-pagination';
 import { NgxGalleryModule } from 'ngx-gallery';
-import { SelfCheckGuard } from './components/guards/self-check.guard';
+import { DateValueAccessorModule } from 'angular-date-value-accessor';
 
 @NgModule({
   declarations: [
@@ -92,7 +94,8 @@ import { SelfCheckGuard } from './components/guards/self-check.guard';
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyD72lQaX_Ki1nZlA9Y2OoczB8GvKBY_hIg'
     }),
-    NgxGalleryModule
+    NgxGalleryModule,
+    DateValueAccessorModule
   ],
   providers: [
     HttpClientModule,
@@ -108,7 +111,8 @@ import { SelfCheckGuard } from './components/guards/self-check.guard';
     ContactUsService,
     GnbService,
     MemberService,
-    SelfCheckGuard
+    SelfCheckGuard,
+    DatePipe
   ],
   bootstrap: [AppComponent],
   schemas: [
@@ -121,6 +125,6 @@ export class AppModule {
     @Inject(APP_ID) private appId: string) {
     const platform = isPlatformBrowser(platformId) ?
       'on the server' : 'in the browser';
-    console.log(`Running ${platform} with appId=${appId}`);
+    //console.log(`Running ${platform} with appId=${appId}`);
   }
 }

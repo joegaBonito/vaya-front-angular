@@ -23,6 +23,7 @@ export class PictureListComponent implements OnInit {
     hiddenVar:boolean = true;
     isAdmin:boolean = false;
     p: number = 1;
+    isLoading:boolean;
 
     private baseUrl = this.pictureService.baseUrl;
     constructor(private route: ActivatedRoute,
@@ -33,6 +34,7 @@ export class PictureListComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.isLoading = true;
         this.route.params.subscribe((params: Params) => {
             this.categoryId = params['id'];
         })
@@ -50,7 +52,7 @@ export class PictureListComponent implements OnInit {
                 this.items = res;
                 return res;
             })
-            .subscribe();
+            .subscribe(()=>this.isLoading = false);
         this.galleryOptions = [
             {
                 width: '800px',

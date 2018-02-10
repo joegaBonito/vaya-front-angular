@@ -1,5 +1,8 @@
 <div class="row margin">
-    <div class="col-10 offset-1">
+    <div *ngIf="isLoading" class="col-10 offset-1">
+            Loading...
+    </div>
+    <div *ngIf="!isLoading" class="col-10 offset-1">
         <div class="row">
             <ngx-gallery id="ngx-gallery" [options]="galleryOptions" [images]="galleryImages" (previewOpen)="navHide()" (previewClose)="navShow()"></ngx-gallery>
         </div>
@@ -37,7 +40,7 @@
     <div class="row">
         <div class="col-10 offset-2">
             <button class="btn btn-primary" (click)="goBack()">Back</button>
-            <button class="btn btn-primary" *ngIf="isAdmin" [routerLink]="['/picture/create',categoryId]">Add</button>
+            <button class="btn btn-primary" *ngIf="isAdmin" [routerLink]="['/picture/create',categoryId]">Add More Pictures</button>
             <button class="btn btn-primary" *ngIf="isAdmin" (click)="onClickEdit()">Edit</button>
         </div>
     </div>

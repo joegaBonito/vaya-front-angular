@@ -17,7 +17,6 @@ export class PictureListListComponent implements OnInit {
   id:number;
   filePath:string;
   isAdmin:boolean = false;
-
   private baseUrl = this.pictureService.baseUrl;
 
   constructor(private pictureService:PictureService,
@@ -44,6 +43,10 @@ export class PictureListListComponent implements OnInit {
         this.isAdmin = false;
       }
     });
+  }
+
+  onClickEdit(id:string) {
+    this.router.navigate(['/picture/pictureList-edit',id]);
   }
 
   onClickDelete(id:string) {

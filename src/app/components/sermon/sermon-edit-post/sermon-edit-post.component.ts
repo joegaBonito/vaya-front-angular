@@ -33,6 +33,10 @@ export class SermonEditPostComponent implements OnInit {
     });
   }
 
+  onClickBack(){
+    this.router.navigate(['/sermon/list']);
+  }
+
   onSubmit({value,valid}:{value:SermonPost, valid:boolean}) {
     if(!valid) {
       this.flashMessagesService.show('Please fill in all required fields', {cssClass:'alert-danger', timeout:3000});

@@ -1,21 +1,22 @@
 
 <div class="row">
     <div *ngIf="!items" class="col-10 offset-1">
-        No pictures are registered yet...
+        Loading...
       </div>
   <div class="col-10 offset-1">
     <div  class="row">
       <div *ngFor="let item of items">
-        <div  class="col-12 padding-on-each-card">
+        <div  class="col-12 padding-on-each-card text-center">
           <div class="card shadow-on-each-card">
             <a [routerLink]="['/picture/list',item.id]">
-              <img class="card-img-top" [src]="filePath + item.originalFileName" alt="Card image cap">
+              <img class="card-img-top" [src]="filePath + item.originalFileName" [alt]="item.title + ' ' + item.year">
             </a>
             <div class="card-body">
               <h5 class="card-title">{{item.title}}</h5>
+
               <p class="card-text">{{item.year}}</p>
-              <a href="#" *ngIf="isAdmin" class="btn btn-primary" [routerLink]="['/picture/pictureList-edit',item.id]">Edit</a>
-              <button class="btn btn-danger" *ngIf="isAdmin" (click) = "onClickDelete(item.id)">Delete</button>
+              <button *ngIf="isAdmin" class="btn btn-primary" (click)="onClickEdit(item.id)">Edit</button>
+              <button *ngIf="isAdmin" class="btn btn-danger"  (click)="onClickDelete(item.id)">Delete</button>
             </div>
           </div>
         </div>

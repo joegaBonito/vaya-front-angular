@@ -4,6 +4,7 @@ import { YacolumnService} from '../service/yacolumn.service';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import {Router} from '@angular/router';
 import {LoginService} from '../../login/service/login.service';
+import { stringify } from '@angular/compiler/src/util';
 
 @Component({
   selector: 'app-young-adults-column-create-post',
@@ -25,6 +26,11 @@ export class YoungAdultsColumnCreatePostComponent implements OnInit {
 
   ngOnInit() {
       this.yaColumn.author = this.loginService.getUsername();
+      this.yaColumn.date= JSON.stringify(Date.now());
+  }
+
+  onClickBack(){
+    this.router.navigate(['/yacolumn/list']);
   }
 
   onSubmit({value, valid}: { value: YAColumn, valid: boolean }) {

@@ -30,6 +30,10 @@ export class PictureListCreatePostComponent implements OnInit {
       this.originalFileName = this.fileData.name;
   }
 
+  onClickBack() {
+    this.router.navigate(['/picture/pictureList-list']);
+  }
+
   onSubmit({value,valid}:{value:PictureList, valid:boolean}) {
     if(!valid) {
       this.flashMessagesService.show('Please fill in all required fields', {cssClass:'alert-danger', timeout:3000});

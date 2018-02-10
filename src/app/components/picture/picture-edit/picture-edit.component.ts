@@ -40,7 +40,7 @@ export class PictureEditComponent implements OnInit {
         this.picture.author = this.loginService.getUsername();
       })
       .subscribe();
-      this.filePath = this.baseUrl + "/picture-file/";
+      this.filePath = this.baseUrl + "/picture-file?filename=";
       this.route.params.subscribe((params: Params) => {
         this.categoryId = params['id1'];
         this.pictureId = params['id2'];

@@ -14,7 +14,7 @@ export class AdminGuard implements CanActivate, CanActivateChild {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
      return this.loginService.onCheckAdmin().map((isAdmin) => {
-       console.log(isAdmin);
+       //console.log(isAdmin);
         if(!isAdmin) {
         this.router.navigate(['/']);
         }  

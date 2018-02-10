@@ -53,8 +53,8 @@ export class PictureListEditPostComponent implements OnInit {
     }
   }
 
-  goBack(): void {
-    this.location.back();
+  onClickBack(): void {
+    this.router.navigate(['/picture/pictureList-list']);
   }
 
 }

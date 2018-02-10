@@ -5,6 +5,7 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { LoginService } from '../../login/service/login.service';
 
+
 @Component({
   selector: 'app-young-adults-column-edit-post',
   templateUrl: './young-adults-column-edit-post.component.html',
@@ -13,7 +14,6 @@ import { LoginService } from '../../login/service/login.service';
 export class YoungAdultsColumnEditPostComponent implements OnInit {
 
   yaColumn:YAColumn;
-
   submitted:boolean = false;
 
   constructor(
@@ -32,7 +32,12 @@ export class YoungAdultsColumnEditPostComponent implements OnInit {
     });
   }
 
+  onClickBack(){
+    this.router.navigate(['/yacolumn/list']);
+  }
+
   onSubmit({value,valid}:{value:YAColumn, valid:boolean}) {
+    //console.log(value.date);
     if(!valid) {
       this.flashMessagesService.show('Please fill in all required fields', {cssClass:'alert-danger', timeout:3000});
       this.router.navigate(['/yacolumn/edit',this.yaColumn.id]);

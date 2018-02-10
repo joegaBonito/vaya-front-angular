@@ -94,9 +94,7 @@ export class GnbComponent implements OnInit {
       this.isAuthenticated = isAuthenticated;
       this.onCheckAdmin();
       this.authenticatedEmail = this.loginService.getUsername();
-      this.loginService.findUserId().do(res=>{this.authenticatedId = res}).subscribe(()=>
-      console.log(this.authenticatedId)
-      );
+      this.loginService.findUserId().do(res=>{this.authenticatedId = res}).subscribe();
     });
   }
 
@@ -113,7 +111,7 @@ export class GnbComponent implements OnInit {
   }
 
   editUserInfo() {
-    console.log("Button is clicked");
+    //console.log("Button is clicked");
     
   }
 }

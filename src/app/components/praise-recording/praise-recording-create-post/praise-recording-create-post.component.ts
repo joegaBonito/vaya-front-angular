@@ -25,12 +25,17 @@ export class PraiseRecordingCreatePostComponent implements OnInit {
 
   ngOnInit() {
     this.praiseRecording.author = this.loginService.getUsername();
+    this.praiseRecording.date= JSON.stringify(Date.now());
   }
 
   fileChange(event) {
       this.fileData = event.target.files[0];
       let fileName = this.fileData.name;
-      console.log(fileName);
+      //console.log(fileName);
+  }
+
+  onClickBack(){
+    this.router.navigate(['/praise-recording/list']);
   }
 
   onSubmit({value,valid}:{value:PraiseRecording, valid:boolean}) {

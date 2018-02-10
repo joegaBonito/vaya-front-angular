@@ -25,7 +25,7 @@ export class MemberService {
 
     editMember(id:string,value:Member):Observable<Member> {
         let apiURL = `${this.baseUrl}/members/edit/${id}`;
-        console.log(value.role);
+        //console.log(value.role);
         return this.http.put<Member>(apiURL, value).catch(this.handleError<Member>('Update Member Error'));
     }
 

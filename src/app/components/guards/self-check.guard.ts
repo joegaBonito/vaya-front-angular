@@ -23,7 +23,7 @@ export class SelfCheckGuard implements CanActivate, CanActivateChild {
                   this.router.navigate(['/']);
                   this.flashMessagesService.show("You are cannot edit other people's profile", {cssClass:'alert-danger', timeout:3000});
                 } 
-                console.log(isSelf);
+                //console.log(isSelf);
                 return isSelf;
               });
     }

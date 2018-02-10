@@ -35,6 +35,10 @@ export class PictureCreateComponent implements OnInit {
           this.fileData = event.target.files[0];
           this.originalFileName = this.fileData.name;
       }
+
+      onClickBack() {
+        this.router.navigate(['/picture/list',this.categoryId]);
+      }
     
       onSubmit({value,valid}:{value:Picture, valid:boolean}) {
         if(!valid) {

@@ -25,6 +25,11 @@ export class SermonCreatePostComponent implements OnInit {
 
   ngOnInit() {
     this.sermonPost.author = this.loginService.getUsername();
+    this.sermonPost.date= JSON.stringify(Date.now());
+  }
+
+  onClickBack(){
+    this.router.navigate(['/sermon/list']);
   }
 
 

@@ -43,7 +43,7 @@
         <label for="date">Date: </label>
       </div>
       <div class="col-10 offset-1  col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
-        <input type="text" class="form-control" id="date" [(ngModel)]="yaColumn.date" name="date" #yaColumnDate = "ngModel" required/>
+        <input type="text" class="form-control" id="date" (ngModel)="yaColumn.date=$event" [ngModel]="yaColumn.date | date:'shortDate'" name="date" #yaColumnDate = "ngModel" required>
         <div *ngIf="yaColumnDate.errors?.required && yaColumnDate.touched" class="alert alert-danger">
           Date is required
         </div>
@@ -63,6 +63,7 @@
   <div class="row">
       <div class="col-10 offset-1  col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
         <button type="submit" class="btn btn-success" >Submit</button>
+        <button type="button" class="btn btn-primary" (click)="onClickBack()">Back</button>
       </div>
   </div>
   </form>
