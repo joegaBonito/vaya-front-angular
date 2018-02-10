@@ -3,6 +3,12 @@
 .row {
     margin: 0px auto;
     width:100%;
+    animation: fadein 3s;
+  }
+  
+  @keyframes fadein {
+      from { opacity: 0; }
+      to   { opacity: 1; }
   }
   
   .news-backgroundimg {
