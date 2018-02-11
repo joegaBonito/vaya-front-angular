@@ -79,7 +79,11 @@ export class PraiseRecordingViewPostComponent implements OnInit {
   }
 
   onCheckOwner(){
-      if(this.loginService.getUsername() == this.praiseRecording.author) {
+    let username:string;
+    this.loginService.isCurrentUserName.subscribe((res)=>{
+      username = res;
+    });
+      if(username == this.praiseRecording.author) {
         this.isOwner = true;
       } else {
         this.isOwner = false;

@@ -36,6 +36,10 @@ export class ProfileEditComponent implements OnInit {
             .subscribe(()=>this.isLoading = false);
     }
 
+    onClickBack(){
+        this.router.navigate(['/']);
+    }
+
     onSubmit({ value, valid }: { value: Member, valid: boolean }) {
         if (!valid) {
             this.flashMessagesService.show('Please fill in all required fields', { cssClass: 'alert-danger', timeout: 1000 });

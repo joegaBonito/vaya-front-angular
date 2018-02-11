@@ -28,7 +28,9 @@ export class YoungAdultsColumnEditPostComponent implements OnInit {
     this.yacolumnService.getYAColumn(this.route.snapshot.params.id)
     .subscribe(yaColumn => {
       this.yaColumn = yaColumn;
-      this.yaColumn.author = this.loginService.getUsername();
+      this.loginService.isCurrentUserName.subscribe((res)=>{
+        this.yaColumn.author = res;
+       });
     });
   }
 

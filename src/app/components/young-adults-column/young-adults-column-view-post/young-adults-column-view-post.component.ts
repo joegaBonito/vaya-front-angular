@@ -55,7 +55,11 @@ export class YoungAdultsColumnViewPostComponent implements OnInit {
   }
 
   onCheckOwner() {
-    if (this.loginService.getUsername() == this.yaColumn.author) {
+    let username: string;
+    this.loginService.isCurrentUserName.subscribe((res) => {
+      username = res;
+    });
+    if (username == this.yaColumn.author) {
       this.isOwner = true;
     } else {
       this.isOwner = false;

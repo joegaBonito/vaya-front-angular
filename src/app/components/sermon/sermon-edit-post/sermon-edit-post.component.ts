@@ -29,7 +29,9 @@ export class SermonEditPostComponent implements OnInit {
     .switchMap((params:ParamMap)=>this.sermonService.getSermonPost(params.get('id')))
     .subscribe(sermonPost =>{
       this.sermonPost = sermonPost;
-      this.sermonPost.author = this.loginService.getUsername();
+      this.loginService.isCurrentUserName.subscribe((res)=>{
+        this.sermonPost.author = res;
+       });
     });
   }
 

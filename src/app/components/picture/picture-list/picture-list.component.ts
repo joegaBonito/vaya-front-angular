@@ -62,7 +62,7 @@ export class PictureListComponent implements OnInit {
                 thumbnailsRemainingCount: true,
                 thumbnailsArrows: false,
                 previewCloseOnEsc:true,
-                lazyLoading:true
+                lazyLoading:false
             },
             // max-width 400
             {
@@ -97,8 +97,8 @@ export class PictureListComponent implements OnInit {
         document.querySelector("nav").style.display = 'none';
     }
 
-    goBack() {
-        this.location.back();
+    onClickBack(){
+        this.router.navigate(['/picture/pictureList-list']);
     }
     onClickEdit() {
         this.hiddenVar = !this.hiddenVar;

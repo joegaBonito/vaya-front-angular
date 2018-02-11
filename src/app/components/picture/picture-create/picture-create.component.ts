@@ -25,10 +25,13 @@ export class PictureCreateComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.picture.author = this.loginService.getUsername();
+        this.loginService.isCurrentUserName.subscribe((res)=> {
+          this.picture.author = res;
+        });
         this.route.params.subscribe((params: Params) => {
             this.categoryId = params['id'];
-        })
+        });
+        this.picture.date= JSON.stringify(Date.now());
       }
     
       fileChange(event) {

@@ -47,7 +47,11 @@ export class MemberEditComponent implements OnInit{
     }
   
     onCheckOwner(){
-        if(this.loginService.getUsername() == this.member.email) {
+      let username:string;
+      this.loginService.isCurrentUserName.subscribe((res)=> {
+        username = res;
+      });
+        if(username == this.member.email) {
           this.isOwner = true;
         } else {
           this.isOwner = false;

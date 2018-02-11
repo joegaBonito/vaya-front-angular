@@ -35,7 +35,9 @@ export class PraiseRecordingEditPostComponent implements OnInit {
            .switchMap((params: ParamMap) => this.praiserecordingService.getPraiseRecording(params.get('id')))
            .subscribe(praiseRecording => {
              this.praiseRecording = praiseRecording;
-             this.praiseRecording.author = this.loginService.getUsername();
+             this.loginService.isCurrentUserName.subscribe((res)=>{
+              this.praiseRecording.author = res;
+             });
            });
     }
 

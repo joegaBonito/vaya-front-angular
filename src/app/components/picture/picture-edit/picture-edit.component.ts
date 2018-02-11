@@ -37,7 +37,9 @@ export class PictureEditComponent implements OnInit {
       .switchMap((params: ParamMap) => this.pictureService.getPicture(params.get('id2')))
       .map((picture)=>{
         this.picture = picture;
-        this.picture.author = this.loginService.getUsername();
+        this.loginService.isCurrentUserName.subscribe((res)=>{
+          this.picture.author = res;
+        });
       })
       .subscribe();
       this.filePath = this.baseUrl + "/picture-file?filename=";

@@ -1,6 +1,6 @@
 <!-- <app-worship-banner></app-worship-banner> -->
   <div class="row">
-    <div class="col-10 offset-1 col-lg-10 offset-lg-1">
+    <div class="col-10 offset-1 col-lg-8 offset-lg-2">
       <h2>Register</h2>
     </div>
   </div>
@@ -21,7 +21,7 @@
         <label for="name">Name: </label>
       </div>
       <div class="col-10 offset-1  col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
-        <input type="input" class="form-control" id="name" name="name" [(ngModel)]="member.name" #memberName = "ngModel" required/>
+        <input placeholder="Please input your First Name and Last Name" type="input" class="form-control" id="name" name="name" [(ngModel)]="member.name" #memberName = "ngModel" required/>
         <div *ngIf="memberName.errors?.required && memberName.touched" class="alert alert-danger">
           Name is required
         </div>

@@ -24,7 +24,9 @@ export class PraiseRecordingCreatePostComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.praiseRecording.author = this.loginService.getUsername();
+    this.loginService.isCurrentUserName.subscribe((res)=>{
+      this.praiseRecording.author = res;
+    });
     this.praiseRecording.date= JSON.stringify(Date.now());
   }
 

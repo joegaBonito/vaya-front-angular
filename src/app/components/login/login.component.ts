@@ -4,6 +4,9 @@ import { Router } from '@angular/router';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { LoginService } from './service/login.service';
 import { EventEmitter } from '@angular/core';
+import { map } from 'rxjs/operator/map';
+import { Observable } from 'rxjs/Observable';
+import { GnbService } from '../gnb/service/gnb.service';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +20,8 @@ export class LoginComponent implements OnInit  {
 
   constructor(private router:Router,
               private flashMessagesService:FlashMessagesService,
-              private loginService:LoginService) { }
+              private loginService:LoginService,
+              private gnbService:GnbService) { }
 
   ngOnInit() {
     //Shares the authenticated state between GNB Component and LoginComponent.
@@ -28,18 +32,24 @@ export class LoginComponent implements OnInit  {
 
   onSubmit({value,valid}:{value:Member, valid:boolean}) {
     if(!valid) {
-      // this.flashMessagesService.show('Please fill in all required fields', {cssClass:'alert-danger', timeout:3000});
+      this.flashMessagesService.show('Please fill in all required fields', {cssClass:'alert-danger', timeout:3000});
       this.router.navigate(['LoginComponent']);
       this.loginService.changeAuthenticationStatus(false);
+      this.loginService.getUsername();
     } else {
       this.loginService.login(value.email,value.password).map((res)=>{
         //-Save the JWT token in local storage. localStorage is object available on windows, so it does not have to be imported.
         localStorage.setItem('token',res.token);
-        // this.router.navigate(['/']);
-        window.location.href = "/";
-        //this.flashMessagesService.show('Log In Successful!',{cssClass:'alert-success',timeout:3000});
-      }).subscribe();
-      this.loginService.changeAuthenticationStatus(true);
+        this.loginService.getUsername();
+        this.router.navigate(['/']);
+        this.flashMessagesService.show('Log In Successful!', {cssClass:'alert-success',timeout:3000});
+        //window.location.href = "/";
+        return Observable.of({});
+      })
+      .subscribe(()=>{
+        this.loginService.changeAuthenticationStatus(true);
+        
+      });
     }
   }
 

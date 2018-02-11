@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { YAColumn } from '../model/YAColumn';
-import { YacolumnService} from '../service/yacolumn.service';
+import { YacolumnService } from '../service/yacolumn.service';
 import { FlashMessagesService } from 'angular2-flash-messages';
-import {Router} from '@angular/router';
-import {LoginService} from '../../login/service/login.service';
+import { Router } from '@angular/router';
+import { LoginService } from '../../login/service/login.service';
 import { stringify } from '@angular/compiler/src/util';
 
 @Component({
@@ -25,15 +25,17 @@ export class YoungAdultsColumnCreatePostComponent implements OnInit {
   }
 
   ngOnInit() {
-      this.yaColumn.author = this.loginService.getUsername();
-      this.yaColumn.date= JSON.stringify(Date.now());
+    this.loginService.isCurrentUserName.subscribe((res) => {
+      this.yaColumn.author = res;
+    });
+    this.yaColumn.date = JSON.stringify(Date.now());
   }
 
-  onClickBack(){
+  onClickBack() {
     this.router.navigate(['/yacolumn/list']);
   }
 
-  onSubmit({value, valid}: { value: YAColumn, valid: boolean }) {
+  onSubmit({ value, valid }: { value: YAColumn, valid: boolean }) {
     if (!valid) {
       this.flashMessagesService.show('Please fill in all required fields', { cssClass: 'alert-danger', timeout: 3000 });
       this.router.navigate(['/yacolumn/create']);

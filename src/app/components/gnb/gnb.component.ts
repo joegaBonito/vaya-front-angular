@@ -17,9 +17,10 @@ export class GnbComponent implements OnInit {
   show:boolean = false;
   showLoginMobile:boolean = false;
   showLoginDesktop:boolean = false;
-  isAuthenticated:boolean = false;
+  isAuthenticated:Observable<boolean>;
   isAdmin:boolean  = false;
-  authenticatedEmail:string;
+  emailJson:any=JSON;
+  authenticatedEmail:Observable<string>;
   authenticatedId:string;
 
   constructor(private router:Router,
@@ -78,24 +79,23 @@ export class GnbComponent implements OnInit {
 
   signOut() {
     localStorage.removeItem('token');
-    this.isAuthenticated = false;
+    this.loginService.changeAuthenticationStatus(false);
     this.isAdmin = false;
-    window.location.href="/";
-    // this.router.navigate(['/']);
-    // this.flashMessagesService.show('Log out Successful!',{cssClass:'alert-danger',timeout:1000});
+    this.router.navigate(['/']);
+    this.flashMessagesService.show('Log out Successful!',{cssClass:'alert-danger',timeout:1000});
   }
 
-/*
- * The function 'this.loginService.isAuthenticatedCurrent' is called to share the authenticated state between
- * the GNB component and the Login Component.
- */
-  checkAuthenticationStatus() {
-    this.loginService.isAuthenticatedCurrent.subscribe(isAuthenticated=>{
-      this.isAuthenticated = isAuthenticated;
-      this.onCheckAdmin();
-      this.authenticatedEmail = this.loginService.getUsername();
-      this.loginService.findUserId().do(res=>{this.authenticatedId = res}).subscribe();
-    });
+  /*
+  * The function 'this.loginService.isAuthenticatedCurrent' is called to share the authenticated state between
+  * the GNB component and the Login Component.
+  */
+  checkAuthenticationStatus(){
+    this.isAuthenticated = this.loginService.isAuthenticatedCurrent;
+    console.log(this.isAuthenticated);
+    this.onCheckAdmin();
+    this.loginService.getUsername();
+    this.authenticatedEmail = this.loginService.isCurrentUserName;
+    this.loginService.findUserId().do(res => { this.authenticatedId = res }).subscribe();
   }
 
   onCheckAdmin(){
@@ -112,6 +112,5 @@ export class GnbComponent implements OnInit {
 
   editUserInfo() {
     //console.log("Button is clicked");
-    
   }
 }

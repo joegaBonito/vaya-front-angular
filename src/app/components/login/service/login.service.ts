@@ -24,6 +24,10 @@ export class LoginService {
   private isAuthenticated = new BehaviorSubject<boolean>(false);
   isAuthenticatedCurrent = this.isAuthenticated.asObservable();
 
+  //Allows to share a state between components.
+  private userName = new BehaviorSubject<string>(" ");
+  isCurrentUserName = this.userName.asObservable();
+
   constructor(private http: HttpClient,
     private router: Router) {
   }
@@ -67,17 +71,21 @@ export class LoginService {
   /*
   * Decodes JWT token and returns username.
   */
-  getUsername(): string {
+  getUsername(): void {
     var token = localStorage.getItem('token');
     var decoded = jwtDecode(token);
-    return decoded.sub;
+    this.isCurrentUserName = Observable.of(decoded.sub);
   }
 
   /*
   * Finds userId using returned username from a token.
   */
   findUserId(): Observable<any> {
-    let username: string = this.getUsername();
+    let username: string;  
+    this.getUsername();
+    this.isCurrentUserName.subscribe((res)=>{
+      username = res;
+    });
     return this.http.get<any>(`${this.baseUrl}/members/find?username=${username}`)
       .catch(this.handleError<any>('Login Error'));
   }

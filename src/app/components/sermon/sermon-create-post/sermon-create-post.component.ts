@@ -24,7 +24,9 @@ export class SermonCreatePostComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.sermonPost.author = this.loginService.getUsername();
+    this.loginService.isCurrentUserName.subscribe((res)=>{
+      this.sermonPost.author = res;
+    });
     this.sermonPost.date= JSON.stringify(Date.now());
   }
 
