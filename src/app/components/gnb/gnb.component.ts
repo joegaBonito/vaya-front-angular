@@ -18,7 +18,7 @@ export class GnbComponent implements OnInit {
   showLoginMobile:boolean = false;
   showLoginDesktop:boolean = false;
   isAuthenticated:Observable<boolean>;
-  isAdmin:boolean  = false;
+  isAdmin:Observable<boolean>;
   emailJson:any=JSON;
   authenticatedEmail:Observable<string>;
   authenticatedId:string;
@@ -80,7 +80,7 @@ export class GnbComponent implements OnInit {
   signOut() {
     localStorage.removeItem('token');
     this.loginService.changeAuthenticationStatus(false);
-    this.isAdmin = false;
+    this.loginService.changeAdminStatus(false);
     this.router.navigate(['/']);
     this.flashMessagesService.show('Log out Successful!',{cssClass:'alert-danger',timeout:1000});
   }
@@ -91,26 +91,12 @@ export class GnbComponent implements OnInit {
   */
   checkAuthenticationStatus(){
     this.isAuthenticated = this.loginService.isAuthenticatedCurrent;
-    console.log(this.isAuthenticated);
-    this.onCheckAdmin();
+    this.loginService.onCheckAdmin().subscribe((res) => {
+      this.loginService.changeAdminStatus(res);
+      this.isAdmin = this.loginService.isAdminCurrent;
+    });
     this.loginService.getUsername();
     this.authenticatedEmail = this.loginService.isCurrentUserName;
     this.loginService.findUserId().do(res => { this.authenticatedId = res }).subscribe();
-  }
-
-  onCheckAdmin(){
-    this.gnbService.onCheckAdmin()
-    .map((res) => {
-      if(res == true) {
-        this.isAdmin = true;
-      } else {
-        this.isAdmin = false;
-      }
-    })
-    .subscribe();
-  }
-
-  editUserInfo() {
-    //console.log("Button is clicked");
   }
 }

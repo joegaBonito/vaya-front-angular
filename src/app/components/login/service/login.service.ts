@@ -20,11 +20,25 @@ export class LoginService {
   members: Member[];
   username: string;
 
-  //Allows to share a state between components.
+  //Allows to share a authentication state between components.
   private isAuthenticated = new BehaviorSubject<boolean>(false);
   isAuthenticatedCurrent = this.isAuthenticated.asObservable();
 
-  //Allows to share a state between components.
+  //This functions allows to update the authenticated state between components.
+  changeAuthenticationStatus(status: boolean) {
+    this.isAuthenticated.next(status);
+  }
+
+  //Allows to share a admin state between components.
+  private isAdmin = new BehaviorSubject<boolean>(false);
+  isAdminCurrent = this.isAdmin.asObservable();
+
+  //This functions allows to update the authenticated state between components.
+  changeAdminStatus(status: boolean) {
+    this.isAdmin.next(status);
+  }
+
+  //Allows to share a username state between components.
   private userName = new BehaviorSubject<string>(" ");
   isCurrentUserName = this.userName.asObservable();
 
@@ -102,10 +116,7 @@ export class LoginService {
       .catch(this.handleError<any>('Authentication Error'))
   }
 
-  //This functions allows to update the authenticated state between components.
-  changeAuthenticationStatus(status: boolean) {
-    this.isAuthenticated.next(status);
-  }
+  
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {

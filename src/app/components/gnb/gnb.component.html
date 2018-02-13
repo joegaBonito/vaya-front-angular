@@ -39,7 +39,7 @@ Angular GNB Toggle w/ Mobile & PC
           <!--<a class="dropdown-item" href="#" routerLink="VideoListComponent" (click)="toggleCollapse()">비디오</a>-->
         </div>
       </li>
-      <li *ngIf="isAdmin"  class="nav-item">
+      <li *ngIf="(isAdmin | async)"  class="nav-item">
         <a class="nav-link cursor-pointer" routerLink="/member/list" (click)="toggleCollapse()">멤버관리</a>
       </li>
       <!--<li class="nav-item dropdown">

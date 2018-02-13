@@ -16,6 +16,6 @@
       </ul>
     </div>
     <news-edit-component *ngIf="!newsFieldStatus"></news-edit-component>
-    <button *ngIf="newsFieldStatus && isAdmin" class="btn btn-primary edit-button" type="button" (click)="onClickEdit()">Edit</button>
+    <button *ngIf="newsFieldStatus && (isAdmin | async)" class="btn btn-primary edit-button" type="button" (click)="onClickEdit()">Edit</button>
   </div>
 </div>
