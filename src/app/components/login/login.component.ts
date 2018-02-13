@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit  {
       this.loginService.changeAdminStatus(false);
       this.loginService.getUsername();
     } else {
-      this.loginService.login(value.email,value.password).map((res)=>{
+      this.loginService.login(value.email,value.password).subscribe((res)=>{
         //-Save the JWT token in local storage. localStorage is object available on windows, so it does not have to be imported.
         localStorage.setItem('token',res.token);
         this.loginService.getUsername();
@@ -48,10 +48,8 @@ export class LoginComponent implements OnInit  {
         });
         this.router.navigate(['/']);
         this.flashMessagesService.show('Log In Successful!', {cssClass:'alert-success',timeout:3000});
-        //window.location.href = "/";
         return Observable.of({});
-      })
-      .subscribe();
+      });
     }
   }
 

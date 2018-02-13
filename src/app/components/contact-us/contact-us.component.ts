@@ -27,10 +27,13 @@ export class ContactUsComponent implements OnInit {
   onSubmit({value,valid}:{value:Email, valid:boolean}) {
     if(!valid) {
       this.flashMessagesService.show('Please fill in all required fields', {cssClass:'alert-danger', timeout:3000});
+      window.scrollTo(0, 0);
     } else {
-      this.contactUsService.sendEmail(value).subscribe(()=>{
+      this.contactUsService.sendEmail(value).map(()=>{
         this.flashMessagesService.show('Email has been sent',{cssClass:'alert-success',timeout:3000});
-      });
+        window.scrollTo(0, 0);
+      })
+      .subscribe();
     }
   }
 
