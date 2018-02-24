@@ -21,6 +21,7 @@ export class PraiseRecordingViewPostComponent implements OnInit {
   fileName:string;
   isAdmin:boolean = false;
   isOwner:boolean = false;
+  filePath:string;
 
   private baseUrl = config.backendAPIUrl;
 
@@ -39,20 +40,22 @@ export class PraiseRecordingViewPostComponent implements OnInit {
     this.route.paramMap
           // (+) converts string 'id' to a number (+params.get('id'))
          .switchMap((params: ParamMap) => this.praiserecordingService.getPraiseRecording(params.get('id')))
-         .subscribe(praiseRecording => {
+         .map(praiseRecording => {
            this.praiseRecording = praiseRecording;
-           this.getImage();
+           this.fileName =  praiseRecording.title + ".mp3";
+         })
+         .subscribe(()=>{
+            this.getFile();
          });
-    this.onCheckAdmin();
+        this.onCheckAdmin();
   }
 
-  getImage() {
-      this.imageFile = `${this.baseUrl}/praiserecording-file/${this.route.snapshot.params.id}`;
-      this.fileName =  this.praiseRecording.title + ".mp3";
+  getFile() {
+      this.filePath = `${this.baseUrl}/praiserecording-file?filename=${this.fileName}`;
   }
 
   downloadFile() {
-    this.praiserecordingService.downloadFile(this.route.snapshot.params.id).subscribe(data => {
+    this.praiserecordingService.downloadFile(this.fileName).subscribe(data => {
             FileSaver.saveAs(data,this.fileName);
         }
     )

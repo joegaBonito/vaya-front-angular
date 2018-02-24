@@ -10,6 +10,7 @@ import { ContactUsService } from './service/contact-us.service';
   styleUrls: ['./contact-us.component.css']
 })
 export class ContactUsComponent implements OnInit {
+  [x: string]: any;
   email:Email;
   
 
@@ -31,6 +32,7 @@ export class ContactUsComponent implements OnInit {
     } else {
       this.contactUsService.sendEmail(value).map(()=>{
         this.flashMessagesService.show('Email has been sent',{cssClass:'alert-success',timeout:3000});
+        this.contactUsForm.reset();
         window.scrollTo(0, 0);
       })
       .subscribe();

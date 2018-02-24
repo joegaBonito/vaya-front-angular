@@ -10,7 +10,7 @@ import { config } from '../../../config';
 
 @Injectable()
 export class PraiserecordingService {
-  private baseUrl = config.backendAPIUrl;
+  baseUrl = config.backendAPIUrl;
   
   praiseRecodrings: PraiseRecording[];
 
@@ -57,8 +57,8 @@ export class PraiserecordingService {
     return this.http.put<PraiseRecording>(apiURL, formData).catch(this.handleError<PraiseRecording>('Update PraiseRecording Error'));
   }
 
-  downloadFile(id: string): Observable<Blob> {
-    let apiURL = `${this.baseUrl}/praiserecording-file/${id}`;
+  downloadFile(filename: string): Observable<Blob> {
+    let apiURL = `${this.baseUrl}/praiserecording-file?filename=${filename}`;
     //{responseType:'blob' as 'blob'} has been added to the requester header because the 'type' undefined error when download.
     return this.http.get(apiURL, { responseType: 'blob' as 'blob' }).catch(this.handleError<Blob>('File Downloading Error'));
   }
