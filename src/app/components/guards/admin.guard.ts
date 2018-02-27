@@ -22,7 +22,7 @@ export class AdminGuard implements CanActivate, CanActivateChild {
        * The code below uses @Ngrx to check admin state.
        */
       this.store.select('auth').map((res)=> {
-        this.isAdmin = res.isAdmin
+        this.isAdmin = res.isAdmin;
         if(this.isAdmin == false) {
           this.router.navigate(['/']);
         }
