@@ -96,7 +96,6 @@ export class AuthEffects {
                 .catch(this.handleError<any>('Login Error'));
         })
         .mergeMap(() => {
-            console.log(this.tokenAndUsernameAndAdmin);
             return [
                 {
                     type: AuthActions.SIGNIN,
@@ -173,7 +172,7 @@ export class AuthEffects {
             } else {
                 this.tokenAndUsernameAndAdmin.authenticated = false;
             }
-            localStorage.setItem('token', res.token);
+            window.localStorage.setItem('token', res.token);
             return res.token;
         })
         .map((token) => {
@@ -219,7 +218,6 @@ export class AuthEffects {
                 .catch(this.handleError<any>('Login Error'));
         })
         .mergeMap(() => {
-            console.log(this.tokenAndUsernameAndAdmin);
             return [
                 {
                     type: AuthActions.SIGNIN,
@@ -267,7 +265,7 @@ export class AuthEffects {
         .map((action: AuthActions.TrySelfCheck) => {
             let headers = new HttpHeaders(
                 {
-                    authorization: localStorage.getItem('token')
+                    authorization: window.localStorage.getItem('token')
                 }
             )
             return this.http.get<boolean>(`${this.baseUrl}/self/${this.tokenAndUsernameAndAdmin.userId}`, { headers })

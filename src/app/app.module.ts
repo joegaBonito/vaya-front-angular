@@ -61,7 +61,6 @@ import { StoreModule, ActionReducerMap, ActionReducer, MetaReducer } from '@ngrx
 import { EffectsModule } from '@ngrx/effects';
 import { reducers } from './store/app.reducer';
 import { AuthEffects } from './components/login/store/auth.effect';
-import { localStorageSync } from 'ngrx-store-localstorage';
 import * as fromAuth from '../app/components/login/store/auth.reducer';
 
 @NgModule({

@@ -8,7 +8,7 @@ import * as fromApp from '../../store/app.reducer';
 
 @Injectable()
 export class AdminGuard implements CanActivate, CanActivateChild {
-  isAdmin:boolean;
+  isAdmin:boolean = false;
 
   constructor(private router: Router, 
   private store:Store<fromApp.AppState>){

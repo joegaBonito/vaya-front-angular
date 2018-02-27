@@ -68,7 +68,7 @@ export class LoginService {
   onCheckAdmin(): Observable<boolean> {
     let headers = new HttpHeaders(
       {
-        authorization: localStorage.getItem('token'),
+        authorization: window.localStorage.getItem('token'),
       }
     )
     return this.http.get<boolean>(`${this.baseUrl}/admin`, { headers })

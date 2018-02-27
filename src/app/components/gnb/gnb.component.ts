@@ -85,7 +85,7 @@ export class GnbComponent implements OnInit {
   }
 
   signOut() {
-    localStorage.removeItem('token');
+    window.localStorage.removeItem('token');
     this.store.dispatch(new AuthActions.Logout());
     this.router.navigate(['/']);
     this.flashMessagesService.show('Log out Successful!',{cssClass:'alert-danger',timeout:1000});
