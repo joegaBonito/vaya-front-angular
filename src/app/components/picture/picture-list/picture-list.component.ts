@@ -6,7 +6,8 @@ import { Location } from '@angular/common';
 import { NgxGalleryOptions, NgxGalleryImage, NgxGalleryAnimation } from 'ngx-gallery';
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/map';
-import { LoginService } from '../../login/service/login.service';
+import { Store } from '@ngrx/store';
+import * as fromApp from '../../../store/app.reducer';
 
 @Component({
     selector: 'app-picture-list-post',
@@ -14,23 +15,23 @@ import { LoginService } from '../../login/service/login.service';
     styleUrls: ['./picture-list.component.css']
 })
 export class PictureListComponent implements OnInit {
-    picture:Picture;
+    picture: Picture;
     items: Picture[];
     categoryId: string;
     filePath: string;
     galleryOptions: NgxGalleryOptions[] = [];
     galleryImages: NgxGalleryImage[] = [];
-    hiddenVar:boolean = true;
-    isAdmin:boolean = false;
+    hiddenVar: boolean = true;
+    isAdmin: boolean = false;
     p: number = 1;
-    isLoading:boolean;
+    isLoading: boolean;
 
     private baseUrl = this.pictureService.baseUrl;
     constructor(private route: ActivatedRoute,
         private router: Router,
         private pictureService: PictureService,
-        private location:Location,
-        private loginService:LoginService) {
+        private location: Location,
+        private store: Store<fromApp.AppState>) {
     }
 
     ngOnInit() {
@@ -40,19 +41,19 @@ export class PictureListComponent implements OnInit {
         })
         this.filePath = this.baseUrl + "/picture-file?filename=";
         this.pictureService.getPictures(this.categoryId)
-            .mergeMap((res:Picture[]) => {
+            .mergeMap((res: Picture[]) => {
                 res.map(item => {
-                        this.galleryImages.push({
-                            small: this.filePath + item.originalFileName,
-                            medium: this.filePath + item.originalFileName,
-                            big: this.filePath + item.originalFileName
-                        })
-                    }
+                    this.galleryImages.push({
+                        small: this.filePath + item.originalFileName,
+                        medium: this.filePath + item.originalFileName,
+                        big: this.filePath + item.originalFileName
+                    })
+                }
                 )
                 this.items = res;
                 return res;
             })
-            .subscribe(()=>this.isLoading = false);
+            .subscribe(() => this.isLoading = false);
         this.galleryOptions = [
             {
                 width: '800px',
@@ -61,14 +62,14 @@ export class PictureListComponent implements OnInit {
                 imageAnimation: NgxGalleryAnimation.Slide,
                 thumbnailsRemainingCount: true,
                 thumbnailsArrows: false,
-                previewCloseOnEsc:true,
-                lazyLoading:false
+                previewCloseOnEsc: true,
+                lazyLoading: false
             },
             // max-width 400
             {
                 breakpoint: 400,
                 imageArrows: false,
-                previewCloseOnClick:true,
+                previewCloseOnClick: true,
                 preview: true
             },
             // max-width 800
@@ -97,26 +98,22 @@ export class PictureListComponent implements OnInit {
         document.querySelector("nav").style.display = 'none';
     }
 
-    onClickBack(){
+    onClickBack() {
         this.router.navigate(['/picture/pictureList-list']);
     }
     onClickEdit() {
         this.hiddenVar = !this.hiddenVar;
     }
-    onClickDelete(id:string) {
+    onClickDelete(id: string) {
         this.pictureService.deletePicture(id)
-        .subscribe(()=>{
-            window.location.reload();
-        });
+            .subscribe(() => {
+                window.location.reload();
+            });
     }
 
-    onCheckAdmin(){
-        this.loginService.onCheckAdmin().subscribe((res)=> {
-          if(res == true) {
-            this.isAdmin = true;
-          } else {
-            this.isAdmin = false;
-          }
+    onCheckAdmin() {
+        this.store.select('auth').subscribe((res) => {
+            this.isAdmin = res.isAdmin;
         });
-      }
+    }
 }

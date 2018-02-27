@@ -4,7 +4,8 @@ import { PraiserecordingService } from '../service/praiserecording.service';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Location }                 from '@angular/common';
-import { LoginService } from '../../login/service/login.service';
+import { Store } from '@ngrx/store';
+import * as fromApp from '../../../store/app.reducer';
 
 @Component({
   selector: 'app-praise-recording-edit-post',
@@ -25,7 +26,7 @@ export class PraiseRecordingEditPostComponent implements OnInit {
       private router:Router,
       private route:ActivatedRoute,
       private location:Location,
-      private loginService:LoginService) {
+      private store:Store<fromApp.AppState>) {
 
       }
 
@@ -35,8 +36,8 @@ export class PraiseRecordingEditPostComponent implements OnInit {
            .switchMap((params: ParamMap) => this.praiserecordingService.getPraiseRecording(params.get('id')))
            .subscribe(praiseRecording => {
              this.praiseRecording = praiseRecording;
-             this.loginService.isCurrentUserName.subscribe((res)=>{
-              this.praiseRecording.author = res;
+             this.store.select('auth').subscribe((res)=>{
+                this.praiseRecording.author = res.currentUsername;
              });
            });
     }

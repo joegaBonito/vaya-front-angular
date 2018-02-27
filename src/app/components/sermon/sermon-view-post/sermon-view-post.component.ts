@@ -4,7 +4,8 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { SermonPost } from '../model/SermonPost';
 import { SermonService } from '../service/sermon.service';
-import { LoginService } from '../../login/service/login.service';
+import { Store } from '@ngrx/store';
+import * as fromApp from '../../../store/app.reducer';
 
 @Component({
   selector: 'app-sermon-view-post',
@@ -21,15 +22,18 @@ export class SermonViewPostComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private location: Location,
-    private loginService: LoginService
+    private store:Store<fromApp.AppState>
   ) { }
 
   ngOnInit() {
     this.route.paramMap
       // (+) converts string 'id' to a number (+params.get('id'))
       .switchMap((params: ParamMap) => this.sermonService.getSermonPost(params.get('id')))
-      .subscribe(sermonPost => this.sermonPost = sermonPost);
-    this.onCheckAdmin();
+      .subscribe(sermonPost => {
+        this.sermonPost = sermonPost;
+        this.onCheckAdmin();
+      });
+    
   }
 
   goBack(): void {
@@ -43,20 +47,16 @@ export class SermonViewPostComponent implements OnInit {
   }
 
   onCheckAdmin() {
-    this.loginService.onCheckAdmin().subscribe((res) => {
-      if (res == true) {
-        this.isAdmin = true;
-      } else {
-        this.isAdmin = false;
-        this.onCheckOwner();
-      }
-    });
+    this.store.select('auth').subscribe((res)=>{
+      this.isAdmin = res.isAdmin;
+      this.onCheckOwner();
+    })
   }
 
   onCheckOwner() {
     let username: string;
-    this.loginService.isCurrentUserName.subscribe((res) => {
-      username = res;
+    this.store.select('auth').subscribe((res)=>{
+      username = res.currentUsername;
     });
     if (username == this.sermonPost.author) {
       this.isOwner = true;

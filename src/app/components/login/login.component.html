@@ -4,11 +4,11 @@
         <input type="email" id="inputEmail" name="email" [(ngModel)]="member.email" class="form-control" placeholder="Email address" required autofocus="" email>
         <label for="inputPassword" class="sr-only">Password</label>
         <input type="password" id="inputPassword" name="password" [(ngModel)]="member.password" class="form-control" placeholder="Password" required>
-        <div class="checkbox">
+        <!-- <div class="checkbox">
           <label>
             <input type="checkbox" value="remember-me"> Remember me
           </label>
-        </div>
-        <button class="btn btn-lg btn-primary" type="submit">Sign in</button>
-        <button class="btn btn-lg btn-secondary" [routerLink]="['/RegisterComponent']" type="button">Register</button>
+        </div> -->
+        <button class="btn btn-lg btn-primary cursor-pointer" type="submit">Sign in</button>
+        <button class="btn btn-lg btn-secondary button-right-float cursor-pointer" [routerLink]="['/RegisterComponent']" type="button">Register</button>
 </form>

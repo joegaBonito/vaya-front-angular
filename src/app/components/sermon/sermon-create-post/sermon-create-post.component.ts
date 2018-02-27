@@ -3,7 +3,8 @@ import {SermonPost} from '../model/SermonPost';
 import { SermonService } from '../service/sermon.service';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import {Router} from '@angular/router';
-import {LoginService} from '../../login/service/login.service';
+import { Store } from '@ngrx/store';
+import * as fromApp from '../../../store/app.reducer';
 
 @Component({
   selector: 'app-sermon-create-post',
@@ -20,13 +21,13 @@ export class SermonCreatePostComponent implements OnInit {
     private sermonService:SermonService,
     private flashMessagesService:FlashMessagesService,
     private router:Router,
-    private loginService:LoginService) {
+    private store:Store<fromApp.AppState>) {
   }
 
   ngOnInit() {
-    this.loginService.isCurrentUserName.subscribe((res)=>{
-      this.sermonPost.author = res;
-    });
+    this.store.select('auth').subscribe((res)=>{
+      this.sermonPost.author = res.currentUsername;
+    })
     this.sermonPost.date= JSON.stringify(Date.now());
   }
 

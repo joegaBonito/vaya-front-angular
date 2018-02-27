@@ -4,7 +4,8 @@ import { Picture } from '../model/Picture';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { ActivatedRoute, ParamMap, Router, Params } from '@angular/router';
 import { Location }                 from '@angular/common';
-import { LoginService } from '../../login/service/login.service';
+import { Store } from '@ngrx/store';
+import * as fromApp from '../../../store/app.reducer';
 
 @Component({
   selector: 'app-picture-edit-post',
@@ -27,7 +28,7 @@ export class PictureEditComponent implements OnInit {
               private router:Router,
               private location:Location,
               private flashMessagesService:FlashMessagesService,
-              private loginService:LoginService) {
+              private store:Store<fromApp.AppState>) {
 
   }
 
@@ -37,8 +38,8 @@ export class PictureEditComponent implements OnInit {
       .switchMap((params: ParamMap) => this.pictureService.getPicture(params.get('id2')))
       .map((picture)=>{
         this.picture = picture;
-        this.loginService.isCurrentUserName.subscribe((res)=>{
-          this.picture.author = res;
+        this.store.select('auth').subscribe((res)=>{
+          this.picture.author = res.currentUsername;
         });
       })
       .subscribe();

@@ -18,15 +18,14 @@ import { PictureListViewPostComponent } from './pictureList-view-post/pictureLis
 
 //Guards
 import { AuthGuard } from '../../components/guards/auth.guard';
-import { GnbStatusGuard } from '../../components/guards/gnb-status.guard';
 
 const appRoutes:Routes = [
   {path:"",component:Picture, children:[
-    {path:"pictureList-list",component: PictureListListComponent, canActivate:[GnbStatusGuard]},
+    {path:"pictureList-list",component: PictureListListComponent},
     {path:"pictureList-create",component: PictureListCreatePostComponent, canActivate:[AuthGuard]},
     {path:"pictureList-edit/:id",component: PictureListEditPostComponent, canActivate:[AuthGuard]},
     {path:"pictureList/:id",component: PictureListViewPostComponent, canActivate:[AuthGuard]},
-    {path:"list/:id",component: PictureListComponent, canActivate:[GnbStatusGuard]},
+    {path:"list/:id",component: PictureListComponent},
     {path:"create/:id",component: PictureCreateComponent, canActivate:[AuthGuard]},
     {path:"edit/:id1/:id2",component: PictureEditComponent, canActivate:[AuthGuard]},
     {path:":id",component: PictureViewComponent, canActivate:[AuthGuard]},

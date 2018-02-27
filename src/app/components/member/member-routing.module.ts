@@ -9,7 +9,6 @@ import { MemberViewComponent } from './member-view/member-view.component';
 
 //Guards
 import { AuthGuard } from '../../components/guards/auth.guard';
-import { GnbStatusGuard } from '../../components/guards/gnb-status.guard';
 import { AdminGuard } from '../guards/admin.guard';
 
 const appRoutes:Routes = [

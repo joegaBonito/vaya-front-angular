@@ -3,8 +3,9 @@ import { PictureList } from '../model/PictureList';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { PictureService} from '../service/picture.service';
 import { FlashMessagesService } from 'angular2-flash-messages';
-import {LoginService} from '../../login/service/login.service';
 import { Location } from '@angular/common';
+import { Store } from '@ngrx/store';
+import * as fromApp from '../../../store/app.reducer';
 
 @Component({
   selector: 'app-pictureList-edit-post',
@@ -23,11 +24,10 @@ export class PictureListEditPostComponent implements OnInit {
               private route:ActivatedRoute,
               private flashMessagesService:FlashMessagesService,
               private pictureService:PictureService,
-              private loginService:LoginService,
-              private location:Location) { }
+              private location:Location,
+              private store:Store<fromApp.AppState>) { }
 
   ngOnInit() {
-    //this.picture.author = this.loginService.getUsername();
     this.filePath = this.baseUrl + "/pictureList-file/";
     this.route.paramMap
     .switchMap((params:ParamMap)=>this.pictureService.getPictureList(params.get('id')))

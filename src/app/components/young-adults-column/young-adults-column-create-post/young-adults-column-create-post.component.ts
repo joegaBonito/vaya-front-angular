@@ -3,8 +3,9 @@ import { YAColumn } from '../model/YAColumn';
 import { YacolumnService } from '../service/yacolumn.service';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { Router } from '@angular/router';
-import { LoginService } from '../../login/service/login.service';
 import { stringify } from '@angular/compiler/src/util';
+import { Store } from '@ngrx/store';
+import * as fromApp from '../../../store/app.reducer';
 
 @Component({
   selector: 'app-young-adults-column-create-post',
@@ -21,12 +22,12 @@ export class YoungAdultsColumnCreatePostComponent implements OnInit {
     private yacolumnService: YacolumnService,
     private flashMessagesService: FlashMessagesService,
     private router: Router,
-    private loginService: LoginService) {
+    private store:Store<fromApp.AppState>) {
   }
 
   ngOnInit() {
-    this.loginService.isCurrentUserName.subscribe((res) => {
-      this.yaColumn.author = res;
+    this.store.select('auth').subscribe((res)=>{
+      this.yaColumn.author = res.currentUsername;
     });
     this.yaColumn.date = JSON.stringify(Date.now());
   }

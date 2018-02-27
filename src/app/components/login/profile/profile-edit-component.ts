@@ -1,12 +1,13 @@
 import { Component, OnInit } from "@angular/core";
 import { Member } from "../model/Member";
 import { ParamMap, ActivatedRoute, Router, Params } from "@angular/router";
-import { LoginService } from "../service/login.service";
 import { MemberService } from "../../member/service/member.service";
 import { FlashMessagesService } from "angular2-flash-messages";
 import { Observable } from "rxjs/Observable";
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/do';
+import { Store } from "@ngrx/store";
+import * as fromApp from '../../../store/app.reducer';
 
 @Component({
     selector: 'app-profile-edit-component',
@@ -17,26 +18,28 @@ export class ProfileEditComponent implements OnInit {
     [x: string]: any;
     member: Member;
     isSelf: boolean;
-    isLoading:boolean = true;
+    isLoading: boolean = true;
 
     constructor(private flashMessagesService: FlashMessagesService,
         private router: Router,
         private route: ActivatedRoute,
         private memberService: MemberService,
-        private loginService: LoginService) { }
+        private store: Store<fromApp.AppState>) { }
 
     ngOnInit() {
-        this.route.paramMap
-            // (+) converts string 'id' to a number (+params.get('id'))
-            .switchMap((params: ParamMap) => this.memberService.getMember(params.get('id')))
-            .do(()=>{this.isLoading = true})
-            .map((member:Member) => {
-                    this.member = member;
+        this.store.select('auth').subscribe((res) => {
+            this.userId = res.userId;
+        })
+        this.memberService.getMember(this.userId)
+            .take(1)
+            .do(() => this.isLoading = true)
+            .map((member: Member) => {
+                this.member = member;
             })
-            .subscribe(()=>this.isLoading = false);
+            .subscribe(() => this.isLoading = false)
     }
 
-    onClickBack(){
+    onClickBack() {
         this.router.navigate(['/']);
     }
 

@@ -3,7 +3,8 @@ import {SermonPost} from '../model/SermonPost';
 import { SermonService } from '../service/sermon.service';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { LoginService } from '../../login/service/login.service';
+import { Store } from '@ngrx/store';
+import * as fromApp from '../../../store/app.reducer';
 
 @Component({
   selector: 'app-sermon-edit-post',
@@ -20,8 +21,7 @@ export class SermonEditPostComponent implements OnInit {
     private flashMessagesService:FlashMessagesService,
     private router:Router,
     private route:ActivatedRoute,
-    private loginService:LoginService) {
-
+    private store:Store<fromApp.AppState>) {
     }
 
   ngOnInit() {
@@ -29,9 +29,9 @@ export class SermonEditPostComponent implements OnInit {
     .switchMap((params:ParamMap)=>this.sermonService.getSermonPost(params.get('id')))
     .subscribe(sermonPost =>{
       this.sermonPost = sermonPost;
-      this.loginService.isCurrentUserName.subscribe((res)=>{
-        this.sermonPost.author = res;
-       });
+       this.store.select('auth').subscribe((res)=>{
+         this.sermonPost.author = res.currentUsername;
+       })
     });
   }
 

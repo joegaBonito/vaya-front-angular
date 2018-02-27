@@ -2,24 +2,35 @@ import { Injectable, Output } from '@angular/core';
 import { CanActivate, CanActivateChild, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { Router } from '@angular/router';
-import { LoginService } from '../login/service/login.service';
+import { Store } from '@ngrx/store';
+import * as fromApp from '../../store/app.reducer';
 
 
 @Injectable()
 export class AdminGuard implements CanActivate, CanActivateChild {
-  constructor(private loginService: LoginService, private router: Router){
+  isAdmin:boolean;
+
+  constructor(private router: Router, 
+  private store:Store<fromApp.AppState>){
+    
   }
 
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-     return this.loginService.onCheckAdmin().map((isAdmin) => {
-       //console.log(isAdmin);
-        if(!isAdmin) {
-        this.router.navigate(['/']);
-        }  
-        return isAdmin;
-        });
+      /**
+       * The code below uses @Ngrx to check admin state.
+       */
+      this.store.select('auth').map((res)=> {
+        this.isAdmin = res.isAdmin
+        if(this.isAdmin == false) {
+          this.router.navigate(['/']);
+        }
+      })
+      .subscribe(()=>{
+        
+      })
+      return this.isAdmin;
     }
 
     canActivateChild(

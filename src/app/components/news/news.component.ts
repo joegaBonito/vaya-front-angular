@@ -4,7 +4,9 @@ import { NewsService } from './service/news.service';
 import 'rxjs/add/operator/take';
 import { LandingPageService } from '../landing-page/service/landing-page.service';
 import { Observable } from 'rxjs/Observable';
-import { LoginService } from '../login/service/login.service';
+import { Store } from '@ngrx/store';
+import * as fromApp from '../../store/app.reducer';
+import * as fromAuth from '../../components/login/store/auth.reducer';
 
 @Component({
   selector: 'app-news',
@@ -14,12 +16,12 @@ import { LoginService } from '../login/service/login.service';
 export class NewsComponent implements OnInit {
 
   news:News;
-  isAdmin:Observable<boolean>;
+  authState:Observable<fromAuth.State>;
   newsFieldStatus:boolean;
 
   constructor(private newsService:NewsService,
              private landingPageService:LandingPageService,
-              private loginService:LoginService) { }
+              private store:Store<fromApp.AppState>) { }
 
   ngOnInit() {
     this.newsService.getNews()
@@ -27,14 +29,11 @@ export class NewsComponent implements OnInit {
     .subscribe((res)=> {
       return this.news = res
     });
-    this.loginService.onCheckAdmin().subscribe((res) => {
-      this.loginService.changeAdminStatus(res);
-      this.isAdmin = this.loginService.isAdminCurrent;
-    });
-    this.isAdmin = this.loginService.isAdminCurrent;
+    this.authState = this.store.select('auth');
     this.landingPageService.currentNewFieldShow.subscribe((res) => {
       this.newsFieldStatus = res;
     })
+    
   }
   onClickEdit():void {
     this.landingPageService.changeNewsFieldShow(false);

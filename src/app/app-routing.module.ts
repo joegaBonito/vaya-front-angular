@@ -23,16 +23,15 @@ import { ProfileEditComponent } from './components/login/profile/profile-edit-co
 
 //Guards
 import { AuthGuard } from './components/guards/auth.guard';
-import { GnbStatusGuard } from './components/guards/gnb-status.guard';
 import { SelfCheckGuard } from './components/guards/self-check.guard';
 
 const appRoutes:Routes = [
-  {path:"",component: LandingPageComponent, canActivate:[GnbStatusGuard]},
-  {path:"about-us",component: AboutUsComponent, canActivate:[GnbStatusGuard]},
-  {path:"ComingsoonComponent", component:ComingsoonComponent, canActivate:[GnbStatusGuard]},
-  {path:"LoginComponent", component:LoginComponent, canActivate:[GnbStatusGuard]},
-  {path:"RegisterComponent",component:RegisterComponent, canActivate:[GnbStatusGuard]},
-  {path:"profile/:id",component:ProfileEditComponent, canActivate:[GnbStatusGuard,SelfCheckGuard]},
+  {path:"",component: LandingPageComponent},
+  {path:"about-us",component: AboutUsComponent},
+  {path:"ComingsoonComponent", component:ComingsoonComponent},
+  {path:"LoginComponent", component:LoginComponent},
+  {path:"RegisterComponent",component:RegisterComponent},
+  {path:"profile",component:ProfileEditComponent, canActivate:[SelfCheckGuard]},
   {path:"sermon", loadChildren:'./components/sermon/sermon.module#SermonModule'},
   {path:"praise-recording", loadChildren:'./components/praise-recording/praise-recording.module#PraiseRecordingModule'},
   {path:"yacolumn", loadChildren:'./components/young-adults-column/yacolumn.module#YAColumnModule'},

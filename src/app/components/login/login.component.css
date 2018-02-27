@@ -7,6 +7,11 @@ form {
 .btn {
   display:inline-block;
   width:49%;
+  margin-top:5px;
+}
+
+.button-right-float {
+  float:right
 }
 
 /* Small devices (landscape phones, 576px and up) */

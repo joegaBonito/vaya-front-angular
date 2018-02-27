@@ -3,7 +3,8 @@ import {YAColumn} from '../model/YAColumn';
 import {YacolumnService} from '../service/yacolumn.service';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Location }                 from '@angular/common';
-import { LoginService } from '../../login/service/login.service';
+import { Store } from '@ngrx/store';
+import * as fromApp from '../../../store/app.reducer';
 
 @Component({
   selector: 'app-young-adults-column-view-post',
@@ -20,8 +21,7 @@ export class YoungAdultsColumnViewPostComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private location: Location,
-    private loginService: LoginService
-
+    private store:Store<fromApp.AppState>
   ) { }
 
   ngOnInit() {
@@ -30,8 +30,8 @@ export class YoungAdultsColumnViewPostComponent implements OnInit {
         .switchMap((params: ParamMap) => this.yacolumnService.getYAColumn(params.get('id')))
         .subscribe(yaColumn => {
           this.yaColumn = yaColumn;
+          this.onCheckAdmin();
         });
-      this.onCheckAdmin();
   }
 
   goBack(): void {
@@ -44,21 +44,17 @@ export class YoungAdultsColumnViewPostComponent implements OnInit {
   }
 
   onCheckAdmin() {
-    this.loginService.onCheckAdmin().subscribe((res) => {
-      if (res == true) {
-        this.isAdmin = true;
-      } else {
-        this.isAdmin = false;
-        this.onCheckOwner()
-      }
-    });
+    this.store.select('auth').subscribe((res)=>{
+      this.isAdmin = res.isAdmin;
+      this.onCheckOwner();
+    })
   }
 
   onCheckOwner() {
     let username: string;
-    this.loginService.isCurrentUserName.subscribe((res) => {
-      username = res;
-    });
+    this.store.select('auth').subscribe((res)=>{
+      username = res.currentUsername;
+    })
     if (username == this.yaColumn.author) {
       this.isOwner = true;
     } else {

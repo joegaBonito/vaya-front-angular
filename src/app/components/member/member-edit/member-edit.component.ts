@@ -1,10 +1,11 @@
 import { OnInit, Component } from "@angular/core";
 import { Member } from "../../login/model/Member";
 import { FlashMessagesService } from "angular2-flash-messages";
-import { LoginService } from "../../login/service/login.service";
 import { Router, ActivatedRoute, ParamMap } from "@angular/router";
 import {Location } from '@angular/common';
 import { MemberService } from "../service/member.service";
+import { Store } from "@ngrx/store";
+import * as fromApp from '../../../store/app.reducer';
 
 @Component({
     selector:'app-member-edit-component',
@@ -20,7 +21,7 @@ export class MemberEditComponent implements OnInit{
     private router:Router,
     private route:ActivatedRoute,
     private memberService:MemberService,
-    private loginService:LoginService
+    private store:Store<fromApp.AppState>
 ){
 
     }
@@ -31,25 +32,21 @@ export class MemberEditComponent implements OnInit{
        .switchMap((params: ParamMap) => this.memberService.getMember(params.get('id')))
        .subscribe(member => {
          this.member = member;
+         this.onCheckAdmin();
        });
-       this.onCheckAdmin();
     }
 
     onCheckAdmin(){
-      this.loginService.onCheckAdmin().subscribe((res)=> {
-        if(res == true) {
-          this.isAdmin = true;
-        } else {
-          this.isAdmin = false;
-          this.onCheckOwner();
-        }
+      this.store.select('auth').map((res)=>{
+        this.isAdmin = res.isAdmin;
+        this.onCheckOwner();
       });
     }
   
     onCheckOwner(){
       let username:string;
-      this.loginService.isCurrentUserName.subscribe((res)=> {
-        username = res;
+      this.store.select('auth').subscribe((res)=>{
+        username = res.currentUsername;
       });
         if(username == this.member.email) {
           this.isOwner = true;

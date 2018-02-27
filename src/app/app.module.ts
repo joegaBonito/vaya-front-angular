@@ -50,12 +50,19 @@ import {MemberService} from './components/member/service/member.service';
 
 //Guards
 import { AuthGuard } from './components/guards/auth.guard';
-import { GnbStatusGuard } from './components/guards/gnb-status.guard';
 import { SelfCheckGuard } from './components/guards/self-check.guard';
 
 //npm libraries
 import {NgxPaginationModule} from 'ngx-pagination';
 import { NgxGalleryModule } from 'ngx-gallery';
+
+//ngrx
+import { StoreModule, ActionReducerMap, ActionReducer, MetaReducer } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { reducers } from './store/app.reducer';
+import { AuthEffects } from './components/login/store/auth.effect';
+import { localStorageSync } from 'ngrx-store-localstorage';
+import * as fromAuth from '../app/components/login/store/auth.reducer';
 
 @NgModule({
   declarations: [
@@ -81,6 +88,8 @@ import { NgxGalleryModule } from 'ngx-gallery';
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'VAYA-SSR' }),
+    StoreModule.forRoot(reducers),
+    EffectsModule.forRoot([AuthEffects]),
     AppRoutingModule,
     PraiseRecordingModule,
     YAColumnModule,
@@ -93,7 +102,7 @@ import { NgxGalleryModule } from 'ngx-gallery';
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyD72lQaX_Ki1nZlA9Y2OoczB8GvKBY_hIg'
     }),
-    NgxGalleryModule
+    NgxGalleryModule,
   ],
   providers: [
     HttpClientModule,
@@ -102,7 +111,6 @@ import { NgxGalleryModule } from 'ngx-gallery';
     YacolumnService,
     LoginService,
     AuthGuard,
-    GnbStatusGuard,
     PictureService,
     NewsService,
     LandingPageService,

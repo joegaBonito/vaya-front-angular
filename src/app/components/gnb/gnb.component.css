@@ -51,9 +51,10 @@ li.dropdown:hover {
 
 /* Large devices (desktops, 992px and up)*/
 @media screen and (min-width: 992px) {
-  .cursor-pointer {
-    cursor:pointer;
+  #logo{
+    width:80px;
   }
+
   a {
     font-size: 22px;
   }

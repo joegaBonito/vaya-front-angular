@@ -3,7 +3,8 @@ import { PraiseRecording } from '../model/PraiseRecording';
 import { Router } from '@angular/router';
 import {PraiserecordingService} from '../service/praiserecording.service';
 import { FlashMessagesService } from 'angular2-flash-messages';
-import {LoginService} from '../../login/service/login.service';
+import { Store } from '@ngrx/store';
+import * as fromApp from '../../../store/app.reducer';
 
 @Component({
   selector: 'app-praise-recording-create-post',
@@ -18,14 +19,14 @@ export class PraiseRecordingCreatePostComponent implements OnInit {
   constructor(private router:Router,
               private flashMessagesService:FlashMessagesService,
               private praiserecordingService:PraiserecordingService,
-              private loginService:LoginService
+              private store:Store<fromApp.AppState>
               ) {
 
   }
 
   ngOnInit() {
-    this.loginService.isCurrentUserName.subscribe((res)=>{
-      this.praiseRecording.author = res;
+    this.store.select('auth').subscribe((res)=>{
+      this.praiseRecording.author = res.currentUsername;
     });
     this.praiseRecording.date= JSON.stringify(Date.now());
   }

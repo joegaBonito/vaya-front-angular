@@ -4,7 +4,8 @@ import { PictureService } from '../service/picture.service';
 import { Picture } from '../model/Picture';
 import { PictureList } from '../model/PictureList';
 import { FlashMessagesService } from 'angular2-flash-messages';
-import {LoginService} from '../../login/service/login.service';
+import { Store } from '@ngrx/store';
+import * as fromApp from '../../../store/app.reducer';
 
 @Component({
   selector: 'app-picture-create-post',
@@ -20,13 +21,13 @@ export class PictureCreateComponent implements OnInit {
     constructor(private route:ActivatedRoute,
                 private router:Router,
                 private pictureService:PictureService,
-                private loginService:LoginService,
-                private flashMessagesService:FlashMessagesService){
+                private flashMessagesService:FlashMessagesService,
+                private store:Store<fromApp.AppState>){
     }
 
     ngOnInit() {
-        this.loginService.isCurrentUserName.subscribe((res)=> {
-          this.picture.author = res;
+        this.store.select('auth').map((res)=>{
+          this.picture.author = res.currentUsername;
         });
         this.route.params.subscribe((params: Params) => {
             this.categoryId = params['id'];

@@ -11,7 +11,6 @@ import { SermonViewPostComponent } from './sermon-view-post/sermon-view-post.com
 
 //Guards
 import { AuthGuard } from '../../components/guards/auth.guard';
-import { GnbStatusGuard } from '../../components/guards/gnb-status.guard';
 
 const appRoutes:Routes = [
   {path:'', component:SermonComponent, canActivate:[AuthGuard], canActivateChild:[AuthGuard], children:[

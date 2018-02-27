@@ -6,6 +6,10 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 import { GnbService } from './service/gnb.service';
 import { Location } from '@angular/common';
 import { Observable } from 'rxjs/Observable';
+import { Store } from '@ngrx/store';
+import * as fromApp from '../../store/app.reducer';
+import * as fromAuth from '../login/store/auth.reducer';
+import * as AuthActions from '../login/store/auth.action';
 
 @Component({
   selector: 'app-gnb',
@@ -22,12 +26,14 @@ export class GnbComponent implements OnInit {
   emailJson:any=JSON;
   authenticatedEmail:Observable<string>;
   authenticatedId:string;
+  authState:Observable<fromAuth.State>;
 
   constructor(private router:Router,
               private loginService:LoginService,
               private flashMessagesService:FlashMessagesService,
               private gnbService:GnbService,
-              @Inject(PLATFORM_ID) private platformId:Object) {
+              @Inject(PLATFORM_ID) private platformId:Object,
+              private store:Store<fromApp.AppState>) {
   }
 
   ngOnInit() {
@@ -43,7 +49,8 @@ export class GnbComponent implements OnInit {
         this.showLoginDesktop = false;
         this.showLoginMobile = true;
       }
-      this.checkAuthenticationStatus();
+      //this.checkAuthenticationStatus();
+      this.authState = this.store.select('auth');
     } else {
       //Server Only Code
     }
@@ -79,8 +86,7 @@ export class GnbComponent implements OnInit {
 
   signOut() {
     localStorage.removeItem('token');
-    this.loginService.changeAuthenticationStatus(false);
-    this.loginService.changeAdminStatus(false);
+    this.store.dispatch(new AuthActions.Logout());
     this.router.navigate(['/']);
     this.flashMessagesService.show('Log out Successful!',{cssClass:'alert-danger',timeout:1000});
   }

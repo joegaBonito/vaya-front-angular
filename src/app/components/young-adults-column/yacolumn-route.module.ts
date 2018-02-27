@@ -11,7 +11,6 @@ import { YoungAdultsColumnViewPostComponent } from './young-adults-column-view-p
 
 //Guards
 import { AuthGuard } from '../../components/guards/auth.guard';
-import { GnbStatusGuard } from '../../components/guards/gnb-status.guard';
 
 const appRoutes:Routes = [
   {path: "",component:YAColumn, canActivate:[AuthGuard], canActivateChild:[AuthGuard],children:[

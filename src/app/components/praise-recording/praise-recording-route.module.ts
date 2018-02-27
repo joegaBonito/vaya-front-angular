@@ -11,7 +11,6 @@ import { PraiseRecordingViewPostComponent } from './praise-recording-view-post/p
 
 //Guards
 import { AuthGuard } from '../../components/guards/auth.guard';
-import { GnbStatusGuard } from '../../components/guards/gnb-status.guard';
 
 const appRoutes:Routes = [
   {path:"",component:PraiseRecording, canActivate:[AuthGuard], canActivateChild:[AuthGuard], children:[

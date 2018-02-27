@@ -3,7 +3,8 @@ import { PictureList } from '../model/PictureList';
 import { Router } from '@angular/router';
 import { PictureService} from '../service/picture.service';
 import { FlashMessagesService } from 'angular2-flash-messages';
-import {LoginService} from '../../login/service/login.service';
+import { Store } from '@ngrx/store';
+import * as fromApp from '../../../store/app.reducer';
 
 @Component({
   selector: 'app-pictureList-create-post',
@@ -18,10 +19,9 @@ export class PictureListCreatePostComponent implements OnInit {
   constructor(private router:Router,
               private flashMessagesService:FlashMessagesService,
               private pictureService:PictureService,
-              private loginService:LoginService) { }
+              private store:Store<fromApp.AppState>) { }
 
   ngOnInit() {
-    //this.picture.author = this.loginService.getUsername();
     this.pictureList = new PictureList();
   }
 

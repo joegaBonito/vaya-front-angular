@@ -3,15 +3,13 @@ import { Observable } from "rxjs/Observable";
 import { HttpHeaders, HttpClient } from "@angular/common/http";
 import { of } from "rxjs/observable/of";
 import { config } from "../../../config";
-import { LoginService } from "../../login/service/login.service";
 
 @Injectable()
 export class GnbService {
 
   private baseUrl = config.backendAPIUrl;
 
-  constructor(private http: HttpClient, 
-              private loginService:LoginService) {
+  constructor(private http: HttpClient) {
 
   }
 

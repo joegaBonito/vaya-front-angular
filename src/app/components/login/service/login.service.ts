@@ -14,6 +14,11 @@ import * as jwtDecode from 'jwt-decode';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { config } from '../../../config';
 
+/**
+ * THIS SERVICE IS NO LONGER USED.
+ * @NGRX is used instead of this.
+ */
+
 @Injectable()
 export class LoginService {
   private baseUrl = config.backendAPIUrl;
@@ -115,8 +120,6 @@ export class LoginService {
     return this.http.get<any>(`${this.baseUrl}/refresh`, { headers })
       .catch(this.handleError<any>('Authentication Error'))
   }
-
-  
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
