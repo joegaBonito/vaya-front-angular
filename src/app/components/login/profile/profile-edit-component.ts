@@ -35,6 +35,7 @@ export class ProfileEditComponent implements OnInit {
             .do(() => this.isLoading = true)
             .map((member: Member) => {
                 this.member = member;
+                //console.log(member);
             })
             .subscribe(() => this.isLoading = false)
     }
@@ -48,7 +49,7 @@ export class ProfileEditComponent implements OnInit {
             this.flashMessagesService.show('Please fill in all required fields', { cssClass: 'alert-danger', timeout: 1000 });
             window.location.reload();
         } else {
-            this.memberService.editMember(this.route.snapshot.params.id, value).subscribe(() => {
+            this.memberService.editMember(this.userId, value).subscribe(() => {
                 this.router.navigate(['/']);
                 this.flashMessagesService.show('Profile Edit Successful!', { cssClass: 'alert-success', timeout: 1000 });
             });

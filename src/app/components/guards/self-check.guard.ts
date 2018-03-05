@@ -25,13 +25,13 @@ export class SelfCheckGuard implements CanActivate, CanActivateChild {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
     this.store.dispatch(new AuthActions.TrySelfCheck());
-    this.store.select('auth').subscribe((res)=>{
+    this.store.select('auth').take(1).map((res)=>{
       this.isSelf = res.isSelf;
       if(this.isSelf==false) {
         this.router.navigate(['/']);
-        this.flashMessagesService.show("You are cannot edit other people's profile", {cssClass:'alert-danger', timeout:3000});
+        this.flashMessagesService.show("You cannot edit other people's profile", {cssClass:'alert-danger', timeout:3000});
       }
-    })
+    }).subscribe();
     return this.isSelf;
   }
 

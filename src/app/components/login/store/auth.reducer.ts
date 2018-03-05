@@ -4,6 +4,7 @@ export interface State {
   token: string;
   authenticated: boolean;
   isAdmin: boolean;
+  isGuest:boolean;
   currentUsername: string;
   userId:string;
   isSelf: boolean;
@@ -13,6 +14,7 @@ const initialState: State = {
   token: null,
   authenticated: false,
   isAdmin: false,
+  isGuest:false,
   currentUsername: null,
   userId:null,
   isSelf: false
@@ -49,6 +51,11 @@ export function authReducer(state = initialState, action: AuthActions.AuthAction
         ...state,
         isAdmin: action.payload
       };
+    case (AuthActions.SET_GUEST):
+      return {
+        ...state,
+        isGuest: action.payload
+      }
     case (AuthActions.SET_CURRENT_USERNAME):
       return {
         ...state,

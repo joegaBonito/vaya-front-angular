@@ -8,7 +8,7 @@ import * as AuthActions from '../login/store/auth.action';
 
 @Injectable()
 export class AuthGuard implements CanActivate, CanActivateChild {
-  isAuthenticated: boolean = false;
+  isAuthenticated:boolean = false;
 
   constructor(
     private router: Router,
@@ -23,14 +23,13 @@ export class AuthGuard implements CanActivate, CanActivateChild {
     /**
      * The code below uses @Ngrx to check the authentication state.
      */
-    this.store.select('auth').map((res) => {
+    this.store.select('auth').take(1).do((res) => {
+      //console.log(res);
       this.isAuthenticated = res.authenticated;
-      if(this.isAuthenticated == false) {
+      if(res.authenticated == false || res.isGuest == true) {
         this.router.navigate(['/LoginComponent']);
-      } 
-    }).subscribe(()=>{
-      
-    })
+      }
+    }).subscribe();
     
     return this.isAuthenticated;
   };

@@ -34,7 +34,8 @@
     <div class="col-10 offset-1 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
         <select class="form-control" id="role" [(ngModel)]="member.role" name="role" #memberRole="ngModel" required>
             <option [ngValue]="undefined" selected disabled>Select Role</option>
-            <option value="ROLE_MEMEBER">Member</option>
+            <option value="ROLE_GUEST">Guest</option>
+            <option value="ROLE_MEMBER">Member</option>
             <option value="ROLE_ADMIN">Admin</option>
         </select>
         <div *ngIf="memberRole.errors?.required && memberRole.touched" class="alert alert-danger">

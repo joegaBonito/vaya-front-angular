@@ -8,6 +8,7 @@ export const SIGNIN = 'SIGNIN';
 export const LOGOUT = 'LOGOUT';
 export const SET_TOKEN = 'SET_TOKEN';
 export const SET_ADMIN = 'SET_ADMIN';
+export const SET_GUEST = 'SET_GUEST';
 export const SET_CURRENT_USERNAME = 'SET_CURRENT_USERNAME';
 export const SET_USER_ID = 'SET_USER_ID';
 export const TRY_SELF_CHECK = 'TRY_SELF_CHECK';
@@ -59,6 +60,12 @@ export class SetAdmin implements Action {
   constructor(public payload: boolean) { }
 }
 
+export class SetGuest implements Action {
+  readonly type = SET_GUEST;
+
+  constructor(public payload: boolean) { }
+}
+
 export class SetCurrentUsername implements Action {
   readonly type = SET_CURRENT_USERNAME;
 
@@ -89,6 +96,7 @@ export type AuthActions =
   TrySignup |
   TrySignin |
   SetAdmin |
+  SetGuest |
   SetCurrentUsername|
   SetUserId|
   TrySelfCheck|

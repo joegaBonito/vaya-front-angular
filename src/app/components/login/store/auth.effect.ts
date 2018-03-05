@@ -14,6 +14,9 @@ import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { Member } from '../model/Member';
 import * as jwtDecode from 'jwt-decode';
+import { Store } from '@ngrx/store';
+import * as fromApp from '../../../store/app.reducer';
+import { FlashMessagesService } from 'angular2-flash-messages';
 
 @Injectable()
 export class AuthEffects {
@@ -23,14 +26,20 @@ export class AuthEffects {
         authenticated: boolean,
         username: string,
         isAdmin: boolean,
+        isGuest: boolean,
         userId: string
     }
-    constructor(private actions$: Actions, private router: Router, private http: HttpClient) {
+    constructor(private actions$: Actions,
+        private router: Router,
+        private http: HttpClient,
+        private store: Store<fromApp.AppState>,
+        private flashMessagesService: FlashMessagesService) {
         this.tokenAndUsernameAndAdmin = {
             token: null,
             authenticated: false,
             username: null,
             isAdmin: false,
+            isGuest: false,
             userId: null
         }
     }
@@ -49,8 +58,9 @@ export class AuthEffects {
             })
             this.tokenAndUsernameAndAdmin.token = token;
             return this.http.get<any>(`${this.baseUrl}/refresh`, { headers })
+                .take(1)
                 .map((res) => {
-                    if(res){
+                    if (res) {
                         this.tokenAndUsernameAndAdmin.authenticated = true;
                     }
                     /**
@@ -65,10 +75,10 @@ export class AuthEffects {
                 })
                 .catch(this.handleError<any>('Authentication Error'))
         })
-        .switchMap((token) => {
-            /**
+        /**
              * Checks for admin status.
              */
+        .switchMap((token) => {
             let headers = new HttpHeaders({
                 authorization: token
             });
@@ -81,6 +91,27 @@ export class AuthEffects {
                     // handle e and return a safe value or rethrow
                     if (e.status === 403) {
                         this.tokenAndUsernameAndAdmin.isAdmin = false;
+                    }
+                    return Observable.of<any>([]);
+                });
+        })
+        /**
+             * Checks for guest status.
+             */
+        .switchMap(() => {
+            let headers = new HttpHeaders({
+                authorization: this.tokenAndUsernameAndAdmin.token
+            });
+            return this.http.get<boolean>(`${this.baseUrl}/guest`, { headers })
+                .take(1)
+                .map((val) => {
+                    this.tokenAndUsernameAndAdmin.isGuest = val;
+                    return val;
+                })
+                .catch((e) => {
+                    // handle e and return a safe value or rethrow
+                    if (e.status === 403) {
+                        this.tokenAndUsernameAndAdmin.isGuest = false;
                     }
                     return Observable.of<any>([]);
                 });
@@ -112,6 +143,10 @@ export class AuthEffects {
                 {
                     type: AuthActions.SET_ADMIN,
                     payload: this.tokenAndUsernameAndAdmin.isAdmin
+                },
+                {
+                    type: AuthActions.SET_GUEST,
+                    payload: this.tokenAndUsernameAndAdmin.isGuest
                 },
                 {
                     type: AuthActions.SET_USER_ID,
@@ -152,7 +187,7 @@ export class AuthEffects {
         });
 
     /**
-     * At the time of login, once the token is provided, this code also finds Username and checks admin status.
+     * At the time of login, once the token is provided, this code also finds Username and checks role status.
      */
     @Effect()
     authSignin = this.actions$
@@ -164,10 +199,19 @@ export class AuthEffects {
             let username = authData.username;
             let password = authData.password;
             return this.http.post<any>(`${this.baseUrl}/auth`, { username, password })
-                .catch(this.handleError<boolean>('Authentication Error'));
+                .catch((e) => {
+                    if (e.status === 404) {
+                        console.log("There is no such user");
+                        alert("Please confirm your username or password again. If both are correct, please check if you have registered. Thank you.");
+                        location.reload();
+                        this.store.dispatch(new AuthActions.Logout());
+                    }
+                    return Observable.of([]);
+                });
         })
         .map(res => {
-            if(res){
+            this.tokenAndUsernameAndAdmin.token = res.token;
+            if (res) {
                 this.tokenAndUsernameAndAdmin.authenticated = true;
             } else {
                 this.tokenAndUsernameAndAdmin.authenticated = false;
@@ -187,14 +231,15 @@ export class AuthEffects {
             });
             return token;
         })
-        .switchMap((token) => {
-            /**
+        /**
              * Checks for admin status.
              */
+        .switchMap((token) => {
             let headers = new HttpHeaders({
                 authorization: token
             });
             return this.http.get<boolean>(`${this.baseUrl}/admin`, { headers })
+                .take(1)
                 .map((val) => {
                     this.tokenAndUsernameAndAdmin.isAdmin = val;
                     return val;
@@ -208,16 +253,48 @@ export class AuthEffects {
                 });
         })
         /**
+             * Checks for guest status.
+             */
+        .switchMap(() => {
+            let headers = new HttpHeaders({
+                authorization: this.tokenAndUsernameAndAdmin.token
+            });
+            return this.http.get<boolean>(`${this.baseUrl}/guest`, { headers })
+                .take(1)
+                .map((val) => {
+                    this.tokenAndUsernameAndAdmin.isGuest = val;
+                    return val;
+                })
+                .catch((e) => {
+                    // handle e and return a safe value or rethrow
+                    if (e.status === 403) {
+                        this.tokenAndUsernameAndAdmin.isGuest = false;
+                    }
+                    return Observable.of<any>([]);
+                });
+        })
+        /**
          * Finds UserId.
          */
         .switchMap(() => {
             return this.http.get<any>(`${this.baseUrl}/members/find?username=${this.tokenAndUsernameAndAdmin.username}`)
+                .take(1)
                 .map((res) => {
                     this.tokenAndUsernameAndAdmin.userId = res;
                 })
-                .catch(this.handleError<any>('Login Error'));
+                .catch((e) => {
+                    if (e.status === 404) {
+                        console.log("There is no such user");
+                        alert("Please confirm your username or password again. If both are correct, please check if you have registered. Thank you.");
+                        \location.reload();
+                        this.store.dispatch(new AuthActions.Logout());
+                    }
+                    return Observable.of([]);
+                });
         })
         .mergeMap(() => {
+            this.router.navigate(['/']);
+            this.flashMessagesService.show('Log In Successful!', { cssClass: 'alert-success', timeout: 3000 });
             return [
                 {
                     type: AuthActions.SIGNIN,
@@ -234,6 +311,10 @@ export class AuthEffects {
                 {
                     type: AuthActions.SET_ADMIN,
                     payload: this.tokenAndUsernameAndAdmin.isAdmin
+                },
+                {
+                    type: AuthActions.SET_GUEST,
+                    payload: this.tokenAndUsernameAndAdmin.isGuest
                 },
                 {
                     type: AuthActions.SET_USER_ID,
@@ -255,6 +336,7 @@ export class AuthEffects {
                 authenticated: false,
                 username: null,
                 isAdmin: false,
+                isGuest: false,
                 userId: null
             }
         });

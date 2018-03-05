@@ -67,8 +67,7 @@ export class LoginComponent implements OnInit {
       const username = value.email;
       const password = value.password;
       this.store.dispatch(new AuthActions.TrySignin({ username, password }));
-      this.router.navigate(['/']);
-      this.flashMessagesService.show('Log In Successful!', { cssClass: 'alert-success', timeout: 3000 });
+
     }
   }
 
