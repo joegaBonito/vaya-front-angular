@@ -286,7 +286,7 @@ export class AuthEffects {
                     if (e.status === 404) {
                         console.log("There is no such user");
                         alert("Please confirm your username or password again. If both are correct, please check if you have registered. Thank you.");
-                        \location.reload();
+                        location.reload();
                         this.store.dispatch(new AuthActions.Logout());
                     }
                     return Observable.of([]);
