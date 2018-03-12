@@ -6,6 +6,8 @@ import { SermonPost } from '../model/SermonPost';
 import { SermonService } from '../service/sermon.service';
 import { Store } from '@ngrx/store';
 import * as fromApp from '../../../store/app.reducer';
+import * as FileSaver from 'file-saver';
+import { config } from '../../../config';
 
 @Component({
   selector: 'app-sermon-view-post',
@@ -16,7 +18,11 @@ export class SermonViewPostComponent implements OnInit {
   isAdmin: boolean = false;
   isOwner: boolean = false;
   sermonPost: SermonPost;
+  fileName: string;
+  filePath: string
 
+  private baseUrl = config.backendAPIUrl;
+  
   constructor(
     private sermonService: SermonService,
     private router: Router,
@@ -29,11 +35,24 @@ export class SermonViewPostComponent implements OnInit {
     this.route.paramMap
       // (+) converts string 'id' to a number (+params.get('id'))
       .switchMap((params: ParamMap) => this.sermonService.getSermonPost(params.get('id')))
-      .subscribe(sermonPost => {
+      .map(sermonPost => {
         this.sermonPost = sermonPost;
+        this.fileName = sermonPost.fileName;
+      }).
+      subscribe(()=>{
+        this.getFile();
         this.onCheckAdmin();
       });
-    
+  }
+  getFile() {
+    this.filePath = `${this.baseUrl}/sermon-file?filename=${this.fileName}`;
+  }
+
+  downloadFile() {
+    this.sermonService.downloadFile(this.fileName).subscribe(data => {
+      FileSaver.saveAs(data, this.fileName);
+    }
+    )
   }
 
   goBack(): void {

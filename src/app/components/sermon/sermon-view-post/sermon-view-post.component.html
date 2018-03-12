@@ -29,6 +29,11 @@
               <span class="title">내용:</span><br/>
             {{sermonPost.body}}
           </div>
+          <div class="col-10 offset-1 font">
+              <span class="title">관련 자료 다운로드: </span><br/>
+            <!-- <img width="200" height="200" *ngIf="imageFile" [src]="imageFile"> -->
+            <button class="btn btn-primary cursor-pointer" (click)="downloadFile()">File Download</button>
+          </div>
         </div>
       </div>
     </div>

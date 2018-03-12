@@ -15,6 +15,9 @@ export class SermonEditPostComponent implements OnInit {
 
   sermonPost:SermonPost;
   submitted:boolean = false;
+  fileData:File;
+  fileDataChanged:boolean = false;
+  fileName:string;
 
   constructor(
     private sermonService:SermonService,
@@ -35,6 +38,12 @@ export class SermonEditPostComponent implements OnInit {
     });
   }
 
+  fileChange(event) {
+    this.fileData = event.target.files[0];
+    this.fileDataChanged = true;
+    this.fileName = this.fileData.name;
+}
+
   onClickBack(){
     this.router.navigate(['/sermon/list']);
   }
@@ -44,8 +53,8 @@ export class SermonEditPostComponent implements OnInit {
       this.flashMessagesService.show('Please fill in all required fields', {cssClass:'alert-danger', timeout:3000});
       this.router.navigate(['SermonEditPostComponent',this.sermonPost.id]);
     } else {
-      this.sermonService.editSermonPost(this.route.snapshot.params.id,value)
-      .subscribe(res=>{
+      this.sermonService.editSermonPost(this.route.snapshot.params.id,value,this.fileData, this.fileName)
+      .subscribe(()=>{
         this.router.navigate(['/sermon/list']);
         this.flashMessagesService.show('Sermon Post has been edited',{cssClass:'alert-success',timeout:3000});
       });

@@ -28,8 +28,19 @@ export class SermonService {
         .catch(this.handleError<SermonPost>(`getSermonPost id=${id}`));
   }
 
-  newSermonPost(sermonPost:SermonPost):Observable<SermonPost> {
-   return this.http.post<SermonPost>(`${this.baseUrl}/sermon-create`, sermonPost).catch(this.handleError<SermonPost>('Create SermonPost Error'));
+  newSermonPost(sermonPost:SermonPost,fileData:File, fileName:string):Observable<SermonPost> {
+    let formData: FormData = new FormData();
+    formData.append('file', fileData);
+    formData.append('title', sermonPost.title);
+    formData.append('author', sermonPost.author);
+    formData.append('mainVerse',sermonPost.mainVerse);
+    formData.append('date', sermonPost.date);
+    formData.append('body', sermonPost.body);
+    formData.append('fileName',fileName);
+
+    let apiURL = `${this.baseUrl}/sermon-create`;
+    return this.http.post<SermonPost>(apiURL, formData)
+    .catch(this.handleError<SermonPost>('Create SermonPost Error'));
   }
 
   deleteSermonPost(id:string):Observable<SermonPost> {
@@ -37,9 +48,25 @@ export class SermonService {
     .catch(this.handleError<SermonPost>('Delete SermonPost Error'));
   }
 
-  editSermonPost(id:string, sermonPost:SermonPost):Observable<SermonPost> {
-    return this.http.put<SermonPost>(`${this.baseUrl}/sermon-edit/${id}`, sermonPost, httpOptions)
+  editSermonPost(id:string, sermonPost:SermonPost,fileData:File, fileName:string):Observable<SermonPost> {
+    let formData: FormData = new FormData();
+    formData.append('file', fileData);
+    formData.append('title', sermonPost.title);
+    formData.append('author', sermonPost.author);
+    formData.append('mainVerse',sermonPost.mainVerse);
+    formData.append('date', sermonPost.date);
+    formData.append('body', sermonPost.body);
+    formData.append('fileName',fileName);
+
+    let apiURL = `${this.baseUrl}/sermon-edit/${id}`
+    return this.http.put<SermonPost>(apiURL, formData)
     .catch(this.handleError<SermonPost>('Update SermonPost Error'));
+  }
+
+  downloadFile(filename: string): Observable<Blob> {
+    let apiURL = `${this.baseUrl}/sermon-file?filename=${filename}`;
+    //{responseType:'blob' as 'blob'} has been added to the requester header because the 'type' undefined error when download.
+    return this.http.get(apiURL, { responseType: 'blob' as 'blob' }).catch(this.handleError<Blob>('File Downloading Error'));
   }
 
  private handleError<T> (operation = 'operation', result?: T) {

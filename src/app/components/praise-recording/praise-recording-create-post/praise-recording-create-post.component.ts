@@ -46,7 +46,7 @@ export class PraiseRecordingCreatePostComponent implements OnInit {
       this.flashMessagesService.show('Please fill in all required fields', {cssClass:'alert-danger', timeout:3000});
       this.router.navigate(['/praise-recording/create']);
     } else {
-      this.praiserecordingService.newSermonPost(value,this.fileData).subscribe(()=>{
+      this.praiserecordingService.newPraiseRecording(value,this.fileData).subscribe(()=>{
         this.router.navigate(['/praise-recording/list']);
         this.flashMessagesService.show('New Post has been added',{cssClass:'alert-success',timeout:3000});
       });

@@ -6,4 +6,5 @@ export class SermonPost {
   mainVerse: string;
   body: string;
   deleteYN:string;
+  fileName:string;
 };

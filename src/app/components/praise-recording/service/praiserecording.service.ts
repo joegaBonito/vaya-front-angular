@@ -28,7 +28,7 @@ export class PraiserecordingService {
       .catch(this.handleError<PraiseRecording>(`getPraiseRecording id=${id}`));
   }
 
-  newSermonPost(praiseRecording: PraiseRecording, fileData: File): Observable<PraiseRecording> {
+  newPraiseRecording(praiseRecording: PraiseRecording, fileData: File): Observable<PraiseRecording> {
     let formData: FormData = new FormData();
     formData.append('file', fileData);
     formData.append('title', praiseRecording.title);

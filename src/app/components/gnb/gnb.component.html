@@ -75,7 +75,7 @@ Angular GNB Toggle w/ Mobile & PC
 
       <!-- Below is used for @ngrx -->
       <li class="nav-item" [hidden]="showLoginMobile">
-        <a class="nav-link cursor-pointer" *ngIf="(authState | async).authenticated" [routerLink]="['/profile',authenticatedId]" (click)="toggleCollapse()">{{((authState | async).currentUsername)}}
+        <a class="nav-link cursor-pointer" *ngIf="(authState | async).authenticated" [routerLink]="['/profile']" (click)="toggleCollapse()">{{((authState | async).currentUsername)}}
           <i class="fa fa-user" aria-hidden="true"></i>
         </a>
       </li>

@@ -16,6 +16,8 @@ export class SermonCreatePostComponent implements OnInit {
   sermonPost:SermonPost = new SermonPost();
   submitted:boolean = false;
   loggedInEmail:string;
+  fileData:File;
+  fileName:string;
 
   constructor(
     private sermonService:SermonService,
@@ -35,14 +37,18 @@ export class SermonCreatePostComponent implements OnInit {
     this.router.navigate(['/sermon/list']);
   }
 
+  fileChange(event) {
+    this.fileData = event.target.files[0];
+    this.fileName = this.fileData.name;
+    //console.log(fileName);
+}
 
   onSubmit({value,valid}:{value:SermonPost, valid:boolean}) {
     if(!valid) {
       this.flashMessagesService.show('Please fill in all required fields', {cssClass:'alert-danger', timeout:3000});
       this.router.navigate(['/sermon/create']);
     } else {
-      this.sermonService.newSermonPost(value)
-      .subscribe(res=>{
+      this.sermonService.newSermonPost(value,this.fileData, this.fileName).subscribe(()=>{
         this.flashMessagesService.show('New Client has been added',{cssClass:'alert-success',timeout:3000});
         this.router.navigate(['/sermon/list']);
       });
