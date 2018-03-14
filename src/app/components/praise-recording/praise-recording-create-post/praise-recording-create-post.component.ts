@@ -5,6 +5,7 @@ import {PraiserecordingService} from '../service/praiserecording.service';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { Store } from '@ngrx/store';
 import * as fromApp from '../../../store/app.reducer';
+import { NgProgress } from 'ngx-progressbar';
 
 @Component({
   selector: 'app-praise-recording-create-post',
@@ -15,11 +16,13 @@ export class PraiseRecordingCreatePostComponent implements OnInit {
 
   praiseRecording:PraiseRecording = new PraiseRecording();
   fileData:File;
-
+  fileName:string;
+  hide:boolean = false;
   constructor(private router:Router,
               private flashMessagesService:FlashMessagesService,
               private praiserecordingService:PraiserecordingService,
-              private store:Store<fromApp.AppState>
+              private store:Store<fromApp.AppState>,
+              private ngProgress:NgProgress
               ) {
 
   }
@@ -33,7 +36,7 @@ export class PraiseRecordingCreatePostComponent implements OnInit {
 
   fileChange(event) {
       this.fileData = event.target.files[0];
-      let fileName = this.fileData.name;
+      this.fileName = this.fileData.name;
       //console.log(fileName);
   }
 
@@ -46,9 +49,14 @@ export class PraiseRecordingCreatePostComponent implements OnInit {
       this.flashMessagesService.show('Please fill in all required fields', {cssClass:'alert-danger', timeout:3000});
       this.router.navigate(['/praise-recording/create']);
     } else {
-      this.praiserecordingService.newPraiseRecording(value,this.fileData).subscribe(()=>{
+      this.hide = true;
+      /** request started */
+      this.ngProgress.start();
+      this.praiserecordingService.newPraiseRecording(value,this.fileData,this.fileName).subscribe(()=>{
         this.router.navigate(['/praise-recording/list']);
         this.flashMessagesService.show('New Post has been added',{cssClass:'alert-success',timeout:3000});
+        this.ngProgress.done();
+        this.hide = false;
       });
     }
   }

@@ -28,14 +28,14 @@ export class PraiserecordingService {
       .catch(this.handleError<PraiseRecording>(`getPraiseRecording id=${id}`));
   }
 
-  newPraiseRecording(praiseRecording: PraiseRecording, fileData: File): Observable<PraiseRecording> {
+  newPraiseRecording(praiseRecording: PraiseRecording, fileData: File, fileName:string): Observable<PraiseRecording> {
     let formData: FormData = new FormData();
     formData.append('file', fileData);
     formData.append('title', praiseRecording.title);
     formData.append('author', praiseRecording.author);
     formData.append('date', praiseRecording.date);
     formData.append('body', praiseRecording.body);
-
+    formData.append('fileName', fileName);
     let apiURL = `${this.baseUrl}/praiserecording-create`;
     return this.http.post<PraiseRecording>(apiURL, formData)
       .catch(this.handleError<PraiseRecording>('Create PraiseRecording Error'));
@@ -46,13 +46,14 @@ export class PraiserecordingService {
     return this.http.delete<PraiseRecording>(apiURL).catch(this.handleError<PraiseRecording>('Delete PraiseRecording Error'));
   }
 
-  editPraiseRecording(id: string, praiseRecording: PraiseRecording, fileData: File): Observable<PraiseRecording> {
+  editPraiseRecording(id: string, praiseRecording: PraiseRecording, fileData: File, fileName:string): Observable<PraiseRecording> {
     let formData: FormData = new FormData();
     formData.append('file', fileData);
     formData.append('title', praiseRecording.title);
     formData.append('author', praiseRecording.author);
     formData.append('date', praiseRecording.date);
     formData.append('body', praiseRecording.body);
+    formData.append('fileName', fileName);
     let apiURL = `${this.baseUrl}/praiserecording-edit/${id}`;
     return this.http.put<PraiseRecording>(apiURL, formData).catch(this.handleError<PraiseRecording>('Update PraiseRecording Error'));
   }

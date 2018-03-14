@@ -5,5 +5,6 @@ export class PraiseRecording {
   date:string;
   fileData:File;
   body:string;
+  fileName:string;
   deleteYN:string;
 };

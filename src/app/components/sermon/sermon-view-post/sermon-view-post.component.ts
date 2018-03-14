@@ -8,6 +8,7 @@ import { Store } from '@ngrx/store';
 import * as fromApp from '../../../store/app.reducer';
 import * as FileSaver from 'file-saver';
 import { config } from '../../../config';
+import { NgProgress } from 'ngx-progressbar';
 
 @Component({
   selector: 'app-sermon-view-post',
@@ -20,6 +21,7 @@ export class SermonViewPostComponent implements OnInit {
   sermonPost: SermonPost;
   fileName: string;
   filePath: string
+  hide:boolean = false;
 
   private baseUrl = config.backendAPIUrl;
   
@@ -28,7 +30,8 @@ export class SermonViewPostComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private location: Location,
-    private store:Store<fromApp.AppState>
+    private store:Store<fromApp.AppState>,
+    private ngProgress: NgProgress
   ) { }
 
   ngOnInit() {
@@ -49,8 +52,12 @@ export class SermonViewPostComponent implements OnInit {
   }
 
   downloadFile() {
+    this.hide = true;
+    this.ngProgress.start();
     this.sermonService.downloadFile(this.fileName).subscribe(data => {
       FileSaver.saveAs(data, this.fileName);
+      this.ngProgress.done();
+      this.hide= false;
     }
     )
   }

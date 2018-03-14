@@ -10,6 +10,7 @@ import * as FileSaver from 'file-saver';
 import { config } from '../../../config';
 import { Store } from '@ngrx/store';
 import * as fromApp from '../../../store/app.reducer';
+import { NgProgress } from 'ngx-progressbar';
 
 @Component({
   selector: 'app-praise-recording-view-post',
@@ -23,6 +24,7 @@ export class PraiseRecordingViewPostComponent implements OnInit {
   isAdmin: boolean = false;
   isOwner: boolean = false;
   filePath: string;
+  hide: boolean = false;
 
   private baseUrl = config.backendAPIUrl;
 
@@ -32,7 +34,8 @@ export class PraiseRecordingViewPostComponent implements OnInit {
     private router: Router,
     private location: Location,
     private http: Http,
-    private store: Store<fromApp.AppState>
+    private store: Store<fromApp.AppState>,
+    private ngProgress: NgProgress
   ) {
 
   }
@@ -43,7 +46,7 @@ export class PraiseRecordingViewPostComponent implements OnInit {
       .switchMap((params: ParamMap) => this.praiserecordingService.getPraiseRecording(params.get('id')))
       .map(praiseRecording => {
         this.praiseRecording = praiseRecording;
-        this.fileName = praiseRecording.title + ".mp3";
+        this.fileName = praiseRecording.fileName;
       })
       .subscribe(() => {
         this.getFile();
@@ -56,8 +59,14 @@ export class PraiseRecordingViewPostComponent implements OnInit {
   }
 
   downloadFile() {
+    this.hide = true;
+    /** request started */
+    this.ngProgress.start();
     this.praiserecordingService.downloadFile(this.fileName).subscribe(data => {
+      console.log(this.fileName);
       FileSaver.saveAs(data, this.fileName);
+      this.ngProgress.done();
+      this.hide = false;
     }
     )
   }

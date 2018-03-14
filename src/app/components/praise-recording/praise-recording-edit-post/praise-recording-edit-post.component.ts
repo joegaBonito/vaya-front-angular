@@ -6,6 +6,7 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Location }                 from '@angular/common';
 import { Store } from '@ngrx/store';
 import * as fromApp from '../../../store/app.reducer';
+import { NgProgress } from 'ngx-progressbar';
 
 @Component({
   selector: 'app-praise-recording-edit-post',
@@ -14,11 +15,12 @@ import * as fromApp from '../../../store/app.reducer';
 })
 export class PraiseRecordingEditPostComponent implements OnInit {
 
-
     praiseRecording:PraiseRecording;
     submitted:boolean = false;
     fileData:File;
     fileDataChanged:boolean = false;
+    fileName:string;
+    hide:boolean = false;
 
     constructor(
       private praiserecordingService:PraiserecordingService,
@@ -26,7 +28,8 @@ export class PraiseRecordingEditPostComponent implements OnInit {
       private router:Router,
       private route:ActivatedRoute,
       private location:Location,
-      private store:Store<fromApp.AppState>) {
+      private store:Store<fromApp.AppState>,
+      private ngProgress:NgProgress) {
 
       }
 
@@ -45,6 +48,7 @@ export class PraiseRecordingEditPostComponent implements OnInit {
     fileChange(event) {
         this.fileData = event.target.files[0];
         this.fileDataChanged = true;
+        this.fileName = this.fileData.name;
     }
 
     onClickBack(){
@@ -56,10 +60,16 @@ export class PraiseRecordingEditPostComponent implements OnInit {
         this.flashMessagesService.show('Please fill in all required fields', {cssClass:'alert-danger', timeout:3000});
         this.router.navigate(['/praise-recording/edit',this.praiseRecording.id]);
       } else {
-        this.praiserecordingService.editPraiseRecording(this.route.snapshot.params.id,value,this.fileData)
+        this.hide = true;
+        /** request started */
+        this.ngProgress.start();
+        this.praiserecordingService.editPraiseRecording(this.route.snapshot.params.id,value,this.fileData,this.fileName)
         .subscribe(res=>{
           this.router.navigate(['//praise-recording/list']);
           this.flashMessagesService.show('Client has been edited',{cssClass:'alert-success',timeout:3000});
+          /** request finished */
+          this.ngProgress.done();
+          this.hide = false;
       });
       }
     }

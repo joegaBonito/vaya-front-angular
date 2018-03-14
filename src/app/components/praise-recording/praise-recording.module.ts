@@ -11,6 +11,7 @@ import { PraiseRecordingViewPostComponent } from './praise-recording-view-post/p
 
 //npm libraries
 import {NgxPaginationModule} from 'ngx-pagination';
+import { NgProgressModule } from 'ngx-progressbar';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import {NgxPaginationModule} from 'ngx-pagination';
       CommonModule,
       FormsModule,
       NgxPaginationModule,
-      PraiseRecordingRouteModule
+      PraiseRecordingRouteModule,
+      NgProgressModule
   ]
 })
 export class PraiseRecordingModule {}

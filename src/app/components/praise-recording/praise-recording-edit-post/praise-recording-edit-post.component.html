@@ -62,8 +62,9 @@
   </div>
   <div class="row">
       <div class="col-10 offset-1  col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
-        <button type="submit" class="btn btn-success" >Submit</button>
-        <button type="button" class="btn btn-primary" (click)="onClickBack()">Back</button>
+        <button type="submit" class="btn btn-success" [hidden]="hide">Submit</button>
+        <button type="button" class="btn btn-primary" (click)="onClickBack()" [hidden]="hide">Back</button>
+        <ng-progress [hidden]="!hide" [thick]="true"></ng-progress>
       </div>
   </div>
   </form>

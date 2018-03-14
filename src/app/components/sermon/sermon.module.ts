@@ -11,6 +11,7 @@ import { SermonViewPostComponent } from './sermon-view-post/sermon-view-post.com
 
 //npm libraries
 import {NgxPaginationModule} from 'ngx-pagination';
+import { NgProgressModule } from 'ngx-progressbar';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import {NgxPaginationModule} from 'ngx-pagination';
       CommonModule,
       FormsModule,
       NgxPaginationModule,
-      SermonRouteModule
+      SermonRouteModule,
+      NgProgressModule
   ]
 })
 export class SermonModule {}

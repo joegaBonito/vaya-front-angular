@@ -25,10 +25,12 @@
           <div class="col-10 offset-1">
               <span class="title">내용:</span><br/> {{praiseRecording.body}}
           </div>
-          <div class="col-10 offset-1">
+          <div class="col-10 offset-1" >
             <!-- <img width="200" height="200" *ngIf="imageFile" [src]="imageFile"> -->
-            <button class="btn btn-primary" (click)="downloadFile()">Download File</button>
+            <button class="btn btn-primary" (click)="downloadFile()" [hidden]="hide">Download File</button>
+            <ng-progress [hidden]="!hide" [thick]="true"></ng-progress>
           </div>
+          
         </div>
       </div>
     </div>

@@ -5,6 +5,7 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import * as fromApp from '../../../store/app.reducer';
+import { NgProgress } from 'ngx-progressbar';
 
 @Component({
   selector: 'app-sermon-edit-post',
@@ -18,13 +19,15 @@ export class SermonEditPostComponent implements OnInit {
   fileData:File;
   fileDataChanged:boolean = false;
   fileName:string;
+  hide:boolean = false;
 
   constructor(
     private sermonService:SermonService,
     private flashMessagesService:FlashMessagesService,
     private router:Router,
     private route:ActivatedRoute,
-    private store:Store<fromApp.AppState>) {
+    private store:Store<fromApp.AppState>,
+    private ngProgress: NgProgress) {
     }
 
   ngOnInit() {
@@ -53,10 +56,14 @@ export class SermonEditPostComponent implements OnInit {
       this.flashMessagesService.show('Please fill in all required fields', {cssClass:'alert-danger', timeout:3000});
       this.router.navigate(['SermonEditPostComponent',this.sermonPost.id]);
     } else {
+      this.hide = true;
+      this.ngProgress.start();
       this.sermonService.editSermonPost(this.route.snapshot.params.id,value,this.fileData, this.fileName)
       .subscribe(()=>{
         this.router.navigate(['/sermon/list']);
         this.flashMessagesService.show('Sermon Post has been edited',{cssClass:'alert-success',timeout:3000});
+        this.ngProgress.done();
+        this.hide=false;
       });
     }
   }

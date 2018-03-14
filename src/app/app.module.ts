@@ -55,6 +55,7 @@ import { SelfCheckGuard } from './components/guards/self-check.guard';
 //npm libraries
 import {NgxPaginationModule} from 'ngx-pagination';
 import { NgxGalleryModule } from 'ngx-gallery';
+import { NgProgressModule } from 'ngx-progressbar';
 
 //ngrx
 import { StoreModule, ActionReducerMap, ActionReducer, MetaReducer } from '@ngrx/store';
@@ -102,6 +103,7 @@ import * as fromAuth from '../app/components/login/store/auth.reducer';
       apiKey: 'AIzaSyD72lQaX_Ki1nZlA9Y2OoczB8GvKBY_hIg'
     }),
     NgxGalleryModule,
+    NgProgressModule
   ],
   providers: [
     HttpClientModule,
