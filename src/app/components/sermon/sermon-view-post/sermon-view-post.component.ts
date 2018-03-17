@@ -58,8 +58,7 @@ export class SermonViewPostComponent implements OnInit {
       FileSaver.saveAs(data, this.fileName);
       this.ngProgress.done();
       this.hide= false;
-    }
-    )
+    })
   }
 
   goBack(): void {

@@ -2,7 +2,7 @@
 <div class="row">
     <div class="col-12 contact-us contact-us-backgroundimg">
         <h2>Contact Us</h2>
-        <form (ngSubmit)="onSubmit(contactUsForm)" #contactUsForm="ngForm" novalidate>
+        <form (ngSubmit)="onSubmit(contactUsForm); contactUsForm.reset();" #contactUsForm="ngForm" novalidate>
             <div class="row">
                 <div class="col-10 offset-1 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
                     <label for="title">Please tell us what you are contacting about: </label>
@@ -74,5 +74,6 @@
                 </div>
             </div>
         </form>
+        <ng-progress [ease]="'linear'" [thick]="true"></ng-progress>
     </div>
 </div>
