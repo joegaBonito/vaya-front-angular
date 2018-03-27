@@ -36,7 +36,8 @@ const appRoutes:Routes = [
   {path:"praise-recording", loadChildren:'./components/praise-recording/praise-recording.module#PraiseRecordingModule'},
   {path:"yacolumn", loadChildren:'./components/young-adults-column/yacolumn.module#YAColumnModule'},
   {path:"picture", loadChildren:'./components/picture/picture.module#PictureModule'},
-  {path:"member",loadChildren:'./components/member/member.module#MemberModule'}
+  {path:"member",loadChildren:'./components/member/member.module#MemberModule'},
+  {path:"newcommer",loadChildren:'./components/new-commer/newcommer.module#NewCommerModule'}
 ];
 
 @NgModule({

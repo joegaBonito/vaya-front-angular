@@ -63,6 +63,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { reducers } from './store/app.reducer';
 import { AuthEffects } from './components/login/store/auth.effect';
 import * as fromAuth from '../app/components/login/store/auth.reducer';
+import { NewCommerModule } from './components/new-commer/newcommer.module';
 
 @NgModule({
   declarations: [
@@ -94,6 +95,7 @@ import * as fromAuth from '../app/components/login/store/auth.reducer';
     PraiseRecordingModule,
     YAColumnModule,
     PictureModule,
+    NewCommerModule,
     HttpModule,
     HttpClientModule,
     FormsModule,

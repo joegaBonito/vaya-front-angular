@@ -28,7 +28,7 @@ Angular GNB Toggle w/ Mobile & PC
         </div>
       </li>
       <li class="nav-item">
-        <a class="nav-link cursor-pointer" routerLink="/ComingsoonComponent" (click)="toggleCollapse()">새신자환영</a>
+        <a class="nav-link cursor-pointer" routerLink="/newcommer/view" (click)="toggleCollapse()">새신자환영</a>
       </li>
       <!-- <li class="nav-item">
         <a class="nav-link" href="#">중보기도</a>
@@ -75,7 +75,7 @@ Angular GNB Toggle w/ Mobile & PC
 
       <!-- Below is used for @ngrx -->
       <li class="nav-item" [hidden]="showLoginMobile">
-        <a class="nav-link cursor-pointer" *ngIf="(authState | async).authenticated" [routerLink]="['/profile']" (click)="toggleCollapse()">{{((authState | async).currentUsername)}}
+        <a class="nav-link cursor-pointer" *ngIf="(authState | async).authenticated" [routerLink]="['/profile']" (click)="toggleCollapse()">{{((authState | async)?.currentUsername).length > 10 ? (((authState | async)?.currentUsername)|slice:0:10)+'...':((authState | async)?.currentUsername) }}
           <i class="fa fa-user" aria-hidden="true"></i>
         </a>
       </li>
@@ -90,7 +90,7 @@ Angular GNB Toggle w/ Mobile & PC
     </ul>
     <ul class="nav navbar-nav pull-right" [hidden]="showLoginDesktop">
       <li class="nav-item">
-        <a class="nav-link cursor-pointer" *ngIf="(authState | async).authenticated" [routerLink]="['/profile']" (click)="toggleCollapse()">{{((authState | async).currentUsername)}}
+        <a class="nav-link cursor-pointer" *ngIf="(authState | async).authenticated" [routerLink]="['/profile']" (click)="toggleCollapse()">{{((authState | async)?.currentUsername).length > 10 ? (((authState | async)?.currentUsername)|slice:0:10)+'...':((authState | async)?.currentUsername) }}
           <i class="fa fa-user" aria-hidden="true"></i>
         </a>
       </li>
