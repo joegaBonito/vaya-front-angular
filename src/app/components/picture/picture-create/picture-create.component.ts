@@ -26,7 +26,7 @@ export class PictureCreateComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.store.select('auth').map((res)=>{
+        this.store.select('auth').subscribe((res)=>{
           this.picture.author = res.currentUsername;
         });
         this.route.params.subscribe((params: Params) => {

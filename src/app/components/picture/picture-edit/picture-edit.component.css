@@ -5,7 +5,9 @@
     width:100%;
     padding-top:10px;
   }
-  
+  .padding-for-navbar {
+    padding-top:20px !important;
+  }
   /* Small devices (landscape phones, 576px and up) */
   @media screen and (min-width: 576px) {
   

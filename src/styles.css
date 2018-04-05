@@ -5,6 +5,10 @@
   width:100%;
 }
 
+.main {
+  margin-top: 53px;
+}
+
 label,a,p {
   font-family:sans-serif;
 }
@@ -24,6 +28,11 @@ button {
 
 .cursor-pointer {
   cursor:pointer;
+}
+
+#flashMessages{
+  position:relative;
+  padding-top:53px;
 }
 
 /* Extra small devices (portrait phones, less than 576px)

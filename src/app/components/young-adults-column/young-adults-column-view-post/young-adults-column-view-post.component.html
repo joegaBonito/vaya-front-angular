@@ -1,5 +1,5 @@
 <!-- <app-worship-banner></app-worship-banner> -->
-<div class="row">
+<div class="row padding-for-navbar ">
   <div class="col-10 offset-1">
     <div class="border">
       <div *ngIf="!yaColumn">
@@ -12,7 +12,7 @@
       <div *ngIf="yaColumn">
         <div class="row">
           <div class="col-10 offset-1">
-            <h2><span class="title">청년 칼럼:</span> {{yaColumn.title}}</h2>
+            <h2><span class="title">청년주보:</span> {{yaColumn.title}}</h2>
           </div>
         </div>
         <div class="row">
@@ -33,9 +33,9 @@
     </div>
     <div class="row btn-row">
       <div class="col-12">
-        <button class="btn btn-primary" (click)="goBack()">Back</button>
-        <button class="btn btn-secondary" *ngIf="isAdmin || isOwner" [routerLink]="['/yacolumn/edit',yaColumn.id]">Edit</button>
-        <button class="btn btn-danger" *ngIf="isAdmin || isOwner" (click)="onClickDelete()">Delete</button>
+        <button class="btn btn-primary cursor-pointer" (click)="goBack()">Back</button>
+        <button class="btn btn-secondary cursor-pointer" *ngIf="isAdmin || isOwner" [routerLink]="['/yacolumn/edit',yaColumn.id]">Edit</button>
+        <button class="btn btn-danger cursor-pointer" *ngIf="isAdmin || isOwner" (click)="onClickDelete()">Delete</button>
       </div>
     </div>
   </div>

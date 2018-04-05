@@ -4,6 +4,10 @@ form {
   margin-top:15px;
   margin-bottom:15px;
 }
+.padding-for-navbar {
+  padding-top:15px !important;
+}
+
 .btn {
   display:inline-block;
   width:49%;
